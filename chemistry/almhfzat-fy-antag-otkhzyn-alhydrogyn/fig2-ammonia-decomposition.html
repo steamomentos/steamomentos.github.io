@@ -9,7 +9,7 @@
   رسم تفاعلي لمقالة "المحفزات في إنتاج وتخزين الهيدروجين" على steamomentos.org
   ملف مستقل (CSS و JS داخليان). الاعتماد الخارجي الوحيد: خطوط Google مع بدائل احتياطية.
   التضمين:
-    <iframe src="https://steamomentos.github.io/chemistry/almhfzat-fy-antag-otkhzyn-alhydrogyn/fig2-ammonia-decomposition.html" style="width:100%;border:0;min-height:640px" loading="lazy" title="تحلل الأمونيا بالحفز"></iframe>
+    <iframe src="https://steamomentos.github.io/chemistry/almhfzat-fy-antag-otkhzyn-alhydrogyn/fig2-ammonia-decomposition.html" style="width:100%;border:0;min-height:600px" loading="lazy" title="تحلل الأمونيا بالحفز"></iframe>
   الرمز اللوني ثابت في كل رسوم المقالة: الهيدروجين ذهبي، الكربون بنفسجي داكن، الأكسجين وردي، النيتروجين نبيذي، المحفز بنفسجي متوسط.
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +24,7 @@
   --sm-bg:var(--sm-white); --sm-surface:#FFFFFF; --sm-surface-2:#F4F1F4;
   --sm-ink:var(--sm-purple); --sm-ink-soft:var(--sm-purple-600); --sm-line:var(--sm-gray);
   --sm-accent:var(--sm-gold); --sm-on-accent:var(--sm-purple);
-  --sm-radius:12px; --sm-radius-sm:8px; --sm-gap:16px;
+  --sm-radius:10px; --sm-radius-sm:8px; --sm-gap:8px;
   --sm-font:'Cairo','Montserrat','Segoe UI',Tahoma,sans-serif;
   --sm-font-latin:'Montserrat','Cairo','Segoe UI',sans-serif;
   /* الرمز اللوني للذرات والمحفز (ثابت في كل رسوم المقالة) */
@@ -33,60 +33,61 @@
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html,body{margin:0}
-body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
 .latin,code,.num{font-family:var(--sm-font-latin);direction:ltr;unicode-bidi:isolate}
 .sm-pattern-light{background-color:var(--sm-bg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23F7F2F9' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
 .sm-pattern-dark{background-color:var(--sm-purple);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23472255' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
 .sm-wrap{max-width:960px;margin:0 auto;overflow:hidden;border-radius:var(--sm-radius);border:1px solid var(--sm-line)}
-.sm-header{color:#fff;padding:20px 24px 24px}
+.sm-header{color:#fff;padding:8px 14px;display:flex;align-items:center;gap:10px}
 .sm-brand{display:flex;align-items:center;gap:10px;direction:ltr;justify-content:flex-start}
-.sm-brand svg{width:40px;height:40px;flex:none}
-.sm-brand .wordmark{font-family:'Kalam','Comic Sans MS',cursive;font-style:italic;font-size:17px;letter-spacing:.5px;color:var(--sm-gray)}
-.sm-title{font-weight:700;font-size:clamp(21px,4vw,31px);line-height:1.4;margin:16px 0 4px}
-.sm-sub{margin:0;color:var(--sm-gray);font-size:15px}
-.sm-body{padding:24px}
-.sm-stage{position:relative;background:var(--sm-surface);border:1px solid var(--sm-line);border-radius:var(--sm-radius);padding:12px;display:grid;place-items:center}
-.sm-stage>svg{width:100%;height:auto;display:block}
+.sm-brand{flex:none}.sm-brand svg{width:26px;height:26px;flex:none}
+.sm-brand .wordmark{display:none;font-family:'Kalam','Comic Sans MS',cursive;font-style:italic;font-size:17px;letter-spacing:.5px;color:var(--sm-gray)}
+.sm-title{font-weight:700;font-size:clamp(14px,2.6vw,18px);line-height:1.4;margin:0;flex:1}
+.sm-sub{display:none}
+.sm-body{padding:10px 12px}
+.sm-stage{position:relative;background:var(--sm-surface);border:1px solid var(--sm-line);border-radius:var(--sm-radius);padding:4px;display:grid;place-items:center}
+.sm-stage>svg{width:100%;height:auto;max-height:250px;display:block}
 .sm-stage text{font-family:var(--sm-font);fill:var(--sm-ink)}
-.sm-controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:var(--sm-gap)}
-.sm-tabs{display:flex;flex-wrap:wrap;gap:8px}
-.sm-btn{font:inherit;font-weight:600;font-size:15px;cursor:pointer;border:2px solid var(--sm-purple);background:#fff;color:var(--sm-purple);padding:6px 16px;border-radius:999px;transition:background .15s,color .15s,border-color .15s}
+.sm-controls{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:var(--sm-gap)}
+.sm-tabs{display:flex;flex-wrap:wrap;gap:4px}
+.sm-btn{font:inherit;font-weight:600;font-size:13px;line-height:1.5;cursor:pointer;border:1.5px solid var(--sm-purple);background:#fff;color:var(--sm-purple);padding:3px 11px;border-radius:999px;transition:background .15s,color .15s,border-color .15s}
 .sm-btn:hover{border-color:var(--sm-purple-500);color:var(--sm-purple-500)}
 .sm-btn[aria-selected="true"],.sm-btn.primary{background:var(--sm-accent);border-color:var(--sm-accent);color:var(--sm-on-accent)}
 .sm-btn:focus-visible,.sm-range:focus-visible{outline:3px solid var(--sm-purple-300);outline-offset:2px}
 .sm-btn.ghost{border-style:dashed}
-.sm-range-wrap{display:flex;align-items:center;gap:10px;flex:1 1 240px}
-.sm-range{flex:1;accent-color:var(--sm-gold);height:28px}
-.sm-card{margin-top:var(--sm-gap);background:var(--sm-surface-2);border-inline-start:4px solid var(--sm-accent);border-radius:var(--sm-radius-sm);padding:12px 16px}
-.sm-card h3{margin:0 0 4px;font-size:18px;font-weight:700}
+.sm-range-wrap{display:flex;align-items:center;gap:8px;flex:1 1 220px;font-size:13px}
+.sm-range{flex:1;accent-color:var(--sm-gold);height:22px}
+.sm-card{margin-top:var(--sm-gap);background:var(--sm-surface-2);border-inline-start:4px solid var(--sm-accent);border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
+.sm-card h3{margin:0 0 2px;font-size:14px;font-weight:700}
 .sm-card p{margin:0;color:var(--sm-ink-soft)}
-.sm-card p+p{margin-top:6px}
-.sm-legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:12px;font-size:14px;color:var(--sm-ink-soft)}
-.sm-legend span::before{content:"";display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--c);margin-inline-end:6px;vertical-align:-1px;border:1px solid rgba(53,17,65,.25)}
-.sm-takeaway{margin-top:var(--sm-gap);background:var(--sm-purple);color:#fff;border-radius:var(--sm-radius-sm);padding:12px 16px}
+.sm-card p+p{margin-top:2px}
+.sm-legend{display:flex;flex-wrap:wrap;gap:2px 12px;margin-top:6px;font-size:12px;color:var(--sm-ink-soft)}
+.sm-legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);margin-inline-end:6px;vertical-align:-1px;border:1px solid rgba(53,17,65,.25)}
+.sm-takeaway{margin-top:var(--sm-gap);background:var(--sm-purple);color:#fff;border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
 .sm-takeaway b{color:var(--sm-gold)}
-.sm-note{font-size:13px;color:var(--sm-ink-soft);margin:8px 0 0}
-.sm-footer{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 24px;background:var(--sm-purple);color:var(--sm-gray);font-size:13px}
+.sm-note{font-size:11.5px;color:var(--sm-ink-soft);margin:4px 0 0;line-height:1.45}
+.sm-footer{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:3px 14px;background:var(--sm-purple);color:var(--sm-gray);font-size:11px}
 .sm-footer a{color:var(--sm-gold);text-decoration:none;font-family:var(--sm-font-latin);font-weight:700}
 .mv{transition:transform .9s cubic-bezier(.4,.1,.2,1),opacity .5s}
 .no-anim .mv{transition:none}
 .atom{stroke:#fff;stroke-width:1.5}
 .atom-label{font-family:var(--sm-font-latin)!important;font-weight:700;font-size:12px;fill:#fff!important;text-anchor:middle;dominant-baseline:central;pointer-events:none}
 .atom-label.dark{fill:var(--sm-purple)!important}
-.eq{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 14px;margin-bottom:12px;background:#fff;border:1px solid var(--sm-line);border-radius:var(--sm-radius);padding:10px 14px}
+.eq{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 14px;margin-bottom:6px;background:#fff;border:1px solid var(--sm-line);border-radius:var(--sm-radius);padding:3px 10px}
 .eq-side{display:flex;flex-direction:column;align-items:center;line-height:1.2}
-.eq-side b{font-size:22px}
-.eq-side small{font-size:13px;color:var(--sm-ink-soft)}
+.eq-side b{font-size:16px}
+.eq-side small{font-size:11px;color:var(--sm-ink-soft)}
 .eq-side.h b{color:var(--sm-gold-700)}
-.eq-arrow,.eq-plus{font-size:22px;font-weight:700}
-.eq-count{flex-basis:100%;text-align:center;font-size:14px;color:var(--sm-ink-soft)}
+.eq-arrow,.eq-plus{font-size:16px;font-weight:700}
+.eq-count{font-size:11.5px;color:var(--sm-ink-soft)}
 #heat{transition:opacity .5s}
-.why{margin-top:24px;background:#fff;border:1px solid var(--sm-line);border-radius:var(--sm-radius);padding:16px}
-.why h3{margin:0;font-size:18px;line-height:1.5}
-.why-sub{margin:4px 0 12px;color:var(--sm-ink-soft);font-size:15px}
-.bars{display:grid;gap:10px}
-.bar{display:grid;grid-template-columns:minmax(120px,210px) 1fr auto;align-items:center;gap:10px;font-size:15px}
-.bar-track{height:22px;display:block}
+.why{margin-top:8px;background:#fff;border:1px solid var(--sm-line);border-radius:var(--sm-radius-sm);padding:6px 10px}
+.why summary{cursor:pointer;font-weight:700;font-size:13px;color:var(--sm-purple)}
+.why summary::marker{color:var(--sm-gold-700)}
+.why-sub{margin:4px 0 6px;color:var(--sm-ink-soft);font-size:12px}
+.bars{display:grid;gap:4px}
+.bar{display:grid;grid-template-columns:minmax(120px,210px) 1fr auto;align-items:center;gap:8px;font-size:12.5px}
+.bar-track{height:14px;display:block}
 .bar-fill{display:block;height:100%;width:calc(var(--v) / 121 * 100%);background:var(--sm-gray);border-radius:4px}
 .bar.hl .bar-fill{background:var(--sm-gold)}
 .bar.hl{font-weight:700}
@@ -94,9 +95,11 @@ body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font
 @media (max-width:520px){.bar{grid-template-columns:1fr auto}.bar-track{grid-column:1/-1;grid-row:2}}
 
 @media (max-width:520px){
-  .sm-header{padding:16px}.sm-body{padding:12px}.sm-stage{padding:4px}
+  .sm-header{padding:6px 10px}.sm-body{padding:8px}.sm-stage{padding:2px}
   .sm-wrap{border-radius:0;border-inline:0}
-  .sm-btn{font-size:14px;padding:5px 12px}
+  .sm-btn{font-size:12px;padding:2px 9px}
+  .sm-footer{padding:2px 10px;font-size:10px}
+  .sm-card,.sm-takeaway{font-size:12px;padding:5px 8px}.sm-card h3{font-size:13px}.sm-legend{font-size:11px}
 }
 @media (prefers-reduced-motion:reduce){.mv{transition:none!important}*{animation:none!important}}
 </style>
@@ -161,8 +164,8 @@ body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font
       <span style="--c:var(--cat)">روثينيوم Ru (المحفز)</span>
     </div>
 
-    <section class="why" aria-labelledby="why-h">
-      <h3 id="why-h">لماذا نستخرج الهيدروجين من الأمونيا؟ لأنها تحمل منه أكثر في الحجم نفسه</h3>
+    <details class="why">
+      <summary id="why-h">لماذا نستخرج الهيدروجين من الأمونيا؟ لأنها تحمل منه أكثر في الحجم نفسه</summary>
       <p class="why-sub">كم كيلوغرامًا من الهيدروجين يتسع له خزان حجمه متر مكعب واحد (1000 لتر)؟</p>
       <div class="bars">
         <div class="bar hl" style="--v:121"><span class="bar-label">أمونيا سائلة</span><span class="bar-track"><span class="bar-fill"></span></span><span class="bar-val num">121 kg</span></div>
@@ -170,7 +173,7 @@ body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font
         <div class="bar" style="--v:40"><span class="bar-label">هيدروجين مضغوط (700 بار)</span><span class="bar-track"><span class="bar-fill"></span></span><span class="bar-val num">40 kg</span></div>
       </div>
       <p class="sm-note">تتحول الأمونيا إلى سائل بتبريد بسيط (−33°م) أو بضغط خفيف (نحو 10 أضعاف ضغط الجو)، بينما يحتاج الهيدروجين إلى −253°م. القيم تقريبية، محسوبة من كثافة كل مادة.</p>
-    </section>
+    </details>
 
     <div class="sm-takeaway">
       <b>الخلاصة:</b> سطح الروثينيوم يفكك روابط الأمونيا ثم يعيد تركيب ذراتها نيتروجينًا وهيدروجينًا، ويبقى هو كما هو. ولأن الأمونيا تحمل هيدروجينًا كثيرًا في حجم صغير ويسهل نقلها، فهي «حاوية» واعدة للهيدروجين.
