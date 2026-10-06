@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>تشكيل الأطر المعدنية العضوية | STEAMomentos</title>
+<meta name="description" content="ركّب الإطار المعدني العضوي بنفسك، ثم غيّر طول الرابط لترى كيف يتغير حجم المسام.">
+<!--
+  رسم تفاعلي لمقالة "المحفزات في إنتاج وتخزين الهيدروجين" على steamomentos.org
+  ملف مستقل (CSS و JS داخليان). الاعتماد الخارجي الوحيد: خطوط Google مع بدائل احتياطية.
+  التضمين:
+    <iframe src="https://steamomentos.github.io/chemistry/almhfzat-fy-antag-otkhzyn-alhydrogyn/fig3-mof-assembly.html" style="width:100%;border:0;min-height:640px" loading="lazy" title="تشكيل الأطر المعدنية العضوية"></iframe>
+  الرمز اللوني ثابت في كل رسوم المقالة: الهيدروجين ذهبي، الكربون بنفسجي داكن، الأكسجين وردي، النيتروجين نبيذي، المحفز بنفسجي متوسط.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Montserrat:wght@500;700&family=Kalam&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sm-purple:#351141; --sm-gold:#EBB00F; --sm-gray:#DFDADE; --sm-white:#FFFFFF;
+  --sm-purple-700:#57375D; --sm-purple-600:#643A6B; --sm-purple-500:#81539D; --sm-purple-300:#B389CD;
+  --sm-gold-700:#C07F00; --sm-gold-600:#D79E03; --sm-gold-300:#E3C76F; --sm-gold-200:#F4D160;
+  --sm-wine-700:#79155B; --sm-wine-500:#A2678A; --sm-mauve:#A78295;
+  --sm-bg:var(--sm-white); --sm-surface:#FFFFFF; --sm-surface-2:#F4F1F4;
+  --sm-ink:var(--sm-purple); --sm-ink-soft:var(--sm-purple-600); --sm-line:var(--sm-gray);
+  --sm-accent:var(--sm-gold); --sm-on-accent:var(--sm-purple);
+  --sm-radius:12px; --sm-radius-sm:8px; --sm-gap:16px;
+  --sm-font:'Cairo','Montserrat','Segoe UI',Tahoma,sans-serif;
+  --sm-font-latin:'Montserrat','Cairo','Segoe UI',sans-serif;
+  /* الرمز اللوني للذرات والمحفز (ثابت في كل رسوم المقالة) */
+  --atom-h:#EBB00F; --atom-c:#351141; --atom-o:#A2678A; --atom-n:#79155B; --cat:#81539D; --cat-dark:#57375D;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.latin,code,.num{font-family:var(--sm-font-latin);direction:ltr;unicode-bidi:isolate}
+.sm-pattern-light{background-color:var(--sm-bg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23F7F2F9' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-pattern-dark{background-color:var(--sm-purple);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23472255' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-wrap{max-width:960px;margin:0 auto;overflow:hidden;border-radius:var(--sm-radius);border:1px solid var(--sm-line)}
+.sm-header{color:#fff;padding:20px 24px 24px}
+.sm-brand{display:flex;align-items:center;gap:10px;direction:ltr;justify-content:flex-start}
+.sm-brand svg{width:40px;height:40px;flex:none}
+.sm-brand .wordmark{font-family:'Kalam','Comic Sans MS',cursive;font-style:italic;font-size:17px;letter-spacing:.5px;color:var(--sm-gray)}
+.sm-title{font-weight:700;font-size:clamp(21px,4vw,31px);line-height:1.4;margin:16px 0 4px}
+.sm-sub{margin:0;color:var(--sm-gray);font-size:15px}
+.sm-body{padding:24px}
+.sm-stage{position:relative;background:var(--sm-surface);border:1px solid var(--sm-line);border-radius:var(--sm-radius);padding:12px;display:grid;place-items:center}
+.sm-stage>svg{width:100%;height:auto;display:block}
+.sm-stage text{font-family:var(--sm-font);fill:var(--sm-ink)}
+.sm-controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:var(--sm-gap)}
+.sm-tabs{display:flex;flex-wrap:wrap;gap:8px}
+.sm-btn{font:inherit;font-weight:600;font-size:15px;cursor:pointer;border:2px solid var(--sm-purple);background:#fff;color:var(--sm-purple);padding:6px 16px;border-radius:999px;transition:background .15s,color .15s,border-color .15s}
+.sm-btn:hover{border-color:var(--sm-purple-500);color:var(--sm-purple-500)}
+.sm-btn[aria-selected="true"],.sm-btn.primary{background:var(--sm-accent);border-color:var(--sm-accent);color:var(--sm-on-accent)}
+.sm-btn:focus-visible,.sm-range:focus-visible{outline:3px solid var(--sm-purple-300);outline-offset:2px}
+.sm-btn.ghost{border-style:dashed}
+.sm-range-wrap{display:flex;align-items:center;gap:10px;flex:1 1 240px}
+.sm-range{flex:1;accent-color:var(--sm-gold);height:28px}
+.sm-card{margin-top:var(--sm-gap);background:var(--sm-surface-2);border-inline-start:4px solid var(--sm-accent);border-radius:var(--sm-radius-sm);padding:12px 16px}
+.sm-card h3{margin:0 0 4px;font-size:18px;font-weight:700}
+.sm-card p{margin:0;color:var(--sm-ink-soft)}
+.sm-card p+p{margin-top:6px}
+.sm-legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:12px;font-size:14px;color:var(--sm-ink-soft)}
+.sm-legend span::before{content:"";display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--c);margin-inline-end:6px;vertical-align:-1px;border:1px solid rgba(53,17,65,.25)}
+.sm-takeaway{margin-top:var(--sm-gap);background:var(--sm-purple);color:#fff;border-radius:var(--sm-radius-sm);padding:12px 16px}
+.sm-takeaway b{color:var(--sm-gold)}
+.sm-note{font-size:13px;color:var(--sm-ink-soft);margin:8px 0 0}
+.sm-footer{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 24px;background:var(--sm-purple);color:var(--sm-gray);font-size:13px}
+.sm-footer a{color:var(--sm-gold);text-decoration:none;font-family:var(--sm-font-latin);font-weight:700}
+.mv{transition:transform .9s cubic-bezier(.4,.1,.2,1),opacity .5s}
+.no-anim .mv{transition:none}
+.atom{stroke:#fff;stroke-width:1.5}
+.atom-label{font-family:var(--sm-font-latin)!important;font-weight:700;font-size:12px;fill:#fff!important;text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.atom-label.dark{fill:var(--sm-purple)!important}
+
+@media (max-width:520px){
+  .sm-header{padding:16px}.sm-body{padding:12px}.sm-stage{padding:4px}
+  .sm-wrap{border-radius:0;border-inline:0}
+  .sm-btn{font-size:14px;padding:5px 12px}
+}
+@media (prefers-reduced-motion:reduce){.mv{transition:none!important}*{animation:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="sm-logo-mono" viewBox="0 0 100 100">
+    <mask id="sm-mono-cut">
+      <path d="M50 6 88 28v44L50 94 12 72V28z" fill="#fff" stroke="#fff" stroke-width="8" stroke-linejoin="round"/>
+      <path d="M50 17 17 50l33 33 3-3-30-30 27-27zM50 83 83 50 50 17l-3 3 30 30-27 27z" fill="none" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M50 31 69 50 50 69 31 50z" fill="#000"/>
+    </mask>
+    <rect width="100" height="100" fill="currentColor" mask="url(#sm-mono-cut)"/>
+  </symbol>
+</svg>
+<main class="sm-wrap" id="sm-root">
+  <header class="sm-header sm-pattern-dark">
+    <div class="sm-brand" aria-label="STEAMomentos">
+      <svg style="color:var(--sm-gray)"><use href="#sm-logo-mono"/></svg>
+      <span class="wordmark">STEAMomentos</span>
+    </div>
+    <h1 class="sm-title">عُقد معدنية + روابط عضوية = إسفنج بلّوري مليء بالمسام</h1>
+    <p class="sm-sub">ركّب الإطار المعدني العضوي بنفسك، ثم غيّر طول الرابط لترى كيف يتغير حجم المسام.</p>
+  </header>
+  <div class="sm-body sm-pattern-light">
+    <section class="sm-stage">
+      <svg id="scene" viewBox="0 0 600 360" role="img" aria-labelledby="scene-desc">
+        <desc id="scene-desc">عُقد معدنية سداسية وروابط عضوية تتجمع في شبكة منتظمة تتخللها مسام، وتتسع المسام كلما طال الرابط.</desc>
+        <g id="pores"></g>
+        <g id="links"></g>
+        <g id="nodes"></g>
+        <g id="gas"></g>
+      </svg>
+    </section>
+
+    <div class="sm-controls">
+      <button class="sm-btn primary" id="build" aria-pressed="false">ركّب الإطار</button>
+      <label class="sm-range-wrap">
+        <span>طول الرابط العضوي:</span>
+        <input class="sm-range" id="len" type="range" min="0" max="2" step="1" value="1" aria-valuetext="متوسط">
+        <output id="len-out" style="font-weight:700;min-width:48px">متوسط</output>
+      </label>
+    </div>
+
+    <div class="sm-card" aria-live="polite">
+      <h3 id="c-title"></h3>
+      <p id="c-text"></p>
+    </div>
+
+    <div class="sm-legend">
+      <span style="--c:var(--cat)">عقدة معدنية (أيونات الزنك مثلًا)</span>
+      <span style="--c:var(--atom-c)">رابط عضوي (حلقات كربونية)</span>
+      <span style="--c:#F4F1F4">مسام (فراغ داخلي)</span>
+      <span style="--c:var(--atom-h)">هيدروجين H₂</span>
+    </div>
+
+    <div class="sm-card" style="border-color:var(--cat)">
+      <h3>كم هي واسعة من الداخل؟</h3>
+      <p>بعض هذه الأطر تبلغ مساحة جدرانها الداخلية أكثر من 7000 متر مربع لكل غرام واحد (أقل من ملعقة صغيرة من المسحوق)، أي قرابة مساحة ملعب كرة قدم كامل.</p>
+    </div>
+
+    <div class="sm-takeaway">
+      <b>الخلاصة:</b> الأطر المعدنية العضوية (MOFs) تُبنى مثل ألعاب التركيب: عُقد معدنية تشبكها روابط عضوية في نمط يتكرر. والنتيجة بلّورة مليئة بالمسام، يتحكم الكيميائيون في حجمها باختيار طول الرابط.
+    </div>
+
+  </div>
+  <footer class="sm-footer">
+    <span>شكل (3) · المحفزات في إنتاج وتخزين الهيدروجين</span>
+    <a href="https://steamomentos.org" target="_blank" rel="noopener">steamomentos.org</a>
+  </footer>
+</main>
+<script>
+/* أدوات مشتركة */
+var SM = (function(){
+  var NS = 'http://www.w3.org/2000/svg';
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function el(tag, attrs, parent){
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  var COLORS = {H:'var(--atom-h)', C:'var(--atom-c)', O:'var(--atom-o)', N:'var(--atom-n)'};
+  var R = {H:9.5, C:13, O:12, N:13};
+  /* ذرة: دائرة ملونة وعليها رمزها */
+  function atom(sym, parent, extra){
+    var g = el('g', {'class':'mv'}, parent);
+    el('circle', {r: R[sym] || 10, fill: COLORS[sym] || 'var(--sm-gray)', 'class':'atom'}, g);
+    var t = el('text', {'class':'atom-label' + (sym === 'H' ? ' dark' : '')}, g);
+    t.textContent = sym;
+    if (extra) extra(g);
+    return g;
+  }
+  function place(g, x, y, opacity, rot){
+    g.style.transform = 'translate(' + x + 'px,' + y + 'px)' + (rot ? ' rotate(' + rot + 'deg)' : '');
+    if (opacity != null) g.style.opacity = opacity;
+  }
+  /* نقل فوري دون حركة */
+  function jump(g, x, y, opacity, rot){
+    g.classList.remove('mv'); place(g, x, y, opacity, rot);
+    g.getBoundingClientRect(); g.classList.add('mv');
+  }
+  function tabs(container, onSelect){
+    var btns = container.querySelectorAll('.sm-btn');
+    btns.forEach(function(b, i){
+      b.addEventListener('click', function(){ select(i); onSelect(i, true); });
+    });
+    function select(i){ btns.forEach(function(b, j){ b.setAttribute('aria-selected', String(i === j)); }); }
+    return select;
+  }
+  function postHeight(){
+    if (window.parent === window) return;
+    var h = Math.ceil(document.documentElement.getBoundingClientRect().height);
+    try { window.parent.postMessage({type:'sm-embed-height', height:h}, '*'); } catch(e){}
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(postHeight).observe(document.body);
+  window.addEventListener('load', postHeight);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(postHeight);
+  return {el:el, atom:atom, place:place, jump:jump, tabs:tabs, reduce:reduce, COLORS:COLORS};
+})();
+</script>
+<script>
+(function(){
+  var el = SM.el;
+  var gNodes = document.getElementById('nodes'), gLinks = document.getElementById('links');
+  var gPores = document.getElementById('pores'), gGas = document.getElementById('gas');
+  var COLS = 5, ROWS = 3, CX = 300, CY = 182;
+  var SIZES = [
+    {s:80,  rings:1, name:'قصير', title:'رابط قصير ← مسام ضيقة',
+     text:'رابط بحلقة كربونية واحدة يقرّب العُقد من بعضها، فتصغر المسام. الإطار هنا أمتن، لكن الفراغ الداخلي المتاح للغاز أقل.'},
+    {s:105, rings:2, name:'متوسط', title:'رابط متوسط ← مسام أوسع',
+     text:'بإضافة حلقة ثانية للرابط تتباعد العُقد وتتسع المسام. هكذا يضبط الكيميائيون حجم الفراغ ليناسب الجزيء الذي يريدون التقاطه، وهذا ما تعنيه المقالة بـ«التحكم في حجم المسام».'},
+    {s:130, rings:3, name:'طويل', title:'رابط طويل ← مسام كبيرة، وإطار أضعف',
+     text:'كلما طال الرابط كبرت المسام وزادت المساحة الداخلية، لكن الإطار يصبح أقل متانة وقد ينهار. لذلك يبحث العلماء عن التوازن بين الاتساع والمتانة.'}
+  ];
+  var built = false, size = 1;
+
+  /* بذرة ثابتة للمواقع العشوائية حتى يبدو التفكيك متشابهًا في كل مرة */
+  var seed = 7; function rnd(){ seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
+
+  var nodes = [], links = [], pores = [], gas = [];
+  for (var r = 0; r < ROWS; r++) for (var c = 0; c < COLS; c++){
+    var g = el('g', {'class':'mv'}, gNodes);
+    el('path', {d:'M0-17 15-8.5V8.5L0 17-15 8.5V-8.5Z', fill:'var(--cat)', stroke:'#fff', 'stroke-width':2, 'stroke-linejoin':'round'}, g);
+    var t = el('text', {'class':'atom-label', 'font-size':11}, g); t.textContent = 'Zn';
+    nodes.push({g:g, r:r, c:c, sx:40 + rnd() * 520, sy:40 + rnd() * 280, rot:0});
+  }
+  function addLink(r, c, vertical){
+    var g = el('g', {'class':'mv'}, gLinks);
+    links.push({g:g, r:r, c:c, v:vertical, sx:50 + rnd() * 500, sy:40 + rnd() * 280, rot:rnd() * 180});
+  }
+  for (r = 0; r < ROWS; r++) for (c = 0; c < COLS - 1; c++) addLink(r, c, false);
+  for (r = 0; r < ROWS - 1; r++) for (c = 0; c < COLS; c++) addLink(r, c, true);
+  for (r = 0; r < ROWS - 1; r++) for (c = 0; c < COLS - 1; c++){
+    var p = el('rect', {'class':'mv', rx:6, fill:'#F4F1F4', stroke:'var(--sm-gray)'}, gPores);
+    var h2 = el('g', {'class':'mv'}, gGas);
+    [-9.5, 9.5].forEach(function(dx){
+      var a = SM.atom('H', h2); a.classList.remove('mv'); a.setAttribute('transform', 'translate(' + dx + ',0)');
+    });
+    pores.push({rect:p, r:r, c:c}); gas.push({g:h2, r:r, c:c});
+  }
+
+  /* رسم الرابط: قضيب كربوني تتوسطه حلقات سداسية */
+  function drawLink(g, len, rings){
+    g.innerHTML = '';
+    el('line', {x1:-len/2, y1:0, x2:len/2, y2:0, stroke:'var(--atom-c)', 'stroke-width':4, 'stroke-linecap':'round'}, g);
+    var w = 20, start = -(rings - 1) * w / 2;
+    for (var i = 0; i < rings; i++){
+      var x = start + i * w;
+      el('path', {d:'M' + (x-9) + ' 0l4.5-8h9l4.5 8-4.5 8h-9z', fill:'#fff', stroke:'var(--atom-c)', 'stroke-width':2.5}, g);
+    }
+  }
+
+  function render(instant){
+    var S = SIZES[size], s = S.s, ox = CX - (COLS - 1) * s / 2, oy = CY - (ROWS - 1) * s / 2;
+    var f = instant ? SM.jump : SM.place;
+    links.forEach(function(L){ drawLink(L.g, s - 34, S.rings); });
+    nodes.forEach(function(n){
+      if (built) f(n.g, ox + n.c * s, oy + n.r * s, 1, 0); else f(n.g, n.sx, n.sy, 1, 30);
+    });
+    links.forEach(function(L){
+      var x = ox + L.c * s + (L.v ? 0 : s / 2), y = oy + L.r * s + (L.v ? s / 2 : 0);
+      if (built) f(L.g, x, y, 1, L.v ? 90 : 0); else f(L.g, L.sx, L.sy, 1, L.rot);
+    });
+    pores.forEach(function(P){
+      var w = s - 40;
+      P.rect.setAttribute('width', w); P.rect.setAttribute('height', w);
+      P.rect.setAttribute('x', -w / 2); P.rect.setAttribute('y', -w / 2);
+      f(P.rect, ox + (P.c + .5) * s, oy + (P.r + .5) * s, built ? 1 : 0);
+    });
+    gas.forEach(function(G){ f(G.g, ox + (G.c + .5) * s, oy + (G.r + .5) * s, built ? 1 : 0); });
+
+    var out = document.getElementById('len-out'), range = document.getElementById('len');
+    out.textContent = S.name; range.setAttribute('aria-valuetext', S.name);
+    if (built){
+      document.getElementById('c-title').textContent = S.title;
+      document.getElementById('c-text').textContent = S.text;
+    } else {
+      document.getElementById('c-title').textContent = 'قطع متفرقة: عُقد معدنية وروابط عضوية';
+      document.getElementById('c-text').textContent = 'العُقد المعدنية (السداسيات البنفسجية) تشبه كرات ألعاب التركيب، والروابط العضوية تشبه العصي. اضغط «ركّب الإطار» لترى كيف تتشابك في نمط يتكرر في كل الاتجاهات.';
+    }
+  }
+
+  var btn = document.getElementById('build');
+  btn.addEventListener('click', function(){
+    built = !built;
+    btn.textContent = built ? 'فكّك الإطار' : 'ركّب الإطار';
+    btn.setAttribute('aria-pressed', String(built));
+    render();
+  });
+  document.getElementById('len').addEventListener('input', function(e){ size = +e.target.value; render(); });
+  render(true);
+})();
+
+</script>
+</body>
+</html>

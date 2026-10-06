@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>تحلل الأمونيا بالحفز | STEAMomentos</title>
+<meta name="description" content="تابع ذرات جزيئين من الأمونيا خطوة بخطوة على سطح المحفز، ثم اكتشف لماذا تُعدّ الأمونيا "حاوية" جيدة للهيدروجين.">
+<!--
+  رسم تفاعلي لمقالة "المحفزات في إنتاج وتخزين الهيدروجين" على steamomentos.org
+  ملف مستقل (CSS و JS داخليان). الاعتماد الخارجي الوحيد: خطوط Google مع بدائل احتياطية.
+  التضمين:
+    <iframe src="https://steamomentos.github.io/chemistry/almhfzat-fy-antag-otkhzyn-alhydrogyn/fig2-ammonia-decomposition.html" style="width:100%;border:0;min-height:640px" loading="lazy" title="تحلل الأمونيا بالحفز"></iframe>
+  الرمز اللوني ثابت في كل رسوم المقالة: الهيدروجين ذهبي، الكربون بنفسجي داكن، الأكسجين وردي، النيتروجين نبيذي، المحفز بنفسجي متوسط.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Montserrat:wght@500;700&family=Kalam&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sm-purple:#351141; --sm-gold:#EBB00F; --sm-gray:#DFDADE; --sm-white:#FFFFFF;
+  --sm-purple-700:#57375D; --sm-purple-600:#643A6B; --sm-purple-500:#81539D; --sm-purple-300:#B389CD;
+  --sm-gold-700:#C07F00; --sm-gold-600:#D79E03; --sm-gold-300:#E3C76F; --sm-gold-200:#F4D160;
+  --sm-wine-700:#79155B; --sm-wine-500:#A2678A; --sm-mauve:#A78295;
+  --sm-bg:var(--sm-white); --sm-surface:#FFFFFF; --sm-surface-2:#F4F1F4;
+  --sm-ink:var(--sm-purple); --sm-ink-soft:var(--sm-purple-600); --sm-line:var(--sm-gray);
+  --sm-accent:var(--sm-gold); --sm-on-accent:var(--sm-purple);
+  --sm-radius:12px; --sm-radius-sm:8px; --sm-gap:16px;
+  --sm-font:'Cairo','Montserrat','Segoe UI',Tahoma,sans-serif;
+  --sm-font-latin:'Montserrat','Cairo','Segoe UI',sans-serif;
+  /* الرمز اللوني للذرات والمحفز (ثابت في كل رسوم المقالة) */
+  --atom-h:#EBB00F; --atom-c:#351141; --atom-o:#A2678A; --atom-n:#79155B; --cat:#81539D; --cat-dark:#57375D;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.latin,code,.num{font-family:var(--sm-font-latin);direction:ltr;unicode-bidi:isolate}
+.sm-pattern-light{background-color:var(--sm-bg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23F7F2F9' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-pattern-dark{background-color:var(--sm-purple);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23472255' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-wrap{max-width:960px;margin:0 auto;overflow:hidden;border-radius:var(--sm-radius);border:1px solid var(--sm-line)}
+.sm-header{color:#fff;padding:20px 24px 24px}
+.sm-brand{display:flex;align-items:center;gap:10px;direction:ltr;justify-content:flex-start}
+.sm-brand svg{width:40px;height:40px;flex:none}
+.sm-brand .wordmark{font-family:'Kalam','Comic Sans MS',cursive;font-style:italic;font-size:17px;letter-spacing:.5px;color:var(--sm-gray)}
+.sm-title{font-weight:700;font-size:clamp(21px,4vw,31px);line-height:1.4;margin:16px 0 4px}
+.sm-sub{margin:0;color:var(--sm-gray);font-size:15px}
+.sm-body{padding:24px}
+.sm-stage{position:relative;background:var(--sm-surface);border:1px solid var(--sm-line);border-radius:var(--sm-radius);padding:12px;display:grid;place-items:center}
+.sm-stage>svg{width:100%;height:auto;display:block}
+.sm-stage text{font-family:var(--sm-font);fill:var(--sm-ink)}
+.sm-controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:var(--sm-gap)}
+.sm-tabs{display:flex;flex-wrap:wrap;gap:8px}
+.sm-btn{font:inherit;font-weight:600;font-size:15px;cursor:pointer;border:2px solid var(--sm-purple);background:#fff;color:var(--sm-purple);padding:6px 16px;border-radius:999px;transition:background .15s,color .15s,border-color .15s}
+.sm-btn:hover{border-color:var(--sm-purple-500);color:var(--sm-purple-500)}
+.sm-btn[aria-selected="true"],.sm-btn.primary{background:var(--sm-accent);border-color:var(--sm-accent);color:var(--sm-on-accent)}
+.sm-btn:focus-visible,.sm-range:focus-visible{outline:3px solid var(--sm-purple-300);outline-offset:2px}
+.sm-btn.ghost{border-style:dashed}
+.sm-range-wrap{display:flex;align-items:center;gap:10px;flex:1 1 240px}
+.sm-range{flex:1;accent-color:var(--sm-gold);height:28px}
+.sm-card{margin-top:var(--sm-gap);background:var(--sm-surface-2);border-inline-start:4px solid var(--sm-accent);border-radius:var(--sm-radius-sm);padding:12px 16px}
+.sm-card h3{margin:0 0 4px;font-size:18px;font-weight:700}
+.sm-card p{margin:0;color:var(--sm-ink-soft)}
+.sm-card p+p{margin-top:6px}
+.sm-legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:12px;font-size:14px;color:var(--sm-ink-soft)}
+.sm-legend span::before{content:"";display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--c);margin-inline-end:6px;vertical-align:-1px;border:1px solid rgba(53,17,65,.25)}
+.sm-takeaway{margin-top:var(--sm-gap);background:var(--sm-purple);color:#fff;border-radius:var(--sm-radius-sm);padding:12px 16px}
+.sm-takeaway b{color:var(--sm-gold)}
+.sm-note{font-size:13px;color:var(--sm-ink-soft);margin:8px 0 0}
+.sm-footer{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 24px;background:var(--sm-purple);color:var(--sm-gray);font-size:13px}
+.sm-footer a{color:var(--sm-gold);text-decoration:none;font-family:var(--sm-font-latin);font-weight:700}
+.mv{transition:transform .9s cubic-bezier(.4,.1,.2,1),opacity .5s}
+.no-anim .mv{transition:none}
+.atom{stroke:#fff;stroke-width:1.5}
+.atom-label{font-family:var(--sm-font-latin)!important;font-weight:700;font-size:12px;fill:#fff!important;text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.atom-label.dark{fill:var(--sm-purple)!important}
+.eq{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 14px;margin-bottom:12px;background:#fff;border:1px solid var(--sm-line);border-radius:var(--sm-radius);padding:10px 14px}
+.eq-side{display:flex;flex-direction:column;align-items:center;line-height:1.2}
+.eq-side b{font-size:22px}
+.eq-side small{font-size:13px;color:var(--sm-ink-soft)}
+.eq-side.h b{color:var(--sm-gold-700)}
+.eq-arrow,.eq-plus{font-size:22px;font-weight:700}
+.eq-count{flex-basis:100%;text-align:center;font-size:14px;color:var(--sm-ink-soft)}
+#heat{transition:opacity .5s}
+.why{margin-top:24px;background:#fff;border:1px solid var(--sm-line);border-radius:var(--sm-radius);padding:16px}
+.why h3{margin:0;font-size:18px;line-height:1.5}
+.why-sub{margin:4px 0 12px;color:var(--sm-ink-soft);font-size:15px}
+.bars{display:grid;gap:10px}
+.bar{display:grid;grid-template-columns:minmax(120px,210px) 1fr auto;align-items:center;gap:10px;font-size:15px}
+.bar-track{height:22px;display:block}
+.bar-fill{display:block;height:100%;width:calc(var(--v) / 121 * 100%);background:var(--sm-gray);border-radius:4px}
+.bar.hl .bar-fill{background:var(--sm-gold)}
+.bar.hl{font-weight:700}
+.bar-val{font-weight:700;min-width:56px}
+@media (max-width:520px){.bar{grid-template-columns:1fr auto}.bar-track{grid-column:1/-1;grid-row:2}}
+
+@media (max-width:520px){
+  .sm-header{padding:16px}.sm-body{padding:12px}.sm-stage{padding:4px}
+  .sm-wrap{border-radius:0;border-inline:0}
+  .sm-btn{font-size:14px;padding:5px 12px}
+}
+@media (prefers-reduced-motion:reduce){.mv{transition:none!important}*{animation:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="sm-logo-mono" viewBox="0 0 100 100">
+    <mask id="sm-mono-cut">
+      <path d="M50 6 88 28v44L50 94 12 72V28z" fill="#fff" stroke="#fff" stroke-width="8" stroke-linejoin="round"/>
+      <path d="M50 17 17 50l33 33 3-3-30-30 27-27zM50 83 83 50 50 17l-3 3 30 30-27 27z" fill="none" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M50 31 69 50 50 69 31 50z" fill="#000"/>
+    </mask>
+    <rect width="100" height="100" fill="currentColor" mask="url(#sm-mono-cut)"/>
+  </symbol>
+</svg>
+<main class="sm-wrap" id="sm-root">
+  <header class="sm-header sm-pattern-dark">
+    <div class="sm-brand" aria-label="STEAMomentos">
+      <svg style="color:var(--sm-gray)"><use href="#sm-logo-mono"/></svg>
+      <span class="wordmark">STEAMomentos</span>
+    </div>
+    <h1 class="sm-title">كيف يفكّ سطح الروثينيوم الأمونيا ليحرّر الهيدروجين</h1>
+    <p class="sm-sub">تابع ذرات جزيئين من الأمونيا خطوة بخطوة على سطح المحفز، ثم اكتشف لماذا تُعدّ الأمونيا "حاوية" جيدة للهيدروجين.</p>
+  </header>
+  <div class="sm-body sm-pattern-light">
+    <div class="eq" aria-label="المعادلة: جزيئان من الأمونيا ينتجان جزيء نيتروجين وثلاثة جزيئات هيدروجين">
+      <span class="eq-side"><b class="num">2 NH₃</b><small>أمونيا</small></span>
+      <span class="eq-arrow" aria-hidden="true">←</span>
+      <span class="eq-side"><b class="num">N₂</b><small>نيتروجين</small></span>
+      <span class="eq-plus" aria-hidden="true">+</span>
+      <span class="eq-side h"><b class="num">3 H₂</b><small>هيدروجين</small></span>
+      <span class="eq-count">ذرات N: <b class="num">2 = 2</b> · ذرات H: <b class="num">6 = 6</b></span>
+    </div>
+
+    <section class="sm-stage">
+      <svg id="scene" viewBox="0 0 600 345" role="img" aria-labelledby="scene-desc">
+        <desc id="scene-desc">جزيئا أمونيا يلتصقان بسطح الروثينيوم، تنفصل عنهما ذرات الهيدروجين، ثم تتحد الذرات إلى نيتروجين وهيدروجين وتغادر السطح.</desc>
+        <g id="surface"></g>
+        <g id="atoms"></g>
+        <text id="heat" x="300" y="34" text-anchor="middle" font-size="16" fill="#C07F00" font-weight="700">🔥 حرارة: التفاعل يمتص الطاقة</text>
+      </svg>
+    </section>
+
+    <div class="sm-controls">
+      <div class="sm-tabs" role="tablist" aria-label="خطوات التفاعل" id="steps">
+        <button class="sm-btn" role="tab" aria-selected="true">١. الالتصاق</button>
+        <button class="sm-btn" role="tab" aria-selected="false">٢. تفكك الروابط</button>
+        <button class="sm-btn" role="tab" aria-selected="false">٣. التلاقي</button>
+        <button class="sm-btn" role="tab" aria-selected="false">٤. الانطلاق</button>
+      </div>
+      <button class="sm-btn ghost" id="play" aria-pressed="false">▶ تشغيل الكل</button>
+    </div>
+
+    <div class="sm-card" aria-live="polite">
+      <h3 id="s-title"></h3>
+      <p id="s-text"></p>
+    </div>
+
+    <div class="sm-legend">
+      <span style="--c:var(--atom-n)">نيتروجين N</span>
+      <span style="--c:var(--atom-h)">هيدروجين H</span>
+      <span style="--c:var(--cat)">روثينيوم Ru (المحفز)</span>
+    </div>
+
+    <section class="why" aria-labelledby="why-h">
+      <h3 id="why-h">لماذا نستخرج الهيدروجين من الأمونيا؟ لأنها تحمل منه أكثر في الحجم نفسه</h3>
+      <p class="why-sub">كم كيلوغرامًا من الهيدروجين يتسع له خزان حجمه متر مكعب واحد (1000 لتر)؟</p>
+      <div class="bars">
+        <div class="bar hl" style="--v:121"><span class="bar-label">أمونيا سائلة</span><span class="bar-track"><span class="bar-fill"></span></span><span class="bar-val num">121 kg</span></div>
+        <div class="bar" style="--v:71"><span class="bar-label">هيدروجين سائل (عند −253°م)</span><span class="bar-track"><span class="bar-fill"></span></span><span class="bar-val num">71 kg</span></div>
+        <div class="bar" style="--v:40"><span class="bar-label">هيدروجين مضغوط (700 بار)</span><span class="bar-track"><span class="bar-fill"></span></span><span class="bar-val num">40 kg</span></div>
+      </div>
+      <p class="sm-note">تتحول الأمونيا إلى سائل بتبريد بسيط (−33°م) أو بضغط خفيف (نحو 10 أضعاف ضغط الجو)، بينما يحتاج الهيدروجين إلى −253°م. القيم تقريبية، محسوبة من كثافة كل مادة.</p>
+    </section>
+
+    <div class="sm-takeaway">
+      <b>الخلاصة:</b> سطح الروثينيوم يفكك روابط الأمونيا ثم يعيد تركيب ذراتها نيتروجينًا وهيدروجينًا، ويبقى هو كما هو. ولأن الأمونيا تحمل هيدروجينًا كثيرًا في حجم صغير ويسهل نقلها، فهي «حاوية» واعدة للهيدروجين.
+    </div>
+
+  </div>
+  <footer class="sm-footer">
+    <span>شكل (2) · المحفزات في إنتاج وتخزين الهيدروجين</span>
+    <a href="https://steamomentos.org" target="_blank" rel="noopener">steamomentos.org</a>
+  </footer>
+</main>
+<script>
+/* أدوات مشتركة */
+var SM = (function(){
+  var NS = 'http://www.w3.org/2000/svg';
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function el(tag, attrs, parent){
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  var COLORS = {H:'var(--atom-h)', C:'var(--atom-c)', O:'var(--atom-o)', N:'var(--atom-n)'};
+  var R = {H:9.5, C:13, O:12, N:13};
+  /* ذرة: دائرة ملونة وعليها رمزها */
+  function atom(sym, parent, extra){
+    var g = el('g', {'class':'mv'}, parent);
+    el('circle', {r: R[sym] || 10, fill: COLORS[sym] || 'var(--sm-gray)', 'class':'atom'}, g);
+    var t = el('text', {'class':'atom-label' + (sym === 'H' ? ' dark' : '')}, g);
+    t.textContent = sym;
+    if (extra) extra(g);
+    return g;
+  }
+  function place(g, x, y, opacity, rot){
+    g.style.transform = 'translate(' + x + 'px,' + y + 'px)' + (rot ? ' rotate(' + rot + 'deg)' : '');
+    if (opacity != null) g.style.opacity = opacity;
+  }
+  /* نقل فوري دون حركة */
+  function jump(g, x, y, opacity, rot){
+    g.classList.remove('mv'); place(g, x, y, opacity, rot);
+    g.getBoundingClientRect(); g.classList.add('mv');
+  }
+  function tabs(container, onSelect){
+    var btns = container.querySelectorAll('.sm-btn');
+    btns.forEach(function(b, i){
+      b.addEventListener('click', function(){ select(i); onSelect(i, true); });
+    });
+    function select(i){ btns.forEach(function(b, j){ b.setAttribute('aria-selected', String(i === j)); }); }
+    return select;
+  }
+  function postHeight(){
+    if (window.parent === window) return;
+    var h = Math.ceil(document.documentElement.getBoundingClientRect().height);
+    try { window.parent.postMessage({type:'sm-embed-height', height:h}, '*'); } catch(e){}
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(postHeight).observe(document.body);
+  window.addEventListener('load', postHeight);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(postHeight);
+  return {el:el, atom:atom, place:place, jump:jump, tabs:tabs, reduce:reduce, COLORS:COLORS};
+})();
+</script>
+<script>
+(function(){
+  var el = SM.el;
+  var surface = document.getElementById('surface'), layer = document.getElementById('atoms');
+  document.getElementById('heat').textContent = '+ حرارة: التفاعل يمتص الطاقة ليحدث';
+
+  /* سطح الروثينيوم */
+  for (var x = 45; x <= 555; x += 30){
+    el('circle', {cx:x, cy:292, r:15, fill:'var(--cat)', stroke:'#fff', 'stroke-width':1.5}, surface);
+  }
+  var lbl = el('text', {x:300, y:334, 'text-anchor':'middle', 'font-size':16, 'font-weight':700}, surface);
+  lbl.textContent = 'سطح الروثينيوم (المحفز)';
+
+  /* الذرات: نيتروجينان وستة هيدروجين */
+  var N = [SM.atom('N', layer), SM.atom('N', layer)];
+  var H = []; for (var i = 0; i < 6; i++) H.push(SM.atom('H', layer));
+  var up = [[-21,-10],[21,-10],[0,-23]];
+  function nh3(nx, ny){ return up.map(function(o){ return [nx + o[0], ny + o[1]]; }); }
+
+  /* مواقع الذرات في كل حالة: [N1, N2, H1..H6] */
+  function state(n1, n2, hs){ return {N:[n1, n2], H:hs}; }
+  var S = [
+    state([200,95],[400,95], nh3(200,95).concat(nh3(400,95))),                        /* في الغاز */
+    state([200,263],[400,263], nh3(200,263).concat(nh3(400,263))),                    /* ١ الالتصاق */
+    state([200,263],[400,263], [[110,268],[150,268],[250,268],[350,268],[450,268],[490,268]]), /* ٢ التفكك */
+    state([287,263],[313,263], [[121,268],[139,268],[221,268],[239,268],[461,268],[479,268]]), /* ٣ التلاقي */
+    state([287,72],[313,72],   [[121,92],[139,92],[201,132],[219,132],[461,92],[479,92]])       /* ٤ الانطلاق */
+  ];
+  function apply(s, instant){
+    var f = instant ? SM.jump : SM.place;
+    s.N.forEach(function(p, i){ f(N[i], p[0], p[1], 1); });
+    s.H.forEach(function(p, i){ f(H[i], p[0], p[1], 1); });
+  }
+
+  var steps = [
+    {t:'١. الالتصاق (الامتزاز)', p:'يقترب جزيئا الأمونيا (NH₃) من سطح الروثينيوم ويلتصقان به من جهة ذرة النيتروجين. يسمي الكيميائيون هذا الالتصاق بالسطح «امتزازًا».'},
+    {t:'٢. تفكك الروابط', p:'هنا يظهر عمل المحفز: سطح الروثينيوم يُضعف الروابط بين النيتروجين والهيدروجين، فتنفصل ذرات الهيدروجين الست وتنتشر على السطح. من دون محفز تحتاج هذه الخطوة حرارة أعلى بكثير.'},
+    {t:'٣. التلاقي', p:'تتنقل الذرات على السطح: تلتقي ذرتا نيتروجين فتكوّنان جزيء N₂، وتلتقي كل ذرتي هيدروجين فتكوّنان جزيء H₂. اتحاد ذرتي النيتروجين هو غالبًا أبطأ خطوة، والروثينيوم من أفضل المعادن في تسريعها.'},
+    {t:'٤. الانطلاق', p:'يغادر النيتروجين والهيدروجين السطح غازين، ويعود سطح الروثينيوم كما كان، جاهزًا لجزيئات جديدة. الحصيلة: جزيئا أمونيا يعطيان 3 جزيئات هيدروجين.'}
+  ];
+  var select, timers = [], playing = false, playBtn = document.getElementById('play');
+  function card(i){
+    document.getElementById('s-title').textContent = steps[i].t;
+    document.getElementById('s-text').textContent = steps[i].p;
+  }
+  function go(i){
+    if (i === 0) apply(S[0], true);
+    else apply(S[i], true);
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ apply(S[i + 1]); }); });
+    card(i);
+  }
+  function stop(){ timers.forEach(clearTimeout); timers = []; playing = false; playBtn.textContent = '▶ تشغيل الكل'; playBtn.setAttribute('aria-pressed', 'false'); }
+  function play(){
+    stop(); playing = true; playBtn.textContent = '⏸ إيقاف'; playBtn.setAttribute('aria-pressed', 'true');
+    for (var k = 0; k < 4; k++) (function(k){ timers.push(setTimeout(function(){ select(k); go(k); }, k * 2600)); })(k);
+    timers.push(setTimeout(stop, 4 * 2600));
+  }
+  select = SM.tabs(document.getElementById('steps'), function(i){ stop(); go(i); });
+  playBtn.addEventListener('click', function(){ playing ? stop() : play(); });
+  apply(S[0], true); card(0);
+  setTimeout(function(){ go(0); }, 400);
+})();
+
+</script>
+</body>
+</html>

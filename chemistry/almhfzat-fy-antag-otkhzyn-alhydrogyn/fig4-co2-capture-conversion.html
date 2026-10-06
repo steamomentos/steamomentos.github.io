@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>التقاط ثاني أكسيد الكربون وتحويله | STEAMomentos</title>
+<meta name="description" content="شاهد الإطار يمسك ثاني أكسيد الكربون ويترك النيتروجين يمر، ثم اختر المادة التي نصنعها من الكربون الملتقط.">
+<!--
+  رسم تفاعلي لمقالة "المحفزات في إنتاج وتخزين الهيدروجين" على steamomentos.org
+  ملف مستقل (CSS و JS داخليان). الاعتماد الخارجي الوحيد: خطوط Google مع بدائل احتياطية.
+  التضمين:
+    <iframe src="https://steamomentos.github.io/chemistry/almhfzat-fy-antag-otkhzyn-alhydrogyn/fig4-co2-capture-conversion.html" style="width:100%;border:0;min-height:640px" loading="lazy" title="التقاط ثاني أكسيد الكربون وتحويله"></iframe>
+  الرمز اللوني ثابت في كل رسوم المقالة: الهيدروجين ذهبي، الكربون بنفسجي داكن، الأكسجين وردي، النيتروجين نبيذي، المحفز بنفسجي متوسط.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Montserrat:wght@500;700&family=Kalam&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sm-purple:#351141; --sm-gold:#EBB00F; --sm-gray:#DFDADE; --sm-white:#FFFFFF;
+  --sm-purple-700:#57375D; --sm-purple-600:#643A6B; --sm-purple-500:#81539D; --sm-purple-300:#B389CD;
+  --sm-gold-700:#C07F00; --sm-gold-600:#D79E03; --sm-gold-300:#E3C76F; --sm-gold-200:#F4D160;
+  --sm-wine-700:#79155B; --sm-wine-500:#A2678A; --sm-mauve:#A78295;
+  --sm-bg:var(--sm-white); --sm-surface:#FFFFFF; --sm-surface-2:#F4F1F4;
+  --sm-ink:var(--sm-purple); --sm-ink-soft:var(--sm-purple-600); --sm-line:var(--sm-gray);
+  --sm-accent:var(--sm-gold); --sm-on-accent:var(--sm-purple);
+  --sm-radius:12px; --sm-radius-sm:8px; --sm-gap:16px;
+  --sm-font:'Cairo','Montserrat','Segoe UI',Tahoma,sans-serif;
+  --sm-font-latin:'Montserrat','Cairo','Segoe UI',sans-serif;
+  /* الرمز اللوني للذرات والمحفز (ثابت في كل رسوم المقالة) */
+  --atom-h:#EBB00F; --atom-c:#351141; --atom-o:#A2678A; --atom-n:#79155B; --cat:#81539D; --cat-dark:#57375D;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.latin,code,.num{font-family:var(--sm-font-latin);direction:ltr;unicode-bidi:isolate}
+.sm-pattern-light{background-color:var(--sm-bg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23F7F2F9' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-pattern-dark{background-color:var(--sm-purple);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23472255' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-wrap{max-width:960px;margin:0 auto;overflow:hidden;border-radius:var(--sm-radius);border:1px solid var(--sm-line)}
+.sm-header{color:#fff;padding:20px 24px 24px}
+.sm-brand{display:flex;align-items:center;gap:10px;direction:ltr;justify-content:flex-start}
+.sm-brand svg{width:40px;height:40px;flex:none}
+.sm-brand .wordmark{font-family:'Kalam','Comic Sans MS',cursive;font-style:italic;font-size:17px;letter-spacing:.5px;color:var(--sm-gray)}
+.sm-title{font-weight:700;font-size:clamp(21px,4vw,31px);line-height:1.4;margin:16px 0 4px}
+.sm-sub{margin:0;color:var(--sm-gray);font-size:15px}
+.sm-body{padding:24px}
+.sm-stage{position:relative;background:var(--sm-surface);border:1px solid var(--sm-line);border-radius:var(--sm-radius);padding:12px;display:grid;place-items:center}
+.sm-stage>svg{width:100%;height:auto;display:block}
+.sm-stage text{font-family:var(--sm-font);fill:var(--sm-ink)}
+.sm-controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:var(--sm-gap)}
+.sm-tabs{display:flex;flex-wrap:wrap;gap:8px}
+.sm-btn{font:inherit;font-weight:600;font-size:15px;cursor:pointer;border:2px solid var(--sm-purple);background:#fff;color:var(--sm-purple);padding:6px 16px;border-radius:999px;transition:background .15s,color .15s,border-color .15s}
+.sm-btn:hover{border-color:var(--sm-purple-500);color:var(--sm-purple-500)}
+.sm-btn[aria-selected="true"],.sm-btn.primary{background:var(--sm-accent);border-color:var(--sm-accent);color:var(--sm-on-accent)}
+.sm-btn:focus-visible,.sm-range:focus-visible{outline:3px solid var(--sm-purple-300);outline-offset:2px}
+.sm-btn.ghost{border-style:dashed}
+.sm-range-wrap{display:flex;align-items:center;gap:10px;flex:1 1 240px}
+.sm-range{flex:1;accent-color:var(--sm-gold);height:28px}
+.sm-card{margin-top:var(--sm-gap);background:var(--sm-surface-2);border-inline-start:4px solid var(--sm-accent);border-radius:var(--sm-radius-sm);padding:12px 16px}
+.sm-card h3{margin:0 0 4px;font-size:18px;font-weight:700}
+.sm-card p{margin:0;color:var(--sm-ink-soft)}
+.sm-card p+p{margin-top:6px}
+.sm-legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:12px;font-size:14px;color:var(--sm-ink-soft)}
+.sm-legend span::before{content:"";display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--c);margin-inline-end:6px;vertical-align:-1px;border:1px solid rgba(53,17,65,.25)}
+.sm-takeaway{margin-top:var(--sm-gap);background:var(--sm-purple);color:#fff;border-radius:var(--sm-radius-sm);padding:12px 16px}
+.sm-takeaway b{color:var(--sm-gold)}
+.sm-note{font-size:13px;color:var(--sm-ink-soft);margin:8px 0 0}
+.sm-footer{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 24px;background:var(--sm-purple);color:var(--sm-gray);font-size:13px}
+.sm-footer a{color:var(--sm-gold);text-decoration:none;font-family:var(--sm-font-latin);font-weight:700}
+.mv{transition:transform .9s cubic-bezier(.4,.1,.2,1),opacity .5s}
+.no-anim .mv{transition:none}
+.atom{stroke:#fff;stroke-width:1.5}
+.atom-label{font-family:var(--sm-font-latin)!important;font-weight:700;font-size:12px;fill:#fff!important;text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.atom-label.dark{fill:var(--sm-purple)!important}
+
+@media (max-width:520px){
+  .sm-header{padding:16px}.sm-body{padding:12px}.sm-stage{padding:4px}
+  .sm-wrap{border-radius:0;border-inline:0}
+  .sm-btn{font-size:14px;padding:5px 12px}
+}
+@media (prefers-reduced-motion:reduce){.mv{transition:none!important}*{animation:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="sm-logo-mono" viewBox="0 0 100 100">
+    <mask id="sm-mono-cut">
+      <path d="M50 6 88 28v44L50 94 12 72V28z" fill="#fff" stroke="#fff" stroke-width="8" stroke-linejoin="round"/>
+      <path d="M50 17 17 50l33 33 3-3-30-30 27-27zM50 83 83 50 50 17l-3 3 30 30-27 27z" fill="none" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M50 31 69 50 50 69 31 50z" fill="#000"/>
+    </mask>
+    <rect width="100" height="100" fill="currentColor" mask="url(#sm-mono-cut)"/>
+  </symbol>
+</svg>
+<main class="sm-wrap" id="sm-root">
+  <header class="sm-header sm-pattern-dark">
+    <div class="sm-brand" aria-label="STEAMomentos">
+      <svg style="color:var(--sm-gray)"><use href="#sm-logo-mono"/></svg>
+      <span class="wordmark">STEAMomentos</span>
+    </div>
+    <h1 class="sm-title">الإطار يلتقط ثاني أكسيد الكربون من العادم، والهيدروجين يحوّله إلى وقود</h1>
+    <p class="sm-sub">شاهد الإطار يمسك ثاني أكسيد الكربون ويترك النيتروجين يمر، ثم اختر المادة التي نصنعها من الكربون الملتقط.</p>
+  </header>
+  <div class="sm-body sm-pattern-light">
+    <div class="sm-controls" style="margin-top:0;margin-bottom:12px">
+      <div class="sm-tabs" role="tablist" aria-label="المرحلتان" id="phases">
+        <button class="sm-btn" role="tab" aria-selected="true">١. الالتقاط</button>
+        <button class="sm-btn" role="tab" aria-selected="false">٢. التحويل</button>
+      </div>
+    </div>
+
+    <section class="sm-stage">
+      <svg id="capture" viewBox="0 0 600 330" role="img" aria-labelledby="cap-desc">
+        <desc id="cap-desc">غازات العادم تمر عبر الإطار المعدني العضوي؛ جزيئات ثاني أكسيد الكربون تعلق بالمواقع المعدنية، والنيتروجين يمر.</desc>
+        <g id="cap-bg"></g>
+        <g id="cap-mol"></g>
+        <g font-size="16">
+          <rect x="10" y="10" width="230" height="58" rx="10" fill="#F4F1F4"/>
+          <text x="230" y="34" text-anchor="start">CO₂ ملتقط: <tspan id="n-co2" font-weight="700" class="num">0</tspan> / <tspan id="n-sites" class="num">9</tspan></text>
+          <text x="230" y="58" text-anchor="start">N₂ عبر الإطار: <tspan id="n-n2" font-weight="700" class="num">0</tspan></text>
+        </g>
+      </svg>
+      <svg id="convert" viewBox="40 85 520 200" role="img" aria-labelledby="conv-desc" style="display:none">
+        <desc id="conv-desc">ذرات ثاني أكسيد الكربون والهيدروجين تعيد ترتيب نفسها بمساعدة محفز لتكوّن ناتجًا جديدًا.</desc>
+        <g id="conv-bg"></g>
+        <g id="conv-atoms"></g>
+      </svg>
+    </section>
+
+    <div class="sm-controls" id="cap-ctrl">
+      <button class="sm-btn primary" id="regen" disabled>سخّن الإطار ليُطلق CO₂</button>
+      <button class="sm-btn ghost" id="flow" aria-pressed="true">⏸ إيقاف التدفق</button>
+    </div>
+    <div class="sm-controls" id="conv-ctrl" hidden>
+      <span style="font-weight:700">ماذا نصنع من CO₂؟</span>
+      <div class="sm-tabs" role="tablist" aria-label="النواتج" id="products">
+        <button class="sm-btn" role="tab" aria-selected="true">ميثانول</button>
+        <button class="sm-btn" role="tab" aria-selected="false">حمض الفورميك</button>
+        <button class="sm-btn" role="tab" aria-selected="false">ميثان</button>
+      </div>
+      <button class="sm-btn ghost" id="replay">↻ أعد التفاعل</button>
+    </div>
+
+    <div class="sm-card" aria-live="polite">
+      <h3 id="c-title"></h3>
+      <p id="c-text"></p>
+    </div>
+
+    <div class="sm-legend">
+      <span style="--c:var(--atom-c)">كربون C</span>
+      <span style="--c:var(--atom-o)">أكسجين O</span>
+      <span style="--c:var(--atom-n)">نيتروجين N</span>
+      <span style="--c:var(--atom-h)">هيدروجين H</span>
+      <span style="--c:var(--cat)">موقع معدني مفتوح</span>
+    </div>
+    <p class="sm-note" id="cap-note">نسبة ثاني أكسيد الكربون في المشهد مكبّرة للتوضيح؛ في عادم المصانع هو عادةً أقل من خُمس الغاز، ومعظم الباقي نيتروجين.</p>
+
+    <div class="sm-takeaway">
+      <b>الخلاصة:</b> الإطار المعدني العضوي يعمل كمصفاة ذكية: يمسك ثاني أكسيد الكربون ويترك بقية الغاز يمر. ثم يحوّل محفز، مع الهيدروجين، هذا الكربون إلى وقود ومواد مفيدة بدل أن ينطلق إلى الجو.
+    </div>
+
+  </div>
+  <footer class="sm-footer">
+    <span>شكل (4) · المحفزات في إنتاج وتخزين الهيدروجين</span>
+    <a href="https://steamomentos.org" target="_blank" rel="noopener">steamomentos.org</a>
+  </footer>
+</main>
+<script>
+/* أدوات مشتركة */
+var SM = (function(){
+  var NS = 'http://www.w3.org/2000/svg';
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function el(tag, attrs, parent){
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  var COLORS = {H:'var(--atom-h)', C:'var(--atom-c)', O:'var(--atom-o)', N:'var(--atom-n)'};
+  var R = {H:9.5, C:13, O:12, N:13};
+  /* ذرة: دائرة ملونة وعليها رمزها */
+  function atom(sym, parent, extra){
+    var g = el('g', {'class':'mv'}, parent);
+    el('circle', {r: R[sym] || 10, fill: COLORS[sym] || 'var(--sm-gray)', 'class':'atom'}, g);
+    var t = el('text', {'class':'atom-label' + (sym === 'H' ? ' dark' : '')}, g);
+    t.textContent = sym;
+    if (extra) extra(g);
+    return g;
+  }
+  function place(g, x, y, opacity, rot){
+    g.style.transform = 'translate(' + x + 'px,' + y + 'px)' + (rot ? ' rotate(' + rot + 'deg)' : '');
+    if (opacity != null) g.style.opacity = opacity;
+  }
+  /* نقل فوري دون حركة */
+  function jump(g, x, y, opacity, rot){
+    g.classList.remove('mv'); place(g, x, y, opacity, rot);
+    g.getBoundingClientRect(); g.classList.add('mv');
+  }
+  function tabs(container, onSelect){
+    var btns = container.querySelectorAll('.sm-btn');
+    btns.forEach(function(b, i){
+      b.addEventListener('click', function(){ select(i); onSelect(i, true); });
+    });
+    function select(i){ btns.forEach(function(b, j){ b.setAttribute('aria-selected', String(i === j)); }); }
+    return select;
+  }
+  function postHeight(){
+    if (window.parent === window) return;
+    var h = Math.ceil(document.documentElement.getBoundingClientRect().height);
+    try { window.parent.postMessage({type:'sm-embed-height', height:h}, '*'); } catch(e){}
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(postHeight).observe(document.body);
+  window.addEventListener('load', postHeight);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(postHeight);
+  return {el:el, atom:atom, place:place, jump:jump, tabs:tabs, reduce:reduce, COLORS:COLORS};
+})();
+</script>
+<script>
+(function(){
+  var el = SM.el;
+  function txt(parent, x, y, s, attrs){
+    var t = el('text', Object.assign({x:x, y:y, 'text-anchor':'middle', 'font-size':15}, attrs || {}), parent);
+    t.textContent = s; return t;
+  }
+  function mol(spec, parent, cls){
+    var g = el('g', cls ? {'class':cls} : {}, parent);
+    spec.forEach(function(a){
+      var at = SM.atom(a[0], g); at.classList.remove('mv');
+      at.setAttribute('transform', 'translate(' + a[1] + ',' + a[2] + ')');
+    });
+    return g;
+  }
+  var titleEl = document.getElementById('c-title'), textEl = document.getElementById('c-text');
+  function card(t, p){ titleEl.textContent = t; textEl.textContent = p; }
+
+  /* ========== المرحلة ١: الالتقاط ========== */
+  var capBg = document.getElementById('cap-bg'), capMol = document.getElementById('cap-mol');
+  var MX0 = 195, MX1 = 405, MY0 = 85, MY1 = 285;
+  el('rect', {x:MX0, y:MY0, width:MX1 - MX0, height:MY1 - MY0, rx:10, fill:'#F4F1F4', stroke:'var(--cat)', 'stroke-width':3}, capBg);
+  for (var gx = MX0 + 35; gx < MX1; gx += 35) el('line', {x1:gx, y1:MY0, x2:gx, y2:MY1, stroke:'var(--sm-gray)', 'stroke-width':2}, capBg);
+  for (var gy = MY0 + 50; gy < MY1; gy += 50) el('line', {x1:MX0, y1:gy, x2:MX1, y2:gy, stroke:'var(--sm-gray)', 'stroke-width':2}, capBg);
+  txt(capBg, 300, 310, 'الإطار المعدني العضوي (MOF)', {'font-weight':700, 'font-size':16});
+  txt(capBg, 520, 300, 'غازات العادم تدخل', {'font-size':14, fill:'#643A6B'});
+  txt(capBg, 85, 300, 'غاز أنظف يخرج', {'font-size':14, fill:'#643A6B'});
+  el('path', {d:'M590 280h-60m0 0 8-6m-8 6 8 6', stroke:'#643A6B', 'stroke-width':2, fill:'none'}, capBg);
+  el('path', {d:'M150 280H40m0 0 8-6m-8 6 8 6', stroke:'#643A6B', 'stroke-width':2, fill:'none'}, capBg);
+
+  /* المواقع المعدنية المفتوحة: 4 أعمدة × 3 صفوف */
+  var sites = [];
+  /* جزيء CO₂ يرتبط بطرفه (ذرة أكسجين) بالموقع المعدني، مائلًا */
+  [150, 205, 260].forEach(function(y){
+    [222, 287, 352].forEach(function(x){
+      el('circle', {cx:x, cy:y, r:6, fill:'var(--cat)', stroke:'#fff', 'stroke-width':1.5}, capBg);
+      sites.push({x:x + 27, y:y - 27, taken:null});
+    });
+  });
+
+  var CO2 = [['O',-24,0],['C',0,0],['O',24,0]], N2 = [['N',-13,0],['N',13,0]];
+  var movers = [], nCO2 = 0, nN2 = 0, flowing = !SM.reduce, last = 0, spawnT = 0, k = 0;
+  var cntCO2 = document.getElementById('n-co2'), cntN2 = document.getElementById('n-n2');
+  var regen = document.getElementById('regen'), flowBtn = document.getElementById('flow');
+
+  function spawn(){
+    var isCO2 = (k++ % 3) === 1;
+    var g = mol(isCO2 ? CO2 : N2, capMol);
+    movers.push({g:g, co2:isCO2, x:630, y:105 + Math.random() * 160, target:null, rot:0});
+  }
+  function freeSite(){ for (var i = 0; i < sites.length; i++) if (!sites[i].taken) return sites[i]; return null; }
+  function setT(m){
+    m.g.setAttribute('transform', 'translate(' + m.x.toFixed(1) + ',' + m.y.toFixed(1) + ') rotate(' + m.rot.toFixed(1) + ')');
+    if (m.rot) m.g.querySelectorAll('text').forEach(function(t){ t.setAttribute('transform', 'rotate(' + (-m.rot).toFixed(1) + ')'); });
+  }
+
+  function tick(t){
+    var dt = Math.min(50, t - (last || t)); last = t;
+    if (flowing && current === 0){
+      spawnT += dt;
+      if (spawnT > 700){ spawnT = 0; spawn(); }
+      movers.forEach(function(m){
+        if (m.stuck) return;
+        if (m.target){
+          var dx = m.target.x - m.x, dy = m.target.y - m.y, d = Math.hypot(dx, dy), step = dt * .12;
+          if (d <= step){ m.x = m.target.x; m.y = m.target.y; m.rot = -45; m.stuck = true; }
+          else { m.x += dx / d * step; m.y += dy / d * step; m.rot = Math.max(-45, m.rot - dt * .08); }
+        } else {
+          m.x -= dt * .09;
+          if (m.co2 && m.x < MX1 + 20){
+            var s = freeSite();
+            if (s){ s.taken = m; m.target = s; nCO2++; cntCO2.textContent = nCO2; if (!freeSite()) full(); }
+          }
+          if (!m.co2 && !m.counted && m.x < MX0){ m.counted = true; nN2++; cntN2.textContent = nN2; }
+        }
+        setT(m);
+      });
+      movers = movers.filter(function(m){ if (m.x < -40){ m.g.remove(); return false; } return true; });
+    }
+    requestAnimationFrame(tick);
+  }
+  function full(){
+    regen.disabled = false;
+    card('امتلأ الإطار بثاني أكسيد الكربون', 'كل المواقع المعدنية مشغولة الآن. يكفي تسخين الإطار قليلًا ليطلق ما أمسكه، فنحصل على ثاني أكسيد كربون مركّز جاهز للتحويل، ويعود الإطار فارغًا ليلتقط من جديد.');
+  }
+  function capCard(){
+    card('الإطار يمسك ثاني أكسيد الكربون ويترك النيتروجين يمر',
+      'في مسام الإطار ذرات معدن لها «يد» حرة تسمى المواقع المعدنية المفتوحة. هذه الأيدي تجذب جزيء ثاني أكسيد الكربون (CO₂) أكثر بكثير من جزيء النيتروجين (N₂)، فيعلق الأول ويعبر الثاني.');
+  }
+  regen.addEventListener('click', function(){
+    sites.forEach(function(s){
+      if (s.taken){ var m = s.taken; m.g.style.transform = 'translate(' + m.x + 'px,' + m.y + 'px) rotate(-45deg)'; m.g.getBoundingClientRect();
+        m.g.style.transition = 'transform 1.2s, opacity 1.2s'; m.g.style.transform = 'translate(' + m.x + 'px,' + (m.y - 90) + 'px) rotate(-45deg)'; m.g.style.opacity = 0; setTimeout(function(){ m.g.remove(); }, 1300); }
+      s.taken = null;
+    });
+    movers = movers.filter(function(m){ return !m.stuck && !m.target; });
+    nCO2 = 0; cntCO2.textContent = 0; regen.disabled = true; capCard();
+  });
+  flowBtn.addEventListener('click', function(){
+    flowing = !flowing;
+    flowBtn.textContent = flowing ? '⏸ إيقاف التدفق' : '▶ تشغيل التدفق';
+    flowBtn.setAttribute('aria-pressed', String(flowing));
+  });
+  if (!flowing){ flowBtn.textContent = '▶ تشغيل التدفق'; flowBtn.setAttribute('aria-pressed', 'false'); }
+
+  /* ========== المرحلة ٢: التحويل ========== */
+  var convBg = document.getElementById('conv-bg'), convAtoms = document.getElementById('conv-atoms');
+  el('path', {d:'M345 165H262m0 0 12-9m-12 9 12 9', stroke:'var(--sm-purple)', 'stroke-width':3, fill:'none'}, convBg);
+  var catG = el('g', {transform:'translate(303,128)'}, convBg);
+  el('rect', {x:-44, y:-16, width:88, height:30, rx:15, fill:'var(--cat)'}, catG);
+  txt(catG, 0, 5, 'محفز', {'font-size':15, fill:'#fff', 'font-weight':700});
+  txt(convBg, 303, 215, 'إعادة ترتيب الذرات', {'font-size':13, fill:'#643A6B'});
+  var labels = el('g', {}, convBg);
+
+  function h2stack(n){ var a = []; for (var i = 0; i < n; i++){ var y = 165 + (i - (n - 1) / 2) * 38; a.push([395.5, y], [414.5, y]); } return a; }
+  var REACT_CO2 = [[485,165],[461,165],[509,165]]; /* C, O, O */
+  var R = [
+    { name:'ميثانول', n:3,
+      C:[226,165], O:[[200,165],[100,165]],
+      H:[[226,141],[226,189],[250,165],[184,150],[83,180],[117,180]],
+      labels:[[215,235,'ميثانول CH₃OH'],[100,235,'ماء H₂O']], plus:[155],
+      eq:'CO₂ + 3H₂ ← CH₃OH + H₂O',
+      title:'ميثانول: وقود سائل ومادة أولية للصناعة',
+      text:'ثلاثة جزيئات هيدروجين تكفي لتحويل جزيء CO₂ إلى ميثانول وماء. الميثانول وقود سائل سهل النقل، ومادة أولية لصناعة البلاستيك والدهانات.' },
+    { name:'حمض الفورميك', n:1,
+      C:[205,165], O:[[192,142],[180,180]],
+      H:[[229,165],[162,188]],
+      labels:[[200,235,'حمض الفورميك HCOOH']], plus:[],
+      title:'حمض الفورميك: الهيدروجين يعود إلى «حاوية» سائلة',
+      text:'جزيء هيدروجين واحد يحوّل CO₂ إلى حمض الفورميك. وهذا الحمض نفسه ناقل للهيدروجين (القسم 2.2 من المقالة): نفككه لاحقًا بمحفز فيعطينا الهيدروجين من جديد. دائرة مغلقة!' },
+    { name:'ميثان', n:4,
+      C:[222,165], O:[[100,128],[100,205]],
+      H:[[222,141],[222,189],[198,165],[246,165],[83,143],[117,143],[83,220],[117,220]],
+      labels:[[222,235,'ميثان CH₄'],[100,265,'ماء 2H₂O']], plus:[155],
+      title:'ميثان: غاز طبيعي مصنوع من الكربون الملتقط',
+      text:'أربعة جزيئات هيدروجين تحوّل CO₂ إلى ميثان، المكوّن الرئيسي للغاز الطبيعي، فيمكن ضخه في شبكات الغاز الموجودة أصلًا.' }
+  ];
+  var reactLabels = el('g', {}, convBg);
+  var atoms = [], curR = 0;
+  function setupReaction(i){
+    curR = i; var r = R[i];
+    convAtoms.innerHTML = ''; labels.innerHTML = ''; reactLabels.innerHTML = ''; atoms = [];
+    var hs = h2stack(r.n);
+    function add(sym, from, to){ var g = SM.atom(sym, convAtoms); atoms.push({g:g, from:from, to:to}); }
+    add('C', REACT_CO2[0], r.C);
+    add('O', REACT_CO2[1], r.O[0]); add('O', REACT_CO2[2], r.O[1]);
+    hs.forEach(function(p, j){ add('H', p, r.H[j]); });
+    txt(reactLabels, 485, 235, 'CO₂', {'font-weight':700});
+    txt(reactLabels, 438, 171, '+', {'font-size':22, 'font-weight':700});
+    txt(reactLabels, 405, hs[hs.length - 1][1] + 40, r.n + ' H₂', {'font-weight':700, fill:'#C07F00', style:'direction:ltr;unicode-bidi:embed'});
+    r.labels.forEach(function(l){ txt(labels, l[0], l[1], l[2], {'font-weight':700}); });
+    r.plus.forEach(function(x){ txt(labels, x, 171, '+', {'font-size':22, 'font-weight':700}); });
+    labels.style.opacity = 0;
+    run();
+    card(r.title, r.text + ' ويصبح هذا الوقود «أخضر» فقط إذا جاء الهيدروجين من مصادر نظيفة كالشمس والرياح.');
+  }
+  var runTimer;
+  function run(){
+    clearTimeout(runTimer);
+    atoms.forEach(function(a){ SM.jump(a.g, a.from[0], a.from[1], 1); });
+    labels.style.transition = 'none'; labels.style.opacity = 0; reactLabels.style.opacity = 1;
+    runTimer = setTimeout(function(){
+      atoms.forEach(function(a){ SM.place(a.g, a.to[0], a.to[1], 1); });
+      labels.style.transition = 'opacity .6s .7s'; labels.style.opacity = 1;
+      reactLabels.style.transition = 'opacity .4s'; reactLabels.style.opacity = .35;
+    }, 700);
+  }
+  SM.tabs(document.getElementById('products'), setupReaction);
+  document.getElementById('replay').addEventListener('click', run);
+
+  /* ========== التبديل بين المرحلتين ========== */
+  var current = 0;
+  SM.tabs(document.getElementById('phases'), function(i){
+    current = i;
+    document.getElementById('capture').style.display = i === 0 ? '' : 'none';
+    document.getElementById('convert').style.display = i === 1 ? '' : 'none';
+    document.getElementById('cap-ctrl').hidden = i !== 0;
+    document.getElementById('conv-ctrl').hidden = i !== 1;
+    document.getElementById('cap-note').hidden = i !== 0;
+    if (i === 1) setupReaction(curR); else if (freeSite()) capCard(); else full();
+  });
+  capCard();
+  requestAnimationFrame(tick);
+})();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>تخزين الطاقة المتجددة | STEAMomentos</title>
+<meta name="description" content="قارن الحيّز الذي تشغله 5 كغ من الهيدروجين، وهي كمية تكفي سيارة لقطع نحو 500 كم، بثلاث طرق تخزين.">
+<!--
+  رسم تفاعلي لمقالة "المحفزات في إنتاج وتخزين الهيدروجين" على steamomentos.org
+  ملف مستقل (CSS و JS داخليان). الاعتماد الخارجي الوحيد: خطوط Google مع بدائل احتياطية.
+  التضمين:
+    <iframe src="https://steamomentos.github.io/chemistry/almhfzat-fy-antag-otkhzyn-alhydrogyn/fig5-renewable-energy-storage.html" style="width:100%;border:0;min-height:640px" loading="lazy" title="تخزين الطاقة المتجددة"></iframe>
+  الرمز اللوني ثابت في كل رسوم المقالة: الهيدروجين ذهبي، الكربون بنفسجي داكن، الأكسجين وردي، النيتروجين نبيذي، المحفز بنفسجي متوسط.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Montserrat:wght@500;700&family=Kalam&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sm-purple:#351141; --sm-gold:#EBB00F; --sm-gray:#DFDADE; --sm-white:#FFFFFF;
+  --sm-purple-700:#57375D; --sm-purple-600:#643A6B; --sm-purple-500:#81539D; --sm-purple-300:#B389CD;
+  --sm-gold-700:#C07F00; --sm-gold-600:#D79E03; --sm-gold-300:#E3C76F; --sm-gold-200:#F4D160;
+  --sm-wine-700:#79155B; --sm-wine-500:#A2678A; --sm-mauve:#A78295;
+  --sm-bg:var(--sm-white); --sm-surface:#FFFFFF; --sm-surface-2:#F4F1F4;
+  --sm-ink:var(--sm-purple); --sm-ink-soft:var(--sm-purple-600); --sm-line:var(--sm-gray);
+  --sm-accent:var(--sm-gold); --sm-on-accent:var(--sm-purple);
+  --sm-radius:12px; --sm-radius-sm:8px; --sm-gap:16px;
+  --sm-font:'Cairo','Montserrat','Segoe UI',Tahoma,sans-serif;
+  --sm-font-latin:'Montserrat','Cairo','Segoe UI',sans-serif;
+  /* الرمز اللوني للذرات والمحفز (ثابت في كل رسوم المقالة) */
+  --atom-h:#EBB00F; --atom-c:#351141; --atom-o:#A2678A; --atom-n:#79155B; --cat:#81539D; --cat-dark:#57375D;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.latin,code,.num{font-family:var(--sm-font-latin);direction:ltr;unicode-bidi:isolate}
+.sm-pattern-light{background-color:var(--sm-bg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23F7F2F9' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-pattern-dark{background-color:var(--sm-purple);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23472255' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-wrap{max-width:960px;margin:0 auto;overflow:hidden;border-radius:var(--sm-radius);border:1px solid var(--sm-line)}
+.sm-header{color:#fff;padding:20px 24px 24px}
+.sm-brand{display:flex;align-items:center;gap:10px;direction:ltr;justify-content:flex-start}
+.sm-brand svg{width:40px;height:40px;flex:none}
+.sm-brand .wordmark{font-family:'Kalam','Comic Sans MS',cursive;font-style:italic;font-size:17px;letter-spacing:.5px;color:var(--sm-gray)}
+.sm-title{font-weight:700;font-size:clamp(21px,4vw,31px);line-height:1.4;margin:16px 0 4px}
+.sm-sub{margin:0;color:var(--sm-gray);font-size:15px}
+.sm-body{padding:24px}
+.sm-stage{position:relative;background:var(--sm-surface);border:1px solid var(--sm-line);border-radius:var(--sm-radius);padding:12px;display:grid;place-items:center}
+.sm-stage>svg{width:100%;height:auto;display:block}
+.sm-stage text{font-family:var(--sm-font);fill:var(--sm-ink)}
+.sm-controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:var(--sm-gap)}
+.sm-tabs{display:flex;flex-wrap:wrap;gap:8px}
+.sm-btn{font:inherit;font-weight:600;font-size:15px;cursor:pointer;border:2px solid var(--sm-purple);background:#fff;color:var(--sm-purple);padding:6px 16px;border-radius:999px;transition:background .15s,color .15s,border-color .15s}
+.sm-btn:hover{border-color:var(--sm-purple-500);color:var(--sm-purple-500)}
+.sm-btn[aria-selected="true"],.sm-btn.primary{background:var(--sm-accent);border-color:var(--sm-accent);color:var(--sm-on-accent)}
+.sm-btn:focus-visible,.sm-range:focus-visible{outline:3px solid var(--sm-purple-300);outline-offset:2px}
+.sm-btn.ghost{border-style:dashed}
+.sm-range-wrap{display:flex;align-items:center;gap:10px;flex:1 1 240px}
+.sm-range{flex:1;accent-color:var(--sm-gold);height:28px}
+.sm-card{margin-top:var(--sm-gap);background:var(--sm-surface-2);border-inline-start:4px solid var(--sm-accent);border-radius:var(--sm-radius-sm);padding:12px 16px}
+.sm-card h3{margin:0 0 4px;font-size:18px;font-weight:700}
+.sm-card p{margin:0;color:var(--sm-ink-soft)}
+.sm-card p+p{margin-top:6px}
+.sm-legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:12px;font-size:14px;color:var(--sm-ink-soft)}
+.sm-legend span::before{content:"";display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--c);margin-inline-end:6px;vertical-align:-1px;border:1px solid rgba(53,17,65,.25)}
+.sm-takeaway{margin-top:var(--sm-gap);background:var(--sm-purple);color:#fff;border-radius:var(--sm-radius-sm);padding:12px 16px}
+.sm-takeaway b{color:var(--sm-gold)}
+.sm-note{font-size:13px;color:var(--sm-ink-soft);margin:8px 0 0}
+.sm-footer{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 24px;background:var(--sm-purple);color:var(--sm-gray);font-size:13px}
+.sm-footer a{color:var(--sm-gold);text-decoration:none;font-family:var(--sm-font-latin);font-weight:700}
+.mv{transition:transform .9s cubic-bezier(.4,.1,.2,1),opacity .5s}
+.no-anim .mv{transition:none}
+.atom{stroke:#fff;stroke-width:1.5}
+.atom-label{font-family:var(--sm-font-latin)!important;font-weight:700;font-size:12px;fill:#fff!important;text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.atom-label.dark{fill:var(--sm-purple)!important}
+.chain{list-style:none;margin:0 0 8px;padding:0;display:flex;flex-wrap:wrap;gap:8px;align-items:stretch}
+.chain li{flex:1 1 140px;background:#fff;border:2px solid var(--sm-line);border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:14px;line-height:1.5;position:relative}
+.chain li b{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--sm-purple);color:#fff;font-size:12px;margin-inline-end:4px}
+.chain li.hl{border-color:var(--sm-gold);background:#FFF8E1;font-weight:700}
+.chain li.hl b{background:var(--sm-gold);color:var(--sm-purple)}
+#cube-mof{transition:opacity .6s}
+
+@media (max-width:520px){
+  .sm-header{padding:16px}.sm-body{padding:12px}.sm-stage{padding:4px}
+  .sm-wrap{border-radius:0;border-inline:0}
+  .sm-btn{font-size:14px;padding:5px 12px}
+}
+@media (prefers-reduced-motion:reduce){.mv{transition:none!important}*{animation:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="sm-logo-mono" viewBox="0 0 100 100">
+    <mask id="sm-mono-cut">
+      <path d="M50 6 88 28v44L50 94 12 72V28z" fill="#fff" stroke="#fff" stroke-width="8" stroke-linejoin="round"/>
+      <path d="M50 17 17 50l33 33 3-3-30-30 27-27zM50 83 83 50 50 17l-3 3 30 30-27 27z" fill="none" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M50 31 69 50 50 69 31 50z" fill="#000"/>
+    </mask>
+    <rect width="100" height="100" fill="currentColor" mask="url(#sm-mono-cut)"/>
+  </symbol>
+</svg>
+<main class="sm-wrap" id="sm-root">
+  <header class="sm-header sm-pattern-dark">
+    <div class="sm-brand" aria-label="STEAMomentos">
+      <svg style="color:var(--sm-gray)"><use href="#sm-logo-mono"/></svg>
+      <span class="wordmark">STEAMomentos</span>
+    </div>
+    <h1 class="sm-title">الهيدروجين يخزّن طاقة الشمس والرياح، لكن حجمه هائل</h1>
+    <p class="sm-sub">قارن الحيّز الذي تشغله 5 كغ من الهيدروجين، وهي كمية تكفي سيارة لقطع نحو 500 كم، بثلاث طرق تخزين.</p>
+  </header>
+  <div class="sm-body sm-pattern-light">
+    <ol class="chain" aria-label="رحلة الطاقة من الشمس والرياح إلى السيارة">
+      <li><b>١</b> كهرباء فائضة من الشمس والرياح</li>
+      <li><b>٢</b> تحليل الماء كهربائيًا إلى هيدروجين وأكسجين</li>
+      <li class="hl"><b>٣</b> تخزين الهيدروجين</li>
+      <li><b>٤</b> خلية وقود تعيده كهرباء تحرّك السيارة</li>
+    </ol>
+    <p class="sm-note" style="margin:0 0 12px">الخطوة الأصعب هي الثالثة: الهيدروجين أخف غاز في الكون، فكمية صغيرة منه وزنًا تشغل حيّزًا هائلًا.</p>
+
+    <div class="sm-controls" style="margin-top:0;margin-bottom:12px">
+      <div class="sm-tabs" role="tablist" aria-label="طرق التخزين" id="ways">
+        <button class="sm-btn" role="tab" aria-selected="true">غاز عادي</button>
+        <button class="sm-btn" role="tab" aria-selected="false">غاز مضغوط</button>
+        <button class="sm-btn" role="tab" aria-selected="false">داخل مادة مسامية (MOF)</button>
+      </div>
+    </div>
+
+    <section class="sm-stage">
+      <svg id="scene" viewBox="0 0 600 340" role="img" aria-labelledby="scene-desc">
+        <desc id="scene-desc">مقارنة بالمقياس نفسه بين حجم 5 كيلوغرامات من الهيدروجين وحجم سيارة.</desc>
+        <defs>
+          <pattern id="honey" width="14" height="24" patternUnits="userSpaceOnUse">
+            <path d="M7 0 14 4v8L7 16 0 12V4zM7 16v8" fill="none" stroke="#81539D" stroke-width="1.5"/>
+          </pattern>
+        </defs>
+        <line x1="20" y1="300" x2="590" y2="300" stroke="var(--sm-gray)" stroke-width="3"/>
+        <g id="car"></g>
+        <rect id="cube" x="40" y="85" width="215" height="215" fill="#F4D160" fill-opacity=".55" stroke="var(--sm-gold-700)" stroke-width="2"/>
+        <rect id="cube-mof" x="40" y="85" width="215" height="215" fill="url(#honey)" opacity="0"/>
+        <g id="h2dots"></g>
+        <text id="cube-label" x="147" y="70" text-anchor="middle" font-size="17" font-weight="700"></text>
+        <g transform="translate(40,325)">
+          <line x1="0" y1="0" x2="55" y2="0" stroke="var(--sm-purple)" stroke-width="3"/>
+          <line x1="0" y1="-5" x2="0" y2="5" stroke="var(--sm-purple)" stroke-width="2"/>
+          <line x1="55" y1="-5" x2="55" y2="5" stroke="var(--sm-purple)" stroke-width="2"/>
+          <text x="80" y="5" font-size="14" text-anchor="middle">1 م</text>
+        </g>
+        <text x="455" y="330" text-anchor="middle" font-size="14" fill="#643A6B">سيارة طولها نحو 4.6 م (بالمقياس نفسه)</text>
+      </svg>
+    </section>
+
+    <div class="sm-card" aria-live="polite">
+      <h3 id="c-title"></h3>
+      <p id="c-text"></p>
+      <p id="c-press" style="font-weight:700;color:var(--sm-purple)"></p>
+    </div>
+
+    <div class="sm-takeaway">
+      <b>الخلاصة:</b> الهيدروجين يخزّن فائض طاقة الشمس والرياح، لكن 5 كغ منه تملأ غرفة كاملة. الضغط الشديد يصغّرها إلى خزان سميك ومكلف، والأطر المعدنية العضوية تعد بتخزينها بضغط أقل بفضل مساحتها الداخلية الهائلة، وما زال هذا هدفًا بحثيًا.
+    </div>
+
+  </div>
+  <footer class="sm-footer">
+    <span>شكل (5) · المحفزات في إنتاج وتخزين الهيدروجين</span>
+    <a href="https://steamomentos.org" target="_blank" rel="noopener">steamomentos.org</a>
+  </footer>
+</main>
+<script>
+/* أدوات مشتركة */
+var SM = (function(){
+  var NS = 'http://www.w3.org/2000/svg';
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function el(tag, attrs, parent){
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  var COLORS = {H:'var(--atom-h)', C:'var(--atom-c)', O:'var(--atom-o)', N:'var(--atom-n)'};
+  var R = {H:9.5, C:13, O:12, N:13};
+  /* ذرة: دائرة ملونة وعليها رمزها */
+  function atom(sym, parent, extra){
+    var g = el('g', {'class':'mv'}, parent);
+    el('circle', {r: R[sym] || 10, fill: COLORS[sym] || 'var(--sm-gray)', 'class':'atom'}, g);
+    var t = el('text', {'class':'atom-label' + (sym === 'H' ? ' dark' : '')}, g);
+    t.textContent = sym;
+    if (extra) extra(g);
+    return g;
+  }
+  function place(g, x, y, opacity, rot){
+    g.style.transform = 'translate(' + x + 'px,' + y + 'px)' + (rot ? ' rotate(' + rot + 'deg)' : '');
+    if (opacity != null) g.style.opacity = opacity;
+  }
+  /* نقل فوري دون حركة */
+  function jump(g, x, y, opacity, rot){
+    g.classList.remove('mv'); place(g, x, y, opacity, rot);
+    g.getBoundingClientRect(); g.classList.add('mv');
+  }
+  function tabs(container, onSelect){
+    var btns = container.querySelectorAll('.sm-btn');
+    btns.forEach(function(b, i){
+      b.addEventListener('click', function(){ select(i); onSelect(i, true); });
+    });
+    function select(i){ btns.forEach(function(b, j){ b.setAttribute('aria-selected', String(i === j)); }); }
+    return select;
+  }
+  function postHeight(){
+    if (window.parent === window) return;
+    var h = Math.ceil(document.documentElement.getBoundingClientRect().height);
+    try { window.parent.postMessage({type:'sm-embed-height', height:h}, '*'); } catch(e){}
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(postHeight).observe(document.body);
+  window.addEventListener('load', postHeight);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(postHeight);
+  return {el:el, atom:atom, place:place, jump:jump, tabs:tabs, reduce:reduce, COLORS:COLORS};
+})();
+</script>
+<script>
+(function(){
+  var el = SM.el, M = 55; /* بكسل لكل متر */
+  var car = document.getElementById('car');
+  /* سيارة مسطحة بسيطة، مقدمتها نحو اليسار */
+  el('path', {d:'M330 285V262q0-10 10-14l50-6 30-28h95l35 28h20q10 0 10 10v33z', fill:'var(--sm-purple-600)'}, car);
+  el('path', {d:'M428 220h40v24h-64zM474 220h38l28 24h-66z', fill:'#DFDADE'}, car);
+  [375, 535].forEach(function(x){
+    el('circle', {cx:x, cy:287, r:19, fill:'var(--sm-purple)'}, car);
+    el('circle', {cx:x, cy:287, r:8, fill:'var(--sm-gray)'}, car);
+  });
+
+  var cube = document.getElementById('cube'), mof = document.getElementById('cube-mof');
+  var label = document.getElementById('cube-label'), dots = document.getElementById('h2dots');
+  var WAYS = [
+    { side:Math.cbrt(60), x:40, ground:300, label:'نحو 60 م³',
+      title:'غاز عادي: يملأ غرفة كاملة',
+      text:'عند ضغط الجو العادي تشغل 5 كغ من الهيدروجين نحو 60 مترًا مكعبًا، أي غرفة طولها 5 أمتار وعرضها 4 وارتفاعها 3. لا يمكن لأي سيارة أن تحمل هذا الحجم.',
+      press:'الضغط: 1 بار (ضغط الجو العادي)', wall:2, mof:0 },
+    { side:Math.cbrt(0.125), x:545, ground:282, label:'نحو 125 لترًا',
+      title:'غاز مضغوط: يتسع داخل السيارة، لكن بثمن',
+      text:'بضغط الغاز 700 ضعف ضغط الجو يصغر حجمه إلى نحو 125 لترًا، فيتسع في السيارة. لكن الخزان يجب أن يكون سميكًا من ألياف الكربون ليتحمل هذا الضغط، فيصبح ثقيلًا ومكلفًا.',
+      press:'الضغط: 700 بار', wall:6, mof:0 },
+    { side:Math.cbrt(0.125), x:545, ground:282, label:'الهدف: حجم صغير بضغط أقل',
+      title:'داخل مادة مسامية: الجزيئات تلتصق بالجدران',
+      text:'مسام الإطار المعدني العضوي تمسك جزيئات الهيدروجين على جدرانها الهائلة المساحة، فتتسع كمية كبيرة في حجم صغير دون ضغط شديد، والخزان أخف وأكثر أمانًا. التحدي اليوم: معظم هذه الأطر تبلغ ذلك فقط عند تبريد شديد (نحو −196°م)، والبحث جارٍ لتحقيقه في درجة الحرارة العادية.',
+      press:'الضغط: أقل بكثير من 700 بار (هدف بحثي)', wall:2, mof:1 }
+  ];
+  var cur = {x:40, y:85, s:215}, raf;
+  function tween(to, ms){
+    cancelAnimationFrame(raf);
+    var from = {x:cur.x, y:cur.y, s:cur.s}, t0 = performance.now();
+    if (SM.reduce) ms = 1;
+    (function step(now){
+      var k = Math.min(1, (now - t0) / ms), e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+      cur.x = from.x + (to.x - from.x) * e; cur.y = from.y + (to.y - from.y) * e; cur.s = from.s + (to.s - from.s) * e;
+      [cube, mof].forEach(function(r){ r.setAttribute('x', cur.x); r.setAttribute('y', cur.y); r.setAttribute('width', cur.s); r.setAttribute('height', cur.s); });
+      if (k < 1) raf = requestAnimationFrame(step);
+    })(t0);
+  }
+  /* نقاط تمثل جزيئات H₂ داخل الحجم (للإيحاء فقط) */
+  for (var i = 0; i < 40; i++) el('circle', {r:3, fill:'var(--sm-gold-700)', 'class':'mv', opacity:.8}, dots);
+
+  function show(i){
+    var w = WAYS[i], s = w.side * M, x = w.x, y = w.ground - s;
+    tween({x:x, y:y, s:s}, 1100);
+    cube.setAttribute('stroke-width', w.wall);
+    cube.setAttribute('stroke-dasharray', w.mof ? '5 4' : '');
+    mof.style.opacity = w.mof;
+    label.textContent = w.label;
+    var big = i === 0;
+    label.setAttribute('x', big ? 40 + s / 2 : 470);
+    label.setAttribute('y', big ? y - 14 : 200);
+    dots.style.opacity = big ? 1 : 0;
+    dots.querySelectorAll('circle').forEach(function(c, j){
+      c.setAttribute('cx', 55 + (j * 37) % 185); c.setAttribute('cy', 105 + ((j * 53) % 185));
+    });
+    document.getElementById('c-title').textContent = w.title;
+    document.getElementById('c-text').textContent = w.text;
+    document.getElementById('c-press').textContent = w.press;
+  }
+  dots.style.transition = 'opacity .5s';
+  SM.tabs(document.getElementById('ways'), show);
+  show(0);
+})();
+
+</script>
+</body>
+</html>

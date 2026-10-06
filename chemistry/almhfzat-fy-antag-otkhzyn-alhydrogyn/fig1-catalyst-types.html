@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>أنواع المحفزات | STEAMomentos</title>
+<meta name="description" content="المحفز مادة تسرّع التفاعل ثم تخرج منه كما دخلت. اختر نوعًا لترى أين يعمل وكيف يُنتج الهيدروجين.">
+<!--
+  رسم تفاعلي لمقالة "المحفزات في إنتاج وتخزين الهيدروجين" على steamomentos.org
+  ملف مستقل (CSS و JS داخليان). الاعتماد الخارجي الوحيد: خطوط Google مع بدائل احتياطية.
+  التضمين:
+    <iframe src="https://steamomentos.github.io/chemistry/almhfzat-fy-antag-otkhzyn-alhydrogyn/fig1-catalyst-types.html" style="width:100%;border:0;min-height:640px" loading="lazy" title="أنواع المحفزات"></iframe>
+  الرمز اللوني ثابت في كل رسوم المقالة: الهيدروجين ذهبي، الكربون بنفسجي داكن، الأكسجين وردي، النيتروجين نبيذي، المحفز بنفسجي متوسط.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Montserrat:wght@500;700&family=Kalam&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sm-purple:#351141; --sm-gold:#EBB00F; --sm-gray:#DFDADE; --sm-white:#FFFFFF;
+  --sm-purple-700:#57375D; --sm-purple-600:#643A6B; --sm-purple-500:#81539D; --sm-purple-300:#B389CD;
+  --sm-gold-700:#C07F00; --sm-gold-600:#D79E03; --sm-gold-300:#E3C76F; --sm-gold-200:#F4D160;
+  --sm-wine-700:#79155B; --sm-wine-500:#A2678A; --sm-mauve:#A78295;
+  --sm-bg:var(--sm-white); --sm-surface:#FFFFFF; --sm-surface-2:#F4F1F4;
+  --sm-ink:var(--sm-purple); --sm-ink-soft:var(--sm-purple-600); --sm-line:var(--sm-gray);
+  --sm-accent:var(--sm-gold); --sm-on-accent:var(--sm-purple);
+  --sm-radius:12px; --sm-radius-sm:8px; --sm-gap:16px;
+  --sm-font:'Cairo','Montserrat','Segoe UI',Tahoma,sans-serif;
+  --sm-font-latin:'Montserrat','Cairo','Segoe UI',sans-serif;
+  /* الرمز اللوني للذرات والمحفز (ثابت في كل رسوم المقالة) */
+  --atom-h:#EBB00F; --atom-c:#351141; --atom-o:#A2678A; --atom-n:#79155B; --cat:#81539D; --cat-dark:#57375D;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.latin,code,.num{font-family:var(--sm-font-latin);direction:ltr;unicode-bidi:isolate}
+.sm-pattern-light{background-color:var(--sm-bg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23F7F2F9' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-pattern-dark{background-color:var(--sm-purple);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23472255' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-wrap{max-width:960px;margin:0 auto;overflow:hidden;border-radius:var(--sm-radius);border:1px solid var(--sm-line)}
+.sm-header{color:#fff;padding:20px 24px 24px}
+.sm-brand{display:flex;align-items:center;gap:10px;direction:ltr;justify-content:flex-start}
+.sm-brand svg{width:40px;height:40px;flex:none}
+.sm-brand .wordmark{font-family:'Kalam','Comic Sans MS',cursive;font-style:italic;font-size:17px;letter-spacing:.5px;color:var(--sm-gray)}
+.sm-title{font-weight:700;font-size:clamp(21px,4vw,31px);line-height:1.4;margin:16px 0 4px}
+.sm-sub{margin:0;color:var(--sm-gray);font-size:15px}
+.sm-body{padding:24px}
+.sm-stage{position:relative;background:var(--sm-surface);border:1px solid var(--sm-line);border-radius:var(--sm-radius);padding:12px;display:grid;place-items:center}
+.sm-stage>svg{width:100%;height:auto;display:block}
+.sm-stage text{font-family:var(--sm-font);fill:var(--sm-ink)}
+.sm-controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:var(--sm-gap)}
+.sm-tabs{display:flex;flex-wrap:wrap;gap:8px}
+.sm-btn{font:inherit;font-weight:600;font-size:15px;cursor:pointer;border:2px solid var(--sm-purple);background:#fff;color:var(--sm-purple);padding:6px 16px;border-radius:999px;transition:background .15s,color .15s,border-color .15s}
+.sm-btn:hover{border-color:var(--sm-purple-500);color:var(--sm-purple-500)}
+.sm-btn[aria-selected="true"],.sm-btn.primary{background:var(--sm-accent);border-color:var(--sm-accent);color:var(--sm-on-accent)}
+.sm-btn:focus-visible,.sm-range:focus-visible{outline:3px solid var(--sm-purple-300);outline-offset:2px}
+.sm-btn.ghost{border-style:dashed}
+.sm-range-wrap{display:flex;align-items:center;gap:10px;flex:1 1 240px}
+.sm-range{flex:1;accent-color:var(--sm-gold);height:28px}
+.sm-card{margin-top:var(--sm-gap);background:var(--sm-surface-2);border-inline-start:4px solid var(--sm-accent);border-radius:var(--sm-radius-sm);padding:12px 16px}
+.sm-card h3{margin:0 0 4px;font-size:18px;font-weight:700}
+.sm-card p{margin:0;color:var(--sm-ink-soft)}
+.sm-card p+p{margin-top:6px}
+.sm-legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:12px;font-size:14px;color:var(--sm-ink-soft)}
+.sm-legend span::before{content:"";display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--c);margin-inline-end:6px;vertical-align:-1px;border:1px solid rgba(53,17,65,.25)}
+.sm-takeaway{margin-top:var(--sm-gap);background:var(--sm-purple);color:#fff;border-radius:var(--sm-radius-sm);padding:12px 16px}
+.sm-takeaway b{color:var(--sm-gold)}
+.sm-note{font-size:13px;color:var(--sm-ink-soft);margin:8px 0 0}
+.sm-footer{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 24px;background:var(--sm-purple);color:var(--sm-gray);font-size:13px}
+.sm-footer a{color:var(--sm-gold);text-decoration:none;font-family:var(--sm-font-latin);font-weight:700}
+.mv{transition:transform .9s cubic-bezier(.4,.1,.2,1),opacity .5s}
+.no-anim .mv{transition:none}
+.atom{stroke:#fff;stroke-width:1.5}
+.atom-label{font-family:var(--sm-font-latin)!important;font-weight:700;font-size:12px;fill:#fff!important;text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.atom-label.dark{fill:var(--sm-purple)!important}
+
+@media (max-width:520px){
+  .sm-header{padding:16px}.sm-body{padding:12px}.sm-stage{padding:4px}
+  .sm-wrap{border-radius:0;border-inline:0}
+  .sm-btn{font-size:14px;padding:5px 12px}
+}
+@media (prefers-reduced-motion:reduce){.mv{transition:none!important}*{animation:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="sm-logo-mono" viewBox="0 0 100 100">
+    <mask id="sm-mono-cut">
+      <path d="M50 6 88 28v44L50 94 12 72V28z" fill="#fff" stroke="#fff" stroke-width="8" stroke-linejoin="round"/>
+      <path d="M50 17 17 50l33 33 3-3-30-30 27-27zM50 83 83 50 50 17l-3 3 30 30-27 27z" fill="none" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M50 31 69 50 50 69 31 50z" fill="#000"/>
+    </mask>
+    <rect width="100" height="100" fill="currentColor" mask="url(#sm-mono-cut)"/>
+  </symbol>
+</svg>
+<main class="sm-wrap" id="sm-root">
+  <header class="sm-header sm-pattern-dark">
+    <div class="sm-brand" aria-label="STEAMomentos">
+      <svg style="color:var(--sm-gray)"><use href="#sm-logo-mono"/></svg>
+      <span class="wordmark">STEAMomentos</span>
+    </div>
+    <h1 class="sm-title">ثلاث عائلات من المحفزات، والفرق بينها في مكان المحفز</h1>
+    <p class="sm-sub">المحفز مادة تسرّع التفاعل ثم تخرج منه كما دخلت. اختر نوعًا لترى أين يعمل وكيف يُنتج الهيدروجين.</p>
+  </header>
+  <div class="sm-body sm-pattern-light">
+    <div class="sm-controls" style="margin-top:0;margin-bottom:12px">
+      <div class="sm-tabs" role="tablist" aria-label="أنواع المحفزات" id="kinds">
+        <button class="sm-btn" role="tab" aria-selected="true">المتجانس</button>
+        <button class="sm-btn" role="tab" aria-selected="false">غير المتجانس</button>
+        <button class="sm-btn" role="tab" aria-selected="false">الحيوي (الإنزيمات)</button>
+      </div>
+      <button class="sm-btn ghost" id="play" aria-pressed="true">⏸ إيقاف</button>
+    </div>
+
+    <section class="sm-stage">
+      <svg id="scene" viewBox="0 0 600 330" role="img" aria-labelledby="scene-desc">
+        <desc id="scene-desc">مشهد متحرك يُظهر جزيئًا يصل إلى المحفز فيتفكك ويخرج منه الهيدروجين، ويبقى المحفز كما هو.</desc>
+        <g id="bg"></g>
+        <g id="actors"></g>
+        <g id="counters" font-size="17">
+          <rect x="10" y="14" width="240" height="64" rx="10" fill="#F4F1F4"/>
+          <text x="240" y="40" text-anchor="start">جزيئات H₂ الناتجة: <tspan id="n-h2" class="num" font-weight="700">0</tspan></text>
+          <text x="240" y="66" text-anchor="start">المحفز: <tspan id="n-cat" class="num" font-weight="700">1</tspan> <tspan fill="#643A6B" font-size="14">(لا يُستهلك)</tspan></text>
+        </g>
+      </svg>
+    </section>
+
+    <div class="sm-card" aria-live="polite">
+      <h3 id="k-title"></h3>
+      <p id="k-where"></p>
+      <p id="k-example"></p>
+    </div>
+
+    <div class="sm-legend">
+      <span style="--c:var(--atom-h)">هيدروجين H</span>
+      <span style="--c:var(--atom-c)">كربون C</span>
+      <span style="--c:var(--atom-o)">أكسجين O</span>
+      <span style="--c:var(--cat)">المحفز</span>
+    </div>
+
+    <div class="sm-takeaway">
+      <b>الخلاصة:</b> كل محفز يسرّع التفاعل ثم يخرج منه كما دخل. ما يميز الأنواع الثلاثة هو <b>مكان</b> المحفز: ذائب مع المتفاعلات (متجانس)، أو سطح صلب منفصل عنها (غير متجانس)، أو إنزيم داخل كائن حي (حيوي).
+    </div>
+
+  </div>
+  <footer class="sm-footer">
+    <span>شكل (1) · المحفزات في إنتاج وتخزين الهيدروجين</span>
+    <a href="https://steamomentos.org" target="_blank" rel="noopener">steamomentos.org</a>
+  </footer>
+</main>
+<script>
+/* أدوات مشتركة */
+var SM = (function(){
+  var NS = 'http://www.w3.org/2000/svg';
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function el(tag, attrs, parent){
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  var COLORS = {H:'var(--atom-h)', C:'var(--atom-c)', O:'var(--atom-o)', N:'var(--atom-n)'};
+  var R = {H:9.5, C:13, O:12, N:13};
+  /* ذرة: دائرة ملونة وعليها رمزها */
+  function atom(sym, parent, extra){
+    var g = el('g', {'class':'mv'}, parent);
+    el('circle', {r: R[sym] || 10, fill: COLORS[sym] || 'var(--sm-gray)', 'class':'atom'}, g);
+    var t = el('text', {'class':'atom-label' + (sym === 'H' ? ' dark' : '')}, g);
+    t.textContent = sym;
+    if (extra) extra(g);
+    return g;
+  }
+  function place(g, x, y, opacity, rot){
+    g.style.transform = 'translate(' + x + 'px,' + y + 'px)' + (rot ? ' rotate(' + rot + 'deg)' : '');
+    if (opacity != null) g.style.opacity = opacity;
+  }
+  /* نقل فوري دون حركة */
+  function jump(g, x, y, opacity, rot){
+    g.classList.remove('mv'); place(g, x, y, opacity, rot);
+    g.getBoundingClientRect(); g.classList.add('mv');
+  }
+  function tabs(container, onSelect){
+    var btns = container.querySelectorAll('.sm-btn');
+    btns.forEach(function(b, i){
+      b.addEventListener('click', function(){ select(i); onSelect(i, true); });
+    });
+    function select(i){ btns.forEach(function(b, j){ b.setAttribute('aria-selected', String(i === j)); }); }
+    return select;
+  }
+  function postHeight(){
+    if (window.parent === window) return;
+    var h = Math.ceil(document.documentElement.getBoundingClientRect().height);
+    try { window.parent.postMessage({type:'sm-embed-height', height:h}, '*'); } catch(e){}
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(postHeight).observe(document.body);
+  window.addEventListener('load', postHeight);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(postHeight);
+  return {el:el, atom:atom, place:place, jump:jump, tabs:tabs, reduce:reduce, COLORS:COLORS};
+})();
+</script>
+<script>
+(function(){
+  var el = SM.el, svg = document.getElementById('scene');
+  var bg = document.getElementById('bg'), actors = document.getElementById('actors');
+  var nH2 = document.getElementById('n-h2'), nCat = document.getElementById('n-cat');
+  var playBtn = document.getElementById('play');
+  var playing = !SM.reduce, timers = [], made = 0, current = 0, scene;
+
+  /* جزيء: مجموعة ذرات بإزاحات ثابتة، تتحرك كقطعة واحدة */
+  function mol(spec, parent){
+    var g = el('g', {'class':'mv'}, parent || actors);
+    spec.forEach(function(a){
+      var at = SM.atom(a[0], g, a[3]);
+      at.classList.remove('mv');
+      at.setAttribute('transform', 'translate(' + a[1] + ',' + a[2] + ')');
+    });
+    return g;
+  }
+  function text(x, y, s, attrs){
+    var t = el('text', Object.assign({x:x, y:y, 'text-anchor':'middle', 'font-size':16}, attrs || {}), bg);
+    t.textContent = s; return t;
+  }
+  function plus(g){ var t = el('text', {x:9, y:-7, 'font-size':12, 'font-weight':700}, g); t.textContent = '+'; }
+
+  var HCOOH = [['H',-22,0],['C',0,0],['O',16,-17],['O',19,12],['H',33,25]];
+  var CO2 = [['O',-24,0],['C',0,0],['O',24,0]];
+  var H2 = [['H',-9.5,0],['H',9.5,0]];
+  var CH4 = [['C',0,0],['H',0,-22],['H',21,7],['H',-21,7],['H',0,22]];
+
+  var scenes = [
+    { /* متجانس */
+      title:'المتجانس: المحفز والمتفاعلات في الحالة نفسها',
+      where:'المحفز ذائب في السائل نفسه مع المواد المتفاعلة، فيلتقي بها بسهولة. عيبه أن فصله عن النواتج بعد التفاعل صعب.',
+      example:'مثال مرتبط بالمقالة: معقّدات الروثينيوم الذائبة تفكك حمض الفورميك (HCOOH) إلى ثاني أكسيد الكربون والهيدروجين.',
+      cats:1,
+      build:function(){
+        el('rect', {x:152, y:118, width:296, height:180, fill:'#F4F1F4'}, bg);
+        el('path', {d:'M150 70V290q0 10 10 10h280q10 0 10-10V70', fill:'none', stroke:'var(--sm-purple)', 'stroke-width':3}, bg);
+        text(300, 312, 'محلول سائل: المحفز والمتفاعلات معًا', {'font-size':15, fill:'#643A6B'});
+        [[200,250],[400,250],[390,150]].forEach(function(p){ var g = mol(HCOOH, bg); g.setAttribute('opacity', .22); g.setAttribute('transform', 'translate(' + p[0] + ',' + p[1] + ')'); g.classList.remove('mv'); });
+        var cat = el('g', {transform:'translate(300,212)'}, bg);
+        [[-24,-8],[24,-8],[0,25]].forEach(function(p){ el('circle', {cx:p[0], cy:p[1], r:7, fill:'var(--sm-gray)', stroke:'var(--cat)', 'stroke-width':2}, cat); });
+        el('circle', {r:20, fill:'var(--cat)'}, cat);
+        var t = el('text', {'class':'atom-label', 'font-size':15}, cat); t.textContent = 'Ru';
+        text(300, 268, 'معقّد الروثينيوم (المحفز)', {'font-size':15, 'font-weight':700});
+        return {
+          a: mol(HCOOH), b: mol(CO2), c: mol(H2),
+          start:function(s){ SM.jump(s.a, 175, 165, 1); SM.jump(s.b, 300, 196, 0); SM.jump(s.c, 300, 196, 0); },
+          steps:[
+            function(s){ SM.place(s.a, 262, 196, 1); },
+            function(s){ SM.jump(s.a, 262, 196, 0); SM.jump(s.b, 282, 186, 1); SM.jump(s.c, 318, 190, 1); },
+            function(s){ SM.place(s.b, 410, 160, 1); SM.place(s.c, 300, 40, 1); },
+            function(s){ SM.place(s.b, 410, 160, 0); SM.place(s.c, 300, 40, 0); }
+          ]
+        };
+      }
+    },
+    { /* غير متجانس */
+      title:'غير المتجانس: محفز صلب والمتفاعلات غاز أو سائل',
+      where:'يحدث التفاعل على سطح حبيبات المعدن. يسهل فصل المحفز الصلب وإعادة استخدامه، لذلك هو الأكثر استخدامًا في الصناعة.',
+      example:'مثال من المقالة: حبيبات النيكل المثبتة على السيليكا (SiO₂) تكسر الميثان (CH₄) إلى كربون صلب وهيدروجين نقي عند حرارة معتدلة.',
+      cats:3,
+      build:function(){
+        text(470, 105, 'غاز الميثان', {'font-size':15, fill:'#643A6B'});
+        el('rect', {x:60, y:262, width:480, height:44, rx:6, fill:'var(--sm-gray)'}, bg);
+        text(300, 290, 'مادة داعمة: سيليكا SiO₂', {'font-size':15});
+        [180, 300, 420].forEach(function(x){
+          el('path', {d:'M' + (x-24) + ' 262a24 24 0 0 1 48 0z', fill:'var(--cat)'}, bg);
+          var t = el('text', {x:x, y:252, 'class':'atom-label', 'font-size':12}, bg); t.textContent = 'Ni';
+        });
+        text(300, 324, 'حبيبات النيكل (المحفز) على السطح', {'font-size':15, 'font-weight':700});
+        return {
+          a: mol(CH4), b: mol([['C',0,0]]), c: mol(H2), d: mol(H2),
+          start:function(s){ SM.jump(s.a, 300, 70, 1); SM.jump(s.b, 300, 226, 0); SM.jump(s.c, 285, 222, 0); SM.jump(s.d, 315, 222, 0); },
+          steps:[
+            function(s){ SM.place(s.a, 300, 216, 1); },
+            function(s){ SM.jump(s.a, 300, 216, 0); SM.jump(s.b, 300, 228, 1); SM.jump(s.c, 272, 212, 1); SM.jump(s.d, 328, 212, 1); },
+            function(s){ SM.place(s.c, 170, 60, 1); SM.place(s.d, 430, 60, 1); },
+            function(s){ SM.place(s.c, 170, 60, 0); SM.place(s.d, 430, 60, 0); SM.place(s.b, 300, 228, 0); }
+          ]
+        };
+      }
+    },
+    { /* حيوي */
+      title:'الحيوي: إنزيمات تصنعها الكائنات الحية',
+      where:'الإنزيم بروتين فيه جيب صغير اسمه الموقع النشط، تدخله المواد فتتفاعل بسرعة في ظروف معتدلة. لكنه حساس للحرارة العالية والظروف القاسية.',
+      example:'مثال: إنزيم الهيدروجيناز في بعض البكتيريا والطحالب يجمع البروتونات (H⁺) والإلكترونات (e⁻) ليصنع الهيدروجين.',
+      cats:1,
+      build:function(){
+        el('path', {d:'M185 235C175 150 240 115 278 138L300 170L322 138C360 115 425 150 415 235C405 300 195 305 185 235Z', fill:'var(--cat)'}, bg);
+        el('circle', {cx:300, cy:178, r:6, fill:'none', stroke:'var(--sm-gold)', 'stroke-width':2, 'stroke-dasharray':'3 3'}, bg);
+        text(300, 238, 'إنزيم الهيدروجيناز', {'font-size':17, 'font-weight':700, fill:'#fff'});
+        text(300, 262, '(المحفز)', {'font-size':15, fill:'#fff'});
+        text(395, 128, 'الموقع النشط', {'font-size':15, 'font-weight':700});
+        el('path', {d:'M350 132Q325 140 310 165', fill:'none', stroke:'var(--sm-purple)', 'stroke-width':1.5}, bg);
+        function electron(){
+          var g = el('g', {'class':'mv'}, actors);
+          el('circle', {r:7, fill:'var(--sm-purple-300)', stroke:'#fff', 'stroke-width':1.5}, g);
+          var t = el('text', {'class':'atom-label', 'font-size':10}, g); t.textContent = 'e⁻';
+          return g;
+        }
+        return {
+          p1: mol([['H',0,0,plus]]), p2: mol([['H',0,0,plus]]), e1: electron(), e2: electron(), c: mol(H2),
+          start:function(s){ SM.jump(s.p1, 120, 80, 1); SM.jump(s.p2, 480, 80, 1); SM.jump(s.e1, 110, 300, 1); SM.jump(s.e2, 490, 300, 1); SM.jump(s.c, 300, 168, 0); },
+          steps:[
+            function(s){ SM.place(s.p1, 290, 160, 1); SM.place(s.p2, 310, 160, 1); SM.place(s.e1, 292, 180, 1); SM.place(s.e2, 308, 180, 1); },
+            function(s){ [s.p1, s.p2, s.e1, s.e2].forEach(function(g){ SM.place(g, 300, 172, 0); }); SM.jump(s.c, 300, 160, 1); },
+            function(s){ SM.place(s.c, 300, 40, 1); },
+            function(s){ SM.place(s.c, 300, 40, 0); }
+          ]
+        };
+      }
+    }
+  ];
+
+  function clear(){ timers.forEach(clearTimeout); timers = []; }
+  function at(ms, fn){ timers.push(setTimeout(fn, ms)); }
+
+  function cycle(){
+    clear();
+    scene.start(scene);
+    if (!playing){ return; }
+    var gap = 1000;
+    scene.steps.forEach(function(fn, i){
+      at(250 + i * gap, function(){
+        fn(scene);
+        if (i === 1){ made += (current === 1 ? 2 : 1); nH2.textContent = made; }
+      });
+    });
+    at(250 + scene.steps.length * gap + 300, cycle);
+  }
+
+  function show(i){
+    clear(); current = i; made = 0; nH2.textContent = 0;
+    bg.innerHTML = ''; actors.innerHTML = '';
+    var s = scenes[i];
+    scene = s.build();
+    nCat.textContent = s.cats;
+    document.getElementById('k-title').textContent = s.title;
+    document.getElementById('k-where').textContent = s.where;
+    document.getElementById('k-example').textContent = s.example;
+    cycle();
+  }
+
+  SM.tabs(document.getElementById('kinds'), show);
+  function setPlay(p){
+    playing = p;
+    playBtn.textContent = p ? '⏸ إيقاف' : '▶ تشغيل';
+    playBtn.setAttribute('aria-pressed', String(p));
+    cycle();
+  }
+  playBtn.addEventListener('click', function(){ setPlay(!playing); });
+  show(0);
+  if (!playing){ playBtn.textContent = '▶ تشغيل'; playBtn.setAttribute('aria-pressed','false'); }
+})();
+
+</script>
+</body>
+</html>
