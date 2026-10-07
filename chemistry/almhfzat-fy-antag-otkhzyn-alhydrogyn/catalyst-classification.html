@@ -45,6 +45,11 @@ body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font
 .sm-title{font-weight:700;font-size:clamp(14px,2.6vw,18px);line-height:1.4;margin:0;flex:1}
 .sm-sub{display:none}
 .sm-body{padding:10px 12px}
+/* يملأ الرسم ارتفاع كتلة التضمين كاملًا فلا يبقى فراغ أبيض تحته؛ الزيادة تذهب إلى منطقة الرسم */
+html,body{height:100%}
+.sm-wrap{min-height:100%;display:flex;flex-direction:column}
+.sm-body{flex:1 0 auto;display:flex;flex-direction:column}
+.sm-body>.sm-stage,.sm-body>#catx-anas{flex:1 0 auto}
 .sm-stage{position:relative;background:var(--sm-surface);border:1px solid var(--sm-line);border-radius:var(--sm-radius);padding:4px;display:grid;place-items:center}
 .sm-stage>svg{width:100%;height:auto;max-height:250px;display:block}
 .sm-stage text{font-family:var(--sm-font);fill:var(--sm-ink)}
@@ -117,6 +122,12 @@ body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font
 #catx-anas.catx-narrow .catx-n[data-l="1"]{color:var(--c)}
 #catx-anas.catx-narrow .catx-n[data-l="0"]{color:#fff}
 #catx-anas.catx-narrow .catx-n.catx-sel{color:#fff}
+#catx-anas{display:flex;flex-direction:column}
+#catx-anas .catx-wrap{flex:1 0 auto;align-items:stretch}
+#catx-anas.catx-narrow .catx-wrap{grid-template-rows:1fr auto}
+#catx-anas .catx-panel{display:flex;flex-direction:column}
+#catx-anas .catx-stage{flex:1 0 auto;display:grid;place-items:center}
+#catx-anas .catx-list{align-self:start}
 
 @media (max-width:520px){
   .sm-header{padding:6px 10px}.sm-body{padding:8px}.sm-stage{padding:2px}
