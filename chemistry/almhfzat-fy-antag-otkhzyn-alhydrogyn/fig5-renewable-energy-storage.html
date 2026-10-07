@@ -65,6 +65,9 @@ body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font
 .sm-legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);margin-inline-end:6px;vertical-align:-1px;border:1px solid rgba(53,17,65,.25)}
 .sm-takeaway{margin-top:var(--sm-gap);background:var(--sm-purple);color:#fff;border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
 .sm-takeaway b{color:var(--sm-gold)}
+.pt{display:block;position:relative;padding-inline-start:12px}
+.pt::before{content:"";position:absolute;inset-inline-start:0;top:.6em;width:5px;height:5px;border-radius:50%;background:var(--sm-gold-700)}
+.sm-takeaway .pt::before{background:var(--sm-gold)}
 .sm-note{font-size:11.5px;color:var(--sm-ink-soft);margin:4px 0 0;line-height:1.45}
 .sm-footer{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:3px 14px;background:var(--sm-purple);color:var(--sm-gray);font-size:11px}
 .sm-footer a{color:var(--sm-gold);text-decoration:none;font-family:var(--sm-font-latin);font-weight:700}
@@ -103,21 +106,17 @@ body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font
 </svg>
 <main class="sm-wrap" id="sm-root">
   <header class="sm-header sm-pattern-dark">
-    <div class="sm-brand" aria-label="STEAMomentos">
-      <svg style="color:var(--sm-gray)"><use href="#sm-logo-mono"/></svg>
-      <span class="wordmark">STEAMomentos</span>
-    </div>
     <h1 class="sm-title">الهيدروجين يخزّن طاقة الشمس والرياح، لكن حجمه هائل</h1>
     <p class="sm-sub">قارن الحيّز الذي تشغله 5 كغ من الهيدروجين، وهي كمية تكفي سيارة لقطع نحو 500 كم، بثلاث طرق تخزين.</p>
   </header>
   <div class="sm-body sm-pattern-light">
     <ol class="chain" aria-label="رحلة الطاقة من الشمس والرياح إلى السيارة">
-      <li><b>١</b> كهرباء فائضة من الشمس والرياح</li>
-      <li><b>٢</b> تحليل الماء كهربائيًا إلى هيدروجين وأكسجين</li>
-      <li class="hl"><b>٣</b> تخزين الهيدروجين</li>
-      <li><b>٤</b> خلية وقود تعيده كهرباء تحرّك السيارة</li>
+      <li><b>١</b> كهرباء شمس ورياح</li>
+      <li><b>٢</b> الماء يصبح H₂</li>
+      <li class="hl"><b>٣</b> تخزين H₂</li>
+      <li><b>٤</b> خلية وقود تحرّك السيارة</li>
     </ol>
-    <p class="sm-note" style="margin:0 0 6px">الخطوة الأصعب هي الثالثة: الهيدروجين أخف غاز في الكون، فكمية صغيرة منه وزنًا تشغل حيّزًا هائلًا.</p>
+    <p class="sm-note" style="margin:0 0 6px">الأصعب: الخطوة ٣، لأن H₂ أخف غاز فيشغل حيّزًا هائلًا.</p>
 
     <div class="sm-controls" style="margin-top:0;margin-bottom:6px">
       <div class="sm-tabs" role="tablist" aria-label="طرق التخزين" id="ways">
@@ -158,14 +157,10 @@ body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font
     </div>
 
     <div class="sm-takeaway">
-      <b>الخلاصة:</b> الهيدروجين يخزّن فائض طاقة الشمس والرياح، لكن 5 كغ منه تملأ غرفة كاملة. الضغط الشديد يصغّرها إلى خزان سميك ومكلف، والأطر المعدنية العضوية تعد بتخزينها بضغط أقل بفضل مساحتها الداخلية الهائلة، وما زال هذا هدفًا بحثيًا.
+      <b>الخلاصة</b><span class="pt">H₂ يخزّن طاقة الشمس والرياح، لكن حجمه هائل</span><span class="pt">الضغط يحلّها بتكلفة، و MOF أمل بحثي</span>
     </div>
 
   </div>
-  <footer class="sm-footer">
-    <span>شكل (5) · المحفزات في إنتاج وتخزين الهيدروجين</span>
-    <a href="https://steamomentos.org" target="_blank" rel="noopener">steamomentos.org</a>
-  </footer>
 </main>
 <script>
 /* أدوات مشتركة */
@@ -214,7 +209,12 @@ var SM = (function(){
   if ('ResizeObserver' in window) new ResizeObserver(postHeight).observe(document.body);
   window.addEventListener('load', postHeight);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(postHeight);
-  return {el:el, atom:atom, place:place, jump:jump, tabs:tabs, reduce:reduce, COLORS:COLORS};
+  /* نقاط مختصرة: النص مفصول بـ | */
+  function pts(node, s){
+    node.textContent = '';
+    String(s).split('|').forEach(function(x){ var p = document.createElement('span'); p.className = 'pt'; p.textContent = x.trim(); node.appendChild(p); });
+  }
+  return {pts:pts, el:el, atom:atom, place:place, jump:jump, tabs:tabs, reduce:reduce, COLORS:COLORS};
 })();
 </script>
 <script>
@@ -233,17 +233,17 @@ var SM = (function(){
   var label = document.getElementById('cube-label'), dots = document.getElementById('h2dots');
   var WAYS = [
     { side:Math.cbrt(60), x:40, ground:300, label:'نحو 60 م³',
-      title:'غاز عادي: يملأ غرفة كاملة',
-      text:'عند ضغط الجو العادي تشغل 5 كغ من الهيدروجين نحو 60 مترًا مكعبًا، أي غرفة طولها 5 أمتار وعرضها 4 وارتفاعها 3. لا يمكن لأي سيارة أن تحمل هذا الحجم.',
-      press:'الضغط: 1 بار (ضغط الجو العادي)', wall:2, mof:0 },
+      title:'غاز عادي: غرفة كاملة',
+      text:'5 كغ تشغل نحو 60 م³، بحجم غرفة|لا تتسع في أي سيارة',
+      press:'الضغط: 1 بار', wall:2, mof:0 },
     { side:Math.cbrt(0.125), x:545, ground:282, label:'نحو 125 لترًا',
-      title:'غاز مضغوط: يتسع داخل السيارة، لكن بثمن',
-      text:'بضغط الغاز 700 ضعف ضغط الجو يصغر حجمه إلى نحو 125 لترًا، فيتسع في السيارة. لكن الخزان يجب أن يكون سميكًا من ألياف الكربون ليتحمل هذا الضغط، فيصبح ثقيلًا ومكلفًا.',
+      title:'مضغوط: يتسع، لكن بثمن',
+      text:'الحجم ≈ 125 لترًا|خزان سميك: ثقيل ومكلف',
       press:'الضغط: 700 بار', wall:6, mof:0 },
     { side:Math.cbrt(0.125), x:545, ground:282, label:'الهدف: حجم صغير بضغط أقل',
-      title:'داخل مادة مسامية: الجزيئات تلتصق بالجدران',
-      text:'مسام الإطار المعدني العضوي تمسك جزيئات الهيدروجين على جدرانها الهائلة المساحة، فتتسع كمية كبيرة في حجم صغير دون ضغط شديد، والخزان أخف وأكثر أمانًا. التحدي اليوم: معظم هذه الأطر تبلغ ذلك فقط عند تبريد شديد (نحو −196°م)، والبحث جارٍ لتحقيقه في درجة الحرارة العادية.',
-      press:'الضغط: أقل بكثير من 700 بار (هدف بحثي)', wall:2, mof:1 }
+      title:'داخل MOF: يلتصق بالجدران',
+      text:'حجم صغير بلا ضغط شديد|التحدي: يحتاج اليوم تبريدًا شديدًا (−196°م)',
+      press:'الضغط: أقل بكثير (هدف بحثي)', wall:2, mof:1 }
   ];
   var cur = {x:40, y:85, s:215}, raf;
   function tween(to, ms){
@@ -275,7 +275,7 @@ var SM = (function(){
       c.setAttribute('cx', 55 + (j * 37) % 185); c.setAttribute('cy', 105 + ((j * 53) % 185));
     });
     document.getElementById('c-title').textContent = w.title;
-    document.getElementById('c-text').textContent = w.text;
+    SM.pts(document.getElementById('c-text'), w.text);
     document.getElementById('c-press').textContent = w.press;
   }
   dots.style.transition = 'opacity .5s';

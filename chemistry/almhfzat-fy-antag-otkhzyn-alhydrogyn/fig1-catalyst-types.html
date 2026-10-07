@@ -65,6 +65,9 @@ body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font
 .sm-legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);margin-inline-end:6px;vertical-align:-1px;border:1px solid rgba(53,17,65,.25)}
 .sm-takeaway{margin-top:var(--sm-gap);background:var(--sm-purple);color:#fff;border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
 .sm-takeaway b{color:var(--sm-gold)}
+.pt{display:block;position:relative;padding-inline-start:12px}
+.pt::before{content:"";position:absolute;inset-inline-start:0;top:.6em;width:5px;height:5px;border-radius:50%;background:var(--sm-gold-700)}
+.sm-takeaway .pt::before{background:var(--sm-gold)}
 .sm-note{font-size:11.5px;color:var(--sm-ink-soft);margin:4px 0 0;line-height:1.45}
 .sm-footer{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:3px 14px;background:var(--sm-purple);color:var(--sm-gray);font-size:11px}
 .sm-footer a{color:var(--sm-gold);text-decoration:none;font-family:var(--sm-font-latin);font-weight:700}
@@ -97,10 +100,6 @@ body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font
 </svg>
 <main class="sm-wrap" id="sm-root">
   <header class="sm-header sm-pattern-dark">
-    <div class="sm-brand" aria-label="STEAMomentos">
-      <svg style="color:var(--sm-gray)"><use href="#sm-logo-mono"/></svg>
-      <span class="wordmark">STEAMomentos</span>
-    </div>
     <h1 class="sm-title">ثلاث عائلات من المحفزات، والفرق بينها في مكان المحفز</h1>
     <p class="sm-sub">المحفز مادة تسرّع التفاعل ثم تخرج منه كما دخلت. اختر نوعًا لترى أين يعمل وكيف يُنتج الهيدروجين.</p>
   </header>
@@ -130,7 +129,6 @@ body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font
     <div class="sm-card" aria-live="polite">
       <h3 id="k-title"></h3>
       <p id="k-where"></p>
-      <p id="k-example"></p>
     </div>
 
     <div class="sm-legend">
@@ -141,14 +139,10 @@ body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font
     </div>
 
     <div class="sm-takeaway">
-      <b>الخلاصة:</b> كل محفز يسرّع التفاعل ثم يخرج منه كما دخل. ما يميز الأنواع الثلاثة هو <b>مكان</b> المحفز: ذائب مع المتفاعلات (متجانس)، أو سطح صلب منفصل عنها (غير متجانس)، أو إنزيم داخل كائن حي (حيوي).
+      <b>الخلاصة</b><span class="pt">المحفز يسرّع التفاعل ولا يُستهلك</span><span class="pt">الفرق بين الأنواع: <b>مكان</b> المحفز</span>
     </div>
 
   </div>
-  <footer class="sm-footer">
-    <span>شكل (1) · المحفزات في إنتاج وتخزين الهيدروجين</span>
-    <a href="https://steamomentos.org" target="_blank" rel="noopener">steamomentos.org</a>
-  </footer>
 </main>
 <script>
 /* أدوات مشتركة */
@@ -197,7 +191,12 @@ var SM = (function(){
   if ('ResizeObserver' in window) new ResizeObserver(postHeight).observe(document.body);
   window.addEventListener('load', postHeight);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(postHeight);
-  return {el:el, atom:atom, place:place, jump:jump, tabs:tabs, reduce:reduce, COLORS:COLORS};
+  /* نقاط مختصرة: النص مفصول بـ | */
+  function pts(node, s){
+    node.textContent = '';
+    String(s).split('|').forEach(function(x){ var p = document.createElement('span'); p.className = 'pt'; p.textContent = x.trim(); node.appendChild(p); });
+  }
+  return {pts:pts, el:el, atom:atom, place:place, jump:jump, tabs:tabs, reduce:reduce, COLORS:COLORS};
 })();
 </script>
 <script>
@@ -231,9 +230,9 @@ var SM = (function(){
 
   var scenes = [
     { /* متجانس */
-      title:'المتجانس: المحفز والمتفاعلات في الحالة نفسها',
-      where:'المحفز ذائب في السائل نفسه مع المواد المتفاعلة، فيلتقي بها بسهولة. عيبه أن فصله عن النواتج بعد التفاعل صعب.',
-      example:'مثال مرتبط بالمقالة: معقّدات الروثينيوم الذائبة تفكك حمض الفورميك (HCOOH) إلى ثاني أكسيد الكربون والهيدروجين.',
+      title:'المتجانس: ذائب مع المتفاعلات',
+      where:'يلتقي المتفاعلات بسهولة|عيبه: فصله بعد التفاعل صعب',
+      example:'مثال: الروثينيوم يفكك حمض الفورميك ويُطلق H₂',
       cats:1,
       build:function(){
         el('rect', {x:152, y:118, width:296, height:180, fill:'#F4F1F4'}, bg);
@@ -258,9 +257,9 @@ var SM = (function(){
       }
     },
     { /* غير متجانس */
-      title:'غير المتجانس: محفز صلب والمتفاعلات غاز أو سائل',
-      where:'يحدث التفاعل على سطح حبيبات المعدن. يسهل فصل المحفز الصلب وإعادة استخدامه، لذلك هو الأكثر استخدامًا في الصناعة.',
-      example:'مثال من المقالة: حبيبات النيكل المثبتة على السيليكا (SiO₂) تكسر الميثان (CH₄) إلى كربون صلب وهيدروجين نقي عند حرارة معتدلة.',
+      title:'غير المتجانس: سطح صلب',
+      where:'التفاعل على سطح حبيبات المعدن|يُفصل ويُعاد استخدامه بسهولة، فهو الأشيع صناعيًا',
+      example:'مثال: النيكل يكسر الميثان إلى كربون و H₂',
       cats:3,
       build:function(){
         text(470, 105, 'غاز الميثان', {'font-size':15, fill:'#643A6B'});
@@ -284,9 +283,9 @@ var SM = (function(){
       }
     },
     { /* حيوي */
-      title:'الحيوي: إنزيمات تصنعها الكائنات الحية',
-      where:'الإنزيم بروتين فيه جيب صغير اسمه الموقع النشط، تدخله المواد فتتفاعل بسرعة في ظروف معتدلة. لكنه حساس للحرارة العالية والظروف القاسية.',
-      example:'مثال: إنزيم الهيدروجيناز في بعض البكتيريا والطحالب يجمع البروتونات (H⁺) والإلكترونات (e⁻) ليصنع الهيدروجين.',
+      title:'الحيوي: إنزيم من كائن حي',
+      where:'المواد تدخل «الموقع النشط» وتتفاعل بسرعة|يعمل في ظروف معتدلة، ويتلف بالحرارة العالية',
+      example:'مثال: الهيدروجيناز يصنع H₂ في البكتيريا والطحالب',
       cats:1,
       build:function(){
         el('path', {d:'M185 235C175 150 240 115 278 138L300 170L322 138C360 115 425 150 415 235C405 300 195 305 185 235Z', fill:'var(--cat)'}, bg);
@@ -339,8 +338,7 @@ var SM = (function(){
     scene = s.build();
     nCat.textContent = s.cats;
     document.getElementById('k-title').textContent = s.title;
-    document.getElementById('k-where').textContent = s.where;
-    document.getElementById('k-example').textContent = s.example;
+    SM.pts(document.getElementById('k-where'), s.where + '|' + s.example);
     cycle();
   }
 

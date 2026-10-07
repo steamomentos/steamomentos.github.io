@@ -65,6 +65,9 @@ body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font
 .sm-legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);margin-inline-end:6px;vertical-align:-1px;border:1px solid rgba(53,17,65,.25)}
 .sm-takeaway{margin-top:var(--sm-gap);background:var(--sm-purple);color:#fff;border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
 .sm-takeaway b{color:var(--sm-gold)}
+.pt{display:block;position:relative;padding-inline-start:12px}
+.pt::before{content:"";position:absolute;inset-inline-start:0;top:.6em;width:5px;height:5px;border-radius:50%;background:var(--sm-gold-700)}
+.sm-takeaway .pt::before{background:var(--sm-gold)}
 .sm-note{font-size:11.5px;color:var(--sm-ink-soft);margin:4px 0 0;line-height:1.45}
 .sm-footer{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:3px 14px;background:var(--sm-purple);color:var(--sm-gray);font-size:11px}
 .sm-footer a{color:var(--sm-gold);text-decoration:none;font-family:var(--sm-font-latin);font-weight:700}
@@ -117,10 +120,6 @@ body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font
 </svg>
 <main class="sm-wrap" id="sm-root">
   <header class="sm-header sm-pattern-dark">
-    <div class="sm-brand" aria-label="STEAMomentos">
-      <svg style="color:var(--sm-gray)"><use href="#sm-logo-mono"/></svg>
-      <span class="wordmark">STEAMomentos</span>
-    </div>
     <h1 class="sm-title">كيف يفكّ سطح الروثينيوم الأمونيا ليحرّر الهيدروجين</h1>
     <p class="sm-sub">تابع ذرات جزيئين من الأمونيا خطوة بخطوة على سطح المحفز، ثم اكتشف لماذا تُعدّ الأمونيا "حاوية" جيدة للهيدروجين.</p>
   </header>
@@ -165,25 +164,21 @@ body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font
     </div>
 
     <details class="why">
-      <summary id="why-h">لماذا نستخرج الهيدروجين من الأمونيا؟ لأنها تحمل منه أكثر في الحجم نفسه</summary>
-      <p class="why-sub">كم كيلوغرامًا من الهيدروجين يتسع له خزان حجمه متر مكعب واحد (1000 لتر)؟</p>
+      <summary id="why-h">لماذا الأمونيا؟ تحمل هيدروجينًا أكثر في الحجم نفسه</summary>
+      <p class="why-sub">كغ هيدروجين في خزان 1 م³:</p>
       <div class="bars">
         <div class="bar hl" style="--v:121"><span class="bar-label">أمونيا سائلة</span><span class="bar-track"><span class="bar-fill"></span></span><span class="bar-val num">121 kg</span></div>
         <div class="bar" style="--v:71"><span class="bar-label">هيدروجين سائل (عند −253°م)</span><span class="bar-track"><span class="bar-fill"></span></span><span class="bar-val num">71 kg</span></div>
         <div class="bar" style="--v:40"><span class="bar-label">هيدروجين مضغوط (700 بار)</span><span class="bar-track"><span class="bar-fill"></span></span><span class="bar-val num">40 kg</span></div>
       </div>
-      <p class="sm-note">تتحول الأمونيا إلى سائل بتبريد بسيط (−33°م) أو بضغط خفيف (نحو 10 أضعاف ضغط الجو)، بينما يحتاج الهيدروجين إلى −253°م. القيم تقريبية، محسوبة من كثافة كل مادة.</p>
+      <p class="sm-note">الأمونيا تتسيّل عند −33°م، والهيدروجين عند −253°م. قيم تقريبية.</p>
     </details>
 
     <div class="sm-takeaway">
-      <b>الخلاصة:</b> سطح الروثينيوم يفكك روابط الأمونيا ثم يعيد تركيب ذراتها نيتروجينًا وهيدروجينًا، ويبقى هو كما هو. ولأن الأمونيا تحمل هيدروجينًا كثيرًا في حجم صغير ويسهل نقلها، فهي «حاوية» واعدة للهيدروجين.
+      <b>الخلاصة</b><span class="pt">الروثينيوم يفكك الأمونيا إلى N₂ و H₂ ولا يُستهلك</span><span class="pt">الأمونيا «حاوية» مدمجة وسهلة النقل للهيدروجين</span>
     </div>
 
   </div>
-  <footer class="sm-footer">
-    <span>شكل (2) · المحفزات في إنتاج وتخزين الهيدروجين</span>
-    <a href="https://steamomentos.org" target="_blank" rel="noopener">steamomentos.org</a>
-  </footer>
 </main>
 <script>
 /* أدوات مشتركة */
@@ -232,7 +227,12 @@ var SM = (function(){
   if ('ResizeObserver' in window) new ResizeObserver(postHeight).observe(document.body);
   window.addEventListener('load', postHeight);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(postHeight);
-  return {el:el, atom:atom, place:place, jump:jump, tabs:tabs, reduce:reduce, COLORS:COLORS};
+  /* نقاط مختصرة: النص مفصول بـ | */
+  function pts(node, s){
+    node.textContent = '';
+    String(s).split('|').forEach(function(x){ var p = document.createElement('span'); p.className = 'pt'; p.textContent = x.trim(); node.appendChild(p); });
+  }
+  return {pts:pts, el:el, atom:atom, place:place, jump:jump, tabs:tabs, reduce:reduce, COLORS:COLORS};
 })();
 </script>
 <script>
@@ -270,15 +270,15 @@ var SM = (function(){
   }
 
   var steps = [
-    {t:'١. الالتصاق (الامتزاز)', p:'يقترب جزيئا الأمونيا (NH₃) من سطح الروثينيوم ويلتصقان به من جهة ذرة النيتروجين. يسمي الكيميائيون هذا الالتصاق بالسطح «امتزازًا».'},
-    {t:'٢. تفكك الروابط', p:'هنا يظهر عمل المحفز: سطح الروثينيوم يُضعف الروابط بين النيتروجين والهيدروجين، فتنفصل ذرات الهيدروجين الست وتنتشر على السطح. من دون محفز تحتاج هذه الخطوة حرارة أعلى بكثير.'},
-    {t:'٣. التلاقي', p:'تتنقل الذرات على السطح: تلتقي ذرتا نيتروجين فتكوّنان جزيء N₂، وتلتقي كل ذرتي هيدروجين فتكوّنان جزيء H₂. اتحاد ذرتي النيتروجين هو غالبًا أبطأ خطوة، والروثينيوم من أفضل المعادن في تسريعها.'},
-    {t:'٤. الانطلاق', p:'يغادر النيتروجين والهيدروجين السطح غازين، ويعود سطح الروثينيوم كما كان، جاهزًا لجزيئات جديدة. الحصيلة: جزيئا أمونيا يعطيان 3 جزيئات هيدروجين.'}
+    {t:'١. الالتصاق (الامتزاز)', p:'جزيئا NH₃ يلتصقان بالسطح من جهة النيتروجين'},
+    {t:'٢. تفكك الروابط', p:'السطح يُضعف روابط N–H فتنفصل ذرات H الست|بلا محفز: تحتاج حرارة أعلى بكثير'},
+    {t:'٣. التلاقي', p:'كل ذرتي N تكوّنان N₂، وكل ذرتي H تكوّنان H₂|اتحاد النيتروجين أبطأ خطوة، والروثينيوم يسرّعها'},
+    {t:'٤. الانطلاق', p:'N₂ و H₂ يغادران غازين|السطح يعود كما كان، جاهزًا من جديد'}
   ];
   var select, timers = [], playing = false, playBtn = document.getElementById('play');
   function card(i){
     document.getElementById('s-title').textContent = steps[i].t;
-    document.getElementById('s-text').textContent = steps[i].p;
+    SM.pts(document.getElementById('s-text'), steps[i].p);
   }
   function go(i){
     if (i === 0) apply(S[0], true);

@@ -65,6 +65,9 @@ body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font
 .sm-legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);margin-inline-end:6px;vertical-align:-1px;border:1px solid rgba(53,17,65,.25)}
 .sm-takeaway{margin-top:var(--sm-gap);background:var(--sm-purple);color:#fff;border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
 .sm-takeaway b{color:var(--sm-gold)}
+.pt{display:block;position:relative;padding-inline-start:12px}
+.pt::before{content:"";position:absolute;inset-inline-start:0;top:.6em;width:5px;height:5px;border-radius:50%;background:var(--sm-gold-700)}
+.sm-takeaway .pt::before{background:var(--sm-gold)}
 .sm-note{font-size:11.5px;color:var(--sm-ink-soft);margin:4px 0 0;line-height:1.45}
 .sm-footer{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:3px 14px;background:var(--sm-purple);color:var(--sm-gray);font-size:11px}
 .sm-footer a{color:var(--sm-gold);text-decoration:none;font-family:var(--sm-font-latin);font-weight:700}
@@ -97,10 +100,6 @@ body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font
 </svg>
 <main class="sm-wrap" id="sm-root">
   <header class="sm-header sm-pattern-dark">
-    <div class="sm-brand" aria-label="STEAMomentos">
-      <svg style="color:var(--sm-gray)"><use href="#sm-logo-mono"/></svg>
-      <span class="wordmark">STEAMomentos</span>
-    </div>
     <h1 class="sm-title">الإطار يلتقط ثاني أكسيد الكربون من العادم، والهيدروجين يحوّله إلى وقود</h1>
     <p class="sm-sub">شاهد الإطار يمسك ثاني أكسيد الكربون ويترك النيتروجين يمر، ثم اختر المادة التي نصنعها من الكربون الملتقط.</p>
   </header>
@@ -156,17 +155,13 @@ body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font
       <span style="--c:var(--atom-h)">هيدروجين H</span>
       <span style="--c:var(--cat)">موقع معدني مفتوح</span>
     </div>
-    <p class="sm-note" id="cap-note">نسبة ثاني أكسيد الكربون في المشهد مكبّرة للتوضيح؛ في عادم المصانع هو عادةً أقل من خُمس الغاز، ومعظم الباقي نيتروجين.</p>
+    <p class="sm-note" id="cap-note">نسبة CO₂ مكبّرة للتوضيح.</p>
 
     <div class="sm-takeaway">
-      <b>الخلاصة:</b> الإطار المعدني العضوي يعمل كمصفاة ذكية: يمسك ثاني أكسيد الكربون ويترك بقية الغاز يمر. ثم يحوّل محفز، مع الهيدروجين، هذا الكربون إلى وقود ومواد مفيدة بدل أن ينطلق إلى الجو.
+      <b>الخلاصة</b><span class="pt">الإطار مصفاة: يمسك CO₂ ويترك الباقي</span><span class="pt">محفز + H₂ يحوّلان الكربون إلى وقود</span>
     </div>
 
   </div>
-  <footer class="sm-footer">
-    <span>شكل (4) · المحفزات في إنتاج وتخزين الهيدروجين</span>
-    <a href="https://steamomentos.org" target="_blank" rel="noopener">steamomentos.org</a>
-  </footer>
 </main>
 <script>
 /* أدوات مشتركة */
@@ -215,7 +210,12 @@ var SM = (function(){
   if ('ResizeObserver' in window) new ResizeObserver(postHeight).observe(document.body);
   window.addEventListener('load', postHeight);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(postHeight);
-  return {el:el, atom:atom, place:place, jump:jump, tabs:tabs, reduce:reduce, COLORS:COLORS};
+  /* نقاط مختصرة: النص مفصول بـ | */
+  function pts(node, s){
+    node.textContent = '';
+    String(s).split('|').forEach(function(x){ var p = document.createElement('span'); p.className = 'pt'; p.textContent = x.trim(); node.appendChild(p); });
+  }
+  return {pts:pts, el:el, atom:atom, place:place, jump:jump, tabs:tabs, reduce:reduce, COLORS:COLORS};
 })();
 </script>
 <script>
@@ -234,7 +234,7 @@ var SM = (function(){
     return g;
   }
   var titleEl = document.getElementById('c-title'), textEl = document.getElementById('c-text');
-  function card(t, p){ titleEl.textContent = t; textEl.textContent = p; }
+  function card(t, p){ titleEl.textContent = t; SM.pts(textEl, p); }
 
   /* ========== المرحلة ١: الالتقاط ========== */
   var capBg = document.getElementById('cap-bg'), capMol = document.getElementById('cap-mol');
@@ -301,11 +301,11 @@ var SM = (function(){
   }
   function full(){
     regen.disabled = false;
-    card('امتلأ الإطار بثاني أكسيد الكربون', 'كل المواقع المعدنية مشغولة الآن. يكفي تسخين الإطار قليلًا ليطلق ما أمسكه، فنحصل على ثاني أكسيد كربون مركّز جاهز للتحويل، ويعود الإطار فارغًا ليلتقط من جديد.');
+    card('امتلأ الإطار', 'تسخين بسيط يُطلق CO₂ مركّزًا|الإطار يعود فارغًا ليلتقط من جديد');
   }
   function capCard(){
-    card('الإطار يمسك ثاني أكسيد الكربون ويترك النيتروجين يمر',
-      'في مسام الإطار ذرات معدن لها «يد» حرة تسمى المواقع المعدنية المفتوحة. هذه الأيدي تجذب جزيء ثاني أكسيد الكربون (CO₂) أكثر بكثير من جزيء النيتروجين (N₂)، فيعلق الأول ويعبر الثاني.');
+    card('يمسك CO₂ ويترك N₂ يمر',
+      'مواقع معدنية مفتوحة = «أيدٍ» حرة في المسام|تجذب CO₂ بقوة، و N₂ يعبر');
   }
   regen.addEventListener('click', function(){
     sites.forEach(function(s){
@@ -340,20 +340,20 @@ var SM = (function(){
       H:[[226,141],[226,189],[250,165],[184,150],[83,180],[117,180]],
       labels:[[215,235,'ميثانول CH₃OH'],[100,235,'ماء H₂O']], plus:[155],
       eq:'CO₂ + 3H₂ ← CH₃OH + H₂O',
-      title:'ميثانول: وقود سائل ومادة أولية للصناعة',
-      text:'ثلاثة جزيئات هيدروجين تكفي لتحويل جزيء CO₂ إلى ميثانول وماء. الميثانول وقود سائل سهل النقل، ومادة أولية لصناعة البلاستيك والدهانات.' },
+      title:'ميثانول',
+      text:'CO₂ مع ثلاثة H₂ يعطي ميثانول وماء|وقود سائل، ومادة أولية للبلاستيك' },
     { name:'حمض الفورميك', n:1,
       C:[205,165], O:[[192,142],[180,180]],
       H:[[229,165],[162,188]],
       labels:[[200,235,'حمض الفورميك HCOOH']], plus:[],
-      title:'حمض الفورميك: الهيدروجين يعود إلى «حاوية» سائلة',
-      text:'جزيء هيدروجين واحد يحوّل CO₂ إلى حمض الفورميك. وهذا الحمض نفسه ناقل للهيدروجين (القسم 2.2 من المقالة): نفككه لاحقًا بمحفز فيعطينا الهيدروجين من جديد. دائرة مغلقة!' },
+      title:'حمض الفورميك',
+      text:'CO₂ مع H₂ واحد يعطي حمض الفورميك|ناقل للهيدروجين: نفككه لاحقًا فيعود H₂' },
     { name:'ميثان', n:4,
       C:[222,165], O:[[100,128],[100,205]],
       H:[[222,141],[222,189],[198,165],[246,165],[83,143],[117,143],[83,220],[117,220]],
       labels:[[222,235,'ميثان CH₄'],[100,265,'ماء 2H₂O']], plus:[155],
-      title:'ميثان: غاز طبيعي مصنوع من الكربون الملتقط',
-      text:'أربعة جزيئات هيدروجين تحوّل CO₂ إلى ميثان، المكوّن الرئيسي للغاز الطبيعي، فيمكن ضخه في شبكات الغاز الموجودة أصلًا.' }
+      title:'ميثان',
+      text:'CO₂ مع أربعة H₂ يعطي ميثانًا وماء|غاز طبيعي يُضخ في الشبكات الموجودة' }
   ];
   var reactLabels = el('g', {}, convBg);
   var atoms = [], curR = 0;
@@ -372,7 +372,7 @@ var SM = (function(){
     r.plus.forEach(function(x){ txt(labels, x, 171, '+', {'font-size':22, 'font-weight':700}); });
     labels.style.opacity = 0;
     run();
-    card(r.title, r.text + ' ويصبح هذا الوقود «أخضر» فقط إذا جاء الهيدروجين من مصادر نظيفة كالشمس والرياح.');
+    card(r.title, r.text + '|يكون «أخضر» فقط إن جاء H₂ من الشمس والرياح');
   }
   var runTimer;
   function run(){
