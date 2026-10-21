@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>الضجيج الذي أثبت الانفجار العظيم | STEAMomentos</title>
+<meta name="description" content="وجّه هوائي بنزياس وويلسون إلى أي جهة في السماء، وتابع كيف تحوّل ضجيج غامض إلى دليل على بداية الكون.">
+<!--
+  رسم تفاعلي لمقالة "الانفجار العظيم وتشكّل النظام الشمسي" على steamomentos.org
+  ملف مستقل (CSS و JS داخليان). الاعتماد الخارجي الوحيد: خطوط Google مع بدائل احتياطية.
+  التضمين: كتلة "صفحة مضمّنة" بارتفاع 650 بكسل، والرابط:
+    https://steamomentos.github.io/astronomy/alanfjar-alazym-walnzam-alshmsy/fig3-cosmic-background.html
+  الرمز اللوني ثابت في كل رسوم المقالة: الضوء والإشعاع ذهبي، المادة والمجرات بنفسجي فاتح، الفضاء بنفسجي داكن.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sm-purple:#351141; --sm-gold:#EBB00F; --sm-gray:#DFDADE; --sm-white:#FFFFFF;
+  --sm-purple-700:#57375D; --sm-purple-600:#643A6B; --sm-purple-500:#81539D; --sm-purple-300:#B389CD;
+  --sm-gold-700:#C07F00; --sm-gold-600:#D79E03; --sm-gold-300:#E3C76F; --sm-gold-200:#F4D160;
+  --sm-wine-700:#79155B; --sm-wine-500:#A2678A; --sm-mauve:#A78295;
+  --sm-bg:var(--sm-white); --sm-surface:#FFFFFF; --sm-surface-2:#F4F1F4;
+  --sm-ink:var(--sm-purple); --sm-ink-soft:var(--sm-purple-600); --sm-line:var(--sm-gray);
+  --sm-accent:var(--sm-gold); --sm-on-accent:var(--sm-purple);
+  --sm-radius:10px; --sm-radius-sm:8px; --sm-gap:8px;
+  --sm-font:'Cairo','Montserrat','Segoe UI',Tahoma,sans-serif;
+  --sm-font-latin:'Montserrat','Cairo','Segoe UI',sans-serif;
+  /* الرمز اللوني (ثابت في كل رسوم المقالة): الضوء والإشعاع ذهبي، المادة والمجرات بنفسجي فاتح، الفضاء بنفسجي داكن */
+  --space:#1E0927; --light:#EBB00F; --matter:#B389CD;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;height:100%}
+body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.latin,code,.num{font-family:var(--sm-font-latin);direction:ltr;unicode-bidi:isolate}
+.sm-pattern-light{background-color:var(--sm-bg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23F7F2F9' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-pattern-dark{background-color:var(--sm-purple);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23472255' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-wrap{max-width:960px;margin:0 auto;overflow:hidden;border-radius:var(--sm-radius);border:1px solid var(--sm-line);min-height:100%;display:flex;flex-direction:column}
+.sm-header{color:#fff;padding:8px 14px}
+.sm-title{font-weight:700;font-size:clamp(14px,2.6vw,18px);line-height:1.4;margin:0}
+.sm-body{padding:10px 12px;flex:1 0 auto;display:flex;flex-direction:column}
+.sm-body>.sm-stage{flex:1 0 auto}
+.sm-stage{position:relative;background:var(--space);border:1px solid var(--sm-line);border-radius:var(--sm-radius);padding:4px;display:grid;place-items:center;overflow:hidden;min-height:170px}
+.sm-stage.light{background:var(--sm-surface)}
+.sm-stage>svg{width:100%;height:auto;max-height:270px;display:block}
+/* منطقة رسم تملأ المساحة المتاحة كلها */
+.sm-stage.fill>svg,.sm-stage.fill>canvas{position:absolute;inset:0;width:100%;height:100%;max-height:none}
+.ovl{position:absolute;background:rgba(53,17,65,.92);border:1px solid var(--sm-purple-700);border-radius:8px;color:var(--sm-gray);font-size:12px;padding:5px 9px;line-height:1.4}
+.ovl b{color:var(--sm-gold-200)}
+.sm-stage text{font-family:var(--sm-font)}
+.sm-controls{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:var(--sm-gap)}
+.sm-tabs{display:flex;flex-wrap:wrap;gap:4px}
+.sm-btn{font:inherit;font-weight:600;font-size:13px;line-height:1.5;cursor:pointer;border:1.5px solid var(--sm-purple);background:#fff;color:var(--sm-purple);padding:3px 11px;border-radius:999px;transition:background .15s,color .15s,border-color .15s}
+.sm-btn:hover{border-color:var(--sm-purple-500);color:var(--sm-purple-500)}
+.sm-btn[aria-selected="true"],.sm-btn[aria-pressed="true"],.sm-btn.primary{background:var(--sm-accent);border-color:var(--sm-accent);color:var(--sm-on-accent)}
+.sm-btn:focus-visible,.sm-range:focus-visible{outline:3px solid var(--sm-purple-300);outline-offset:2px}
+.sm-btn.ghost{border-style:dashed}
+.sm-range-wrap{display:flex;align-items:center;gap:8px;flex:1 1 220px;font-size:13px}
+.sm-range{flex:1;accent-color:var(--sm-gold);height:22px;min-width:0}
+.sm-card{margin-top:var(--sm-gap);background:var(--sm-surface-2);border-inline-start:4px solid var(--sm-accent);border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
+.sm-card h3{margin:0 0 2px;font-size:14px;font-weight:700}
+.sm-card p{margin:0;color:var(--sm-ink-soft)}
+.sm-legend{display:flex;flex-wrap:wrap;gap:2px 12px;margin-top:6px;font-size:12px;color:var(--sm-ink-soft)}
+.sm-legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);margin-inline-end:6px;vertical-align:-1px;border:1px solid rgba(53,17,65,.25)}
+.sm-takeaway{margin-top:var(--sm-gap);background:var(--sm-purple);color:#fff;border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
+.sm-takeaway b{color:var(--sm-gold)}
+.pt{display:block;position:relative;padding-inline-start:12px}
+.pt::before{content:"";position:absolute;inset-inline-start:0;top:.6em;width:5px;height:5px;border-radius:50%;background:var(--sm-gold-700)}
+.sm-takeaway .pt::before{background:var(--sm-gold)}
+.sm-note{font-size:11px;color:var(--sm-ink-soft);margin:4px 0 0;line-height:1.45}
+@media (max-width:520px){
+  .sm-header{padding:6px 10px}.sm-body{padding:8px}.sm-stage{padding:2px}
+  .sm-wrap{border-radius:0;border-inline:0}
+  .sm-btn{font-size:12px;padding:2px 9px}
+  .sm-card,.sm-takeaway{font-size:12px;padding:5px 8px}.sm-card h3{font-size:13px}.sm-legend{font-size:11px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+.gl{animation:tw 2.4s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.15}50%{opacity:.9}}
+#ant{transition:transform .25s}
+#clean,#waves{transition:opacity .4s}
+#bar{transition:width .25s}
+.mtr{height:9px;border-radius:5px;background:var(--sm-purple-700);margin:3px 0;overflow:hidden}
+.mtr i{display:block;height:100%;background:var(--sm-gold);border-radius:5px}
+#waves svg{display:block;width:150px;height:18px;margin:1px 0 3px}
+@media (max-width:520px){#meter{width:140px!important}}
+</style>
+</head>
+<body>
+<main class="sm-wrap" id="sm-root">
+  <header class="sm-header sm-pattern-dark">
+    <h1 class="sm-title">وجّه الهوائي: الإشارة الخافتة نفسها تأتي من كل السماء</h1>
+  </header>
+  <div class="sm-body sm-pattern-light">
+
+    <section class="sm-stage fill">
+      <svg id="sc" viewBox="0 0 600 300" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="sc-desc">
+        <desc id="sc-desc">هوائي يمكن توجيهه إلى أي جهة في السماء، ومقياس يُظهر أن الإشارة الخافتة نفسها تصل من كل الاتجاهات.</desc>
+        <defs>
+          <linearGradient id="beam" x1="0" y1="1" x2="0" y2="0">
+            <stop offset="0" stop-color="#EBB00F" stop-opacity=".45"/><stop offset="1" stop-color="#EBB00F" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <g id="glints"></g>
+        <path d="M-600 700 L-600 272 Q0 250 300 262 T1200 270 L1200 700z" fill="#351141"/>
+        <g id="ant" transform="translate(300 262)">
+          <path id="beamP" d="M-34 -58 L-330 -700 L330 -700 L34 -58z" fill="url(#beam)"/>
+          <path d="M-6 0 L6 0 L36 -60 L-36 -60z" fill="#DFDADE" stroke="#fff" stroke-width="1.5"/>
+          <path d="M-36 -60 L36 -60" stroke="#EBB00F" stroke-width="3"/>
+        </g>
+        <rect x="290" y="258" width="20" height="16" rx="3" fill="#81539D"/>
+        <text id="clean" x="300" y="290" text-anchor="middle" font-size="13" fill="#F4D160" font-weight="700" opacity="0">✓ نُظِّف من فضلات الحمام</text>
+      </svg>
+      <div class="ovl" id="meter" style="top:8px;right:8px;width:170px">
+        شدة الإشارة
+        <div class="mtr"><i id="bar"></i></div>
+        <b id="mval"></b>
+      </div>
+      <div class="ovl" id="waves" style="top:8px;left:8px;opacity:0">
+        آنذاك: ضوء حار<svg viewBox="0 0 150 18"><path id="w1" fill="none" stroke="#EBB00F" stroke-width="2"/></svg>
+        اليوم: الموجة نفسها ممطوطة<svg viewBox="0 0 150 18"><path id="w2" fill="none" stroke="#B389CD" stroke-width="2"/></svg>
+      </div>
+    </section>
+    <div class="sm-controls">
+      <div class="sm-tabs" role="tablist" aria-label="القصة" id="steps">
+        <button class="sm-btn" role="tab" aria-selected="true">١. همس غامض</button>
+        <button class="sm-btn" role="tab" aria-selected="false">٢. الحمام؟</button>
+        <button class="sm-btn" role="tab" aria-selected="false">٣. كل الاتجاهات</button>
+        <button class="sm-btn" role="tab" aria-selected="false">٤. التفسير</button>
+      </div>
+      <label class="sm-range-wrap"><span>وجّه الهوائي</span>
+        <input class="sm-range" id="dir" type="range" min="-60" max="60" value="0" aria-label="اتجاه الهوائي">
+      </label>
+    </div>
+    <div class="sm-card" aria-live="polite">
+      <h3 id="c-title"></h3>
+      <p id="c-text"></p>
+    </div>
+    <div class="sm-takeaway">
+      <b>الخلاصة</b><span class="pt">«الضجيج» كان ضوءًا باقيًا من بدايات الكون</span><span class="pt">أقوى دليل على الانفجار العظيم، ونال به الاثنان نوبل 1978</span>
+    </div>
+
+  </div>
+</main>
+<script>
+var SM = (function(){
+  var NS = 'http://www.w3.org/2000/svg';
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function el(tag, attrs, parent){
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  /* نقاط مختصرة: النص مفصول بـ | */
+  function pts(node, s){
+    node.textContent = '';
+    String(s).split('|').forEach(function(x){ var p = document.createElement('span'); p.className = 'pt'; p.textContent = x.trim(); node.appendChild(p); });
+  }
+  function tabs(container, onSelect){
+    var btns = container.querySelectorAll('.sm-btn');
+    btns.forEach(function(b, i){ b.addEventListener('click', function(){ select(i); onSelect(i); }); });
+    function select(i){ btns.forEach(function(b, j){ b.setAttribute('aria-selected', String(i === j)); }); }
+    return select;
+  }
+  /* أرقام عربية بفواصل الآلاف */
+  function fmt(n, d){ return Number(n).toLocaleString('en-US', {maximumFractionDigits: d || 0}); }
+  function postHeight(){
+    if (window.parent === window) return;
+    var h = Math.ceil(document.documentElement.getBoundingClientRect().height);
+    try { window.parent.postMessage({type:'sm-embed-height', height:h}, '*'); } catch(e){}
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(postHeight).observe(document.body);
+  window.addEventListener('load', postHeight);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(postHeight);
+  /* يجعل منطقة الرسم تملأ المساحة بلا فراغ: يختار viewBox بنسبة أبعاد الإطار ويضمن ظهور المنطقة الأساسية (w×h حول cx,cy) */
+  function fit(svg, cx, cy, w, h){
+    var box = svg.parentNode;
+    function go(){
+      var r = box.clientWidth / Math.max(1, box.clientHeight), vw, vh;
+      if (r > w / h){ vh = h; vw = h * r; } else { vw = w; vh = w / r; }
+      svg.setAttribute('viewBox', [cx - vw / 2, cy - vh / 2, vw, vh].map(function(v){ return v.toFixed(1); }).join(' '));
+      svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    }
+    if ('ResizeObserver' in window) new ResizeObserver(go).observe(box);
+    go();
+  }
+  return {el:el, pts:pts, tabs:tabs, fmt:fmt, reduce:reduce, fit:fit};
+})();
+</script>
+<script>
+
+(function(){
+  var el = SM.el;
+  /* الإشارة تملأ السماء بالتساوي: نقاط تومض في كل مكان */
+  var gl = document.getElementById('glints'), seed = 11;
+  function rnd(){ seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+  for (var i = 0; i < 520; i++){
+    var c = el('circle', {cx:(rnd() * 1200 - 300).toFixed(1), cy:(rnd() * 500 - 245).toFixed(1), r:(rnd() * 1.4 + .6).toFixed(2), fill:'#EBB00F', 'class':'gl'}, gl);
+    c.style.animationDelay = (-rnd() * 2.4).toFixed(2) + 's';
+  }
+  /* موجتان: قصيرة (آنذاك) وطويلة (اليوم) */
+  function wave(y, lam){
+    var d = 'M0 ' + y;
+    for (var x = 0; x <= 150; x += 1.5) d += ' L' + x + ' ' + (y + 7 * Math.sin(x / lam * 2 * Math.PI)).toFixed(1);
+    return d;
+  }
+  document.getElementById('w1').setAttribute('d', wave(9, 6));
+  document.getElementById('w2').setAttribute('d', wave(9, 120));
+
+  var dir = document.getElementById('dir'), bar = document.getElementById('bar'), mval = document.getElementById('mval');
+  var step = 0;
+  function aim(){
+    var a = +dir.value;
+    document.getElementById('ant').setAttribute('transform', 'translate(300 262) rotate(' + (-a) + ')');
+    /* القراءة ثابتة مهما كان الاتجاه (مع رجفة بسيطة) */
+    bar.style.width = (68 + (Math.random() - .5) * 3).toFixed(1) + '%';
+    mval.textContent = step === 3 ? 'حرارتها نحو −270 °س' : 'القراءة نفسها في كل اتجاه';
+  }
+  var S = [
+    {t:'١. همس غامض (1964)', p:'هوائي في نيوجيرسي يلتقط إشارة خافتة|لا تتوقف ليلًا ولا نهارًا'},
+    {t:'٢. هل هو الحمام؟', p:'نظّف بنزياس وويلسون الهوائي من فضلات الحمام|الإشارة بقيت كما هي'},
+    {t:'٣. من كل الاتجاهات', p:'حرّك الشريط ووجّه الهوائي حيث شئت|القراءة لا تتغير: المصدر ليس نجمًا ولا مدينة'},
+    {t:'٤. صدى الانفجار العظيم', p:'ضوء انطلق بعد البداية بنحو 380 ألف سنة|تمدد الكون مطّ موجته فصار موجات ميكروية باردة'}
+  ];
+  function show(i){
+    step = i;
+    document.getElementById('c-title').textContent = S[i].t;
+    SM.pts(document.getElementById('c-text'), S[i].p);
+    document.getElementById('clean').setAttribute('opacity', i === 1 ? 1 : 0);
+    document.getElementById('waves').style.opacity = i === 3 ? 1 : 0;
+    aim();
+  }
+  SM.fit(document.getElementById('sc'), 300, 165, 330, 230);
+  SM.tabs(document.getElementById('steps'), show);
+  dir.addEventListener('input', aim);
+  show(0);
+})();
+
+</script>
+</body>
+</html>

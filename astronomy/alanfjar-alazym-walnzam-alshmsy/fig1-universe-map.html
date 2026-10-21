@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>خريطة الكون القريب | STEAMomentos</title>
+<meta name="description" content="اضغط على أي تجمّع مجرات في خريطة السماء لترى بُعده وسرعة ابتعاده عنا.">
+<!--
+  رسم تفاعلي لمقالة "الانفجار العظيم وتشكّل النظام الشمسي" على steamomentos.org
+  ملف مستقل (CSS و JS داخليان). الاعتماد الخارجي الوحيد: خطوط Google مع بدائل احتياطية.
+  التضمين: كتلة "صفحة مضمّنة" بارتفاع 650 بكسل، والرابط:
+    https://steamomentos.github.io/astronomy/alanfjar-alazym-walnzam-alshmsy/fig1-universe-map.html
+  الرمز اللوني ثابت في كل رسوم المقالة: الضوء والإشعاع ذهبي، المادة والمجرات بنفسجي فاتح، الفضاء بنفسجي داكن.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sm-purple:#351141; --sm-gold:#EBB00F; --sm-gray:#DFDADE; --sm-white:#FFFFFF;
+  --sm-purple-700:#57375D; --sm-purple-600:#643A6B; --sm-purple-500:#81539D; --sm-purple-300:#B389CD;
+  --sm-gold-700:#C07F00; --sm-gold-600:#D79E03; --sm-gold-300:#E3C76F; --sm-gold-200:#F4D160;
+  --sm-wine-700:#79155B; --sm-wine-500:#A2678A; --sm-mauve:#A78295;
+  --sm-bg:var(--sm-white); --sm-surface:#FFFFFF; --sm-surface-2:#F4F1F4;
+  --sm-ink:var(--sm-purple); --sm-ink-soft:var(--sm-purple-600); --sm-line:var(--sm-gray);
+  --sm-accent:var(--sm-gold); --sm-on-accent:var(--sm-purple);
+  --sm-radius:10px; --sm-radius-sm:8px; --sm-gap:8px;
+  --sm-font:'Cairo','Montserrat','Segoe UI',Tahoma,sans-serif;
+  --sm-font-latin:'Montserrat','Cairo','Segoe UI',sans-serif;
+  /* الرمز اللوني (ثابت في كل رسوم المقالة): الضوء والإشعاع ذهبي، المادة والمجرات بنفسجي فاتح، الفضاء بنفسجي داكن */
+  --space:#1E0927; --light:#EBB00F; --matter:#B389CD;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;height:100%}
+body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.latin,code,.num{font-family:var(--sm-font-latin);direction:ltr;unicode-bidi:isolate}
+.sm-pattern-light{background-color:var(--sm-bg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23F7F2F9' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-pattern-dark{background-color:var(--sm-purple);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23472255' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-wrap{max-width:960px;margin:0 auto;overflow:hidden;border-radius:var(--sm-radius);border:1px solid var(--sm-line);min-height:100%;display:flex;flex-direction:column}
+.sm-header{color:#fff;padding:8px 14px}
+.sm-title{font-weight:700;font-size:clamp(14px,2.6vw,18px);line-height:1.4;margin:0}
+.sm-body{padding:10px 12px;flex:1 0 auto;display:flex;flex-direction:column}
+.sm-body>.sm-stage{flex:1 0 auto}
+.sm-stage{position:relative;background:var(--space);border:1px solid var(--sm-line);border-radius:var(--sm-radius);padding:4px;display:grid;place-items:center;overflow:hidden;min-height:170px}
+.sm-stage.light{background:var(--sm-surface)}
+.sm-stage>svg{width:100%;height:auto;max-height:270px;display:block}
+/* منطقة رسم تملأ المساحة المتاحة كلها */
+.sm-stage.fill>svg,.sm-stage.fill>canvas{position:absolute;inset:0;width:100%;height:100%;max-height:none}
+.ovl{position:absolute;background:rgba(53,17,65,.92);border:1px solid var(--sm-purple-700);border-radius:8px;color:var(--sm-gray);font-size:12px;padding:5px 9px;line-height:1.4}
+.ovl b{color:var(--sm-gold-200)}
+.sm-stage text{font-family:var(--sm-font)}
+.sm-controls{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:var(--sm-gap)}
+.sm-tabs{display:flex;flex-wrap:wrap;gap:4px}
+.sm-btn{font:inherit;font-weight:600;font-size:13px;line-height:1.5;cursor:pointer;border:1.5px solid var(--sm-purple);background:#fff;color:var(--sm-purple);padding:3px 11px;border-radius:999px;transition:background .15s,color .15s,border-color .15s}
+.sm-btn:hover{border-color:var(--sm-purple-500);color:var(--sm-purple-500)}
+.sm-btn[aria-selected="true"],.sm-btn[aria-pressed="true"],.sm-btn.primary{background:var(--sm-accent);border-color:var(--sm-accent);color:var(--sm-on-accent)}
+.sm-btn:focus-visible,.sm-range:focus-visible{outline:3px solid var(--sm-purple-300);outline-offset:2px}
+.sm-btn.ghost{border-style:dashed}
+.sm-range-wrap{display:flex;align-items:center;gap:8px;flex:1 1 220px;font-size:13px}
+.sm-range{flex:1;accent-color:var(--sm-gold);height:22px;min-width:0}
+.sm-card{margin-top:var(--sm-gap);background:var(--sm-surface-2);border-inline-start:4px solid var(--sm-accent);border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
+.sm-card h3{margin:0 0 2px;font-size:14px;font-weight:700}
+.sm-card p{margin:0;color:var(--sm-ink-soft)}
+.sm-legend{display:flex;flex-wrap:wrap;gap:2px 12px;margin-top:6px;font-size:12px;color:var(--sm-ink-soft)}
+.sm-legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);margin-inline-end:6px;vertical-align:-1px;border:1px solid rgba(53,17,65,.25)}
+.sm-takeaway{margin-top:var(--sm-gap);background:var(--sm-purple);color:#fff;border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
+.sm-takeaway b{color:var(--sm-gold)}
+.pt{display:block;position:relative;padding-inline-start:12px}
+.pt::before{content:"";position:absolute;inset-inline-start:0;top:.6em;width:5px;height:5px;border-radius:50%;background:var(--sm-gold-700)}
+.sm-takeaway .pt::before{background:var(--sm-gold)}
+.sm-note{font-size:11px;color:var(--sm-ink-soft);margin:4px 0 0;line-height:1.45}
+@media (max-width:520px){
+  .sm-header{padding:6px 10px}.sm-body{padding:8px}.sm-stage{padding:2px}
+  .sm-wrap{border-radius:0;border-inline:0}
+  .sm-btn{font-size:12px;padding:2px 9px}
+  .sm-card,.sm-takeaway{font-size:12px;padding:5px 8px}.sm-card h3{font-size:13px}.sm-legend{font-size:11px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+.mk{cursor:pointer}
+.mk circle.dot{stroke:#fff;stroke-width:1.5;transition:r .2s}
+.mk.on circle.dot{stroke:var(--sm-gold);stroke-width:3}
+.mk text{font-size:11px;fill:#fff;paint-order:stroke;stroke:#2A0F35;stroke-width:3px}
+.mk:focus{outline:none}.mk:focus-visible circle.dot{stroke:var(--sm-purple-300);stroke-width:4}
+.dist{margin-top:6px}
+.dist-line{position:relative;height:18px;border-bottom:2px solid var(--sm-gray)}
+.dist-line i{position:absolute;bottom:-6px;width:10px;height:10px;border-radius:50%;transform:translateX(50%);border:1.5px solid #fff;cursor:pointer}
+.dist-line i.on{box-shadow:0 0 0 2px var(--sm-gold)}
+.dist-axis{position:relative;height:16px;font-size:11px;color:var(--sm-ink-soft)}
+.dist-axis span{position:absolute;top:0;transform:translateX(50%);white-space:nowrap}
+.dist-axis span:first-child{transform:none}
+</style>
+</head>
+<body>
+<main class="sm-wrap" id="sm-root">
+  <header class="sm-header sm-pattern-dark">
+    <h1 class="sm-title">خريطة الكون القريب: اضغط أي تجمّع لترى كم يبعد وكم يبتعد</h1>
+  </header>
+  <div class="sm-body sm-pattern-light">
+
+    <section class="sm-stage fill">
+      <svg id="sky" viewBox="0 0 600 300" role="img" aria-labelledby="sky-desc">
+        <desc id="sky-desc">خريطة مبسطة للسماء كلها، فيها شريط مجرة درب التبانة في الوسط، وحولها تجمّعات مجرات بعيدة يمكن الضغط على كل منها.</desc>
+        <defs>
+          <radialGradient id="band" cx="50%" cy="50%" r="50%">
+            <stop offset="0" stop-color="#F4D160" stop-opacity=".9"/>
+            <stop offset=".5" stop-color="#E3C76F" stop-opacity=".35"/>
+            <stop offset="1" stop-color="#E3C76F" stop-opacity="0"/>
+          </radialGradient>
+          <clipPath id="clipSky"><ellipse cx="300" cy="150" rx="288" ry="142"/></clipPath>
+        </defs>
+        <ellipse cx="300" cy="150" rx="288" ry="142" fill="#2A0F35" stroke="#57375D" stroke-width="2"/>
+        <g clip-path="url(#clipSky)" id="web"></g>
+        <ellipse cx="300" cy="150" rx="300" ry="13" fill="url(#band)" clip-path="url(#clipSky)"/>
+        <text x="300" y="180" text-anchor="middle" font-size="11" fill="#F4D160" opacity=".9">مجرتنا تحجب هذا الشريط</text>
+        <g id="marks"></g>
+      </svg>
+    </section>
+    <div class="dist" aria-hidden="true">
+      <div class="dist-line" id="distLine"></div>
+      <div class="dist-axis"><span style="right:0">نحن</span><span class="num" style="right:50%">500</span><span style="left:0;transform:none"><b class="num">1000</b> مليون سنة ضوئية</span></div>
+    </div>
+    <div class="sm-card" aria-live="polite">
+      <h3 id="c-title"></h3>
+      <p id="c-text"></p>
+    </div>
+    <div class="sm-takeaway">
+      <b>الخلاصة</b><span class="pt">كل نقطة مضيئة هنا تجمّع من آلاف المجرات</span><span class="pt">كلها تبتعد عنا، والأبعد يبتعد أسرع: الكون يتمدد</span>
+    </div>
+
+  </div>
+</main>
+<script>
+var SM = (function(){
+  var NS = 'http://www.w3.org/2000/svg';
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function el(tag, attrs, parent){
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  /* نقاط مختصرة: النص مفصول بـ | */
+  function pts(node, s){
+    node.textContent = '';
+    String(s).split('|').forEach(function(x){ var p = document.createElement('span'); p.className = 'pt'; p.textContent = x.trim(); node.appendChild(p); });
+  }
+  function tabs(container, onSelect){
+    var btns = container.querySelectorAll('.sm-btn');
+    btns.forEach(function(b, i){ b.addEventListener('click', function(){ select(i); onSelect(i); }); });
+    function select(i){ btns.forEach(function(b, j){ b.setAttribute('aria-selected', String(i === j)); }); }
+    return select;
+  }
+  /* أرقام عربية بفواصل الآلاف */
+  function fmt(n, d){ return Number(n).toLocaleString('en-US', {maximumFractionDigits: d || 0}); }
+  function postHeight(){
+    if (window.parent === window) return;
+    var h = Math.ceil(document.documentElement.getBoundingClientRect().height);
+    try { window.parent.postMessage({type:'sm-embed-height', height:h}, '*'); } catch(e){}
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(postHeight).observe(document.body);
+  window.addEventListener('load', postHeight);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(postHeight);
+  /* يجعل منطقة الرسم تملأ المساحة بلا فراغ: يختار viewBox بنسبة أبعاد الإطار ويضمن ظهور المنطقة الأساسية (w×h حول cx,cy) */
+  function fit(svg, cx, cy, w, h){
+    var box = svg.parentNode;
+    function go(){
+      var r = box.clientWidth / Math.max(1, box.clientHeight), vw, vh;
+      if (r > w / h){ vh = h; vw = h * r; } else { vw = w; vh = w / r; }
+      svg.setAttribute('viewBox', [cx - vw / 2, cy - vh / 2, vw, vh].map(function(v){ return v.toFixed(1); }).join(' '));
+      svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    }
+    if ('ResizeObserver' in window) new ResizeObserver(go).observe(box);
+    go();
+  }
+  return {el:el, pts:pts, tabs:tabs, fmt:fmt, reduce:reduce, fit:fit};
+})();
+</script>
+<script>
+
+(function(){
+  /* المواقع تقريبية، منقولة من صورة المقالة. z = الانزياح الأحمر.
+     المسافة التقريبية = z × 13970 مليون سنة ضوئية، والسرعة = z × 300000 كم/ث (قانون هابل، يصلح للمسافات القريبة) */
+  var C = [
+    {n:'تجمّع مجرات العذراء', x:715, y:95,  d:52, a:'s'},
+    {n:'تجمّع مجرات الهدر', x:885, y:235, z:0.010},
+    {n:'الطاووس والسند', x:690, y:440, z:0.015},
+    {n:'الجاذب العظيم', x:740, y:345, z:0.016, a:'s'},
+    {n:'برشاوش والحوت', x:180, y:395, z:0.017},
+    {n:'تجمّع مجرات الهلبة', x:600, y:62,  z:0.023, a:'e'},
+    {n:'هرقل العملاق', x:530, y:185, z:0.037, a:'e'},
+    {n:'شابلي العملاق', x:775, y:205, z:0.048, a:'e'},
+    {n:'معمل النحّات', x:625, y:540, z:0.054},
+    {n:'الدب الأكبر العملاق', x:430, y:150, z:0.058, a:'e'},
+    {n:'كوكبة الساعة', x:820, y:505, z:0.067},
+    {n:'الإكليل الشمالي', x:520, y:135, z:0.072, a:'s'}
+  ];
+  C.forEach(function(c){
+    c.mly = c.d || Math.round(c.z * 13970 / 10) * 10;
+    c.sx = 300 + (c.x - 620) / 515 * 288;
+    c.sy = 150 + (c.y - 320) / 285 * 142;
+  });
+  /* لون حسب المسافة: القريب ذهبي فاتح، البعيد بنفسجي */
+  var ramp = ['#F4D160','#EBB00F','#D79E03','#C07F00','#A2678A','#B389CD','#81539D'];
+  function col(m){ return ramp[Math.min(ramp.length - 1, Math.floor(m / 1000 * ramp.length))]; }
+
+  /* نسيج كوني خافت للخلفية (زخرفة شبه عشوائية ثابتة) */
+  var web = document.getElementById('web'), seed = 7;
+  function rnd(){ seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+  for (var i = 0; i < 420; i++){
+    var x = 12 + rnd() * 576, y = 8 + rnd() * 284;
+    if (Math.abs(y - 150) < 10) continue;
+    SM.el('circle', {cx:x, cy:y, r:(rnd() * 1.3 + .3).toFixed(2), fill: ramp[Math.floor(rnd() * ramp.length)], opacity:(.25 + rnd() * .45).toFixed(2)}, web);
+  }
+
+  var marks = document.getElementById('marks'), line = document.getElementById('distLine'), G = [], D = [];
+  C.forEach(function(c, i){
+    var g = SM.el('g', {'class':'mk', tabindex:0, role:'button', 'aria-label':c.n}, marks);
+    SM.el('circle', {cx:c.sx, cy:c.sy, r:12, fill:'transparent'}, g);
+    SM.el('circle', {'class':'dot', cx:c.sx, cy:c.sy, r:6, fill:col(c.mly)}, g);
+    var left = c.a ? c.a === 'e' : c.sx > 300;
+    var t = SM.el('text', {x:c.sx + (left ? -10 : 10), y:c.sy + 4, 'text-anchor': left ? 'start' : 'end'}, g);
+    t.textContent = c.n;
+    g.addEventListener('click', function(){ pick(i); });
+    g.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); pick(i); } });
+    G.push(g);
+    var d = document.createElement('i');
+    d.style.background = col(c.mly);
+    /* RTL: القريب يمينًا */
+    d.style.right = (Math.min(c.mly, 1000) / 1000 * 100) + '%';
+    d.title = c.n;
+    d.addEventListener('click', function(){ pick(i); });
+    line.appendChild(d); D.push(d);
+  });
+  /* إخفاء التسميات المتزاحمة على الشاشات الصغيرة: نُظهر تسمية المختار فقط */
+  function labels(active){
+    var small = document.getElementById('sky').getBoundingClientRect().width < 480;
+    G.forEach(function(g, j){ g.querySelector('text').style.display = (!small || j === active) ? '' : 'none'; });
+  }
+  function pick(i){
+    var c = C[i];
+    G.forEach(function(g, j){ g.classList.toggle('on', i === j); g.querySelector('.dot').setAttribute('r', i === j ? 9 : 6); });
+    D.forEach(function(d, j){ d.classList.toggle('on', i === j); });
+    labels(i);
+    document.getElementById('c-title').textContent = c.n;
+    var p = ['يبعد نحو ' + SM.fmt(c.mly) + ' مليون سنة ضوئية',
+             'ضوؤه الذي نراه انطلق قبل ' + SM.fmt(c.mly) + ' مليون سنة'];
+    if (c.z) p.push('يبتعد عنا بنحو ' + SM.fmt(c.z * 300000) + ' كم في الثانية');
+    else p.push('أقرب تجمّع كبير إلينا، وجاذبيته تشدّ مجرتنا نحوه');
+    SM.pts(document.getElementById('c-text'), p.join('|'));
+    cur = i;
+  }
+  var cur = 0;
+  addEventListener('resize', function(){ labels(cur); });
+  pick(0);
+})();
+
+</script>
+</body>
+</html>

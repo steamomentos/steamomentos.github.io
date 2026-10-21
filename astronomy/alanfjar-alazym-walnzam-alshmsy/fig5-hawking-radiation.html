@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>إشعاع هوكينغ | STEAMomentos</title>
+<meta name="description" content="غيّر كتلة الثقب الأسود لترى كيف يتغير حجمه وحرارته والزمن الذي يحتاجه ليتبخّر.">
+<!--
+  رسم تفاعلي لمقالة "الانفجار العظيم وتشكّل النظام الشمسي" على steamomentos.org
+  ملف مستقل (CSS و JS داخليان). الاعتماد الخارجي الوحيد: خطوط Google مع بدائل احتياطية.
+  التضمين: كتلة "صفحة مضمّنة" بارتفاع 650 بكسل، والرابط:
+    https://steamomentos.github.io/astronomy/alanfjar-alazym-walnzam-alshmsy/fig5-hawking-radiation.html
+  الرمز اللوني ثابت في كل رسوم المقالة: الضوء والإشعاع ذهبي، المادة والمجرات بنفسجي فاتح، الفضاء بنفسجي داكن.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sm-purple:#351141; --sm-gold:#EBB00F; --sm-gray:#DFDADE; --sm-white:#FFFFFF;
+  --sm-purple-700:#57375D; --sm-purple-600:#643A6B; --sm-purple-500:#81539D; --sm-purple-300:#B389CD;
+  --sm-gold-700:#C07F00; --sm-gold-600:#D79E03; --sm-gold-300:#E3C76F; --sm-gold-200:#F4D160;
+  --sm-wine-700:#79155B; --sm-wine-500:#A2678A; --sm-mauve:#A78295;
+  --sm-bg:var(--sm-white); --sm-surface:#FFFFFF; --sm-surface-2:#F4F1F4;
+  --sm-ink:var(--sm-purple); --sm-ink-soft:var(--sm-purple-600); --sm-line:var(--sm-gray);
+  --sm-accent:var(--sm-gold); --sm-on-accent:var(--sm-purple);
+  --sm-radius:10px; --sm-radius-sm:8px; --sm-gap:8px;
+  --sm-font:'Cairo','Montserrat','Segoe UI',Tahoma,sans-serif;
+  --sm-font-latin:'Montserrat','Cairo','Segoe UI',sans-serif;
+  /* الرمز اللوني (ثابت في كل رسوم المقالة): الضوء والإشعاع ذهبي، المادة والمجرات بنفسجي فاتح، الفضاء بنفسجي داكن */
+  --space:#1E0927; --light:#EBB00F; --matter:#B389CD;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;height:100%}
+body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.latin,code,.num{font-family:var(--sm-font-latin);direction:ltr;unicode-bidi:isolate}
+.sm-pattern-light{background-color:var(--sm-bg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23F7F2F9' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-pattern-dark{background-color:var(--sm-purple);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23472255' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-wrap{max-width:960px;margin:0 auto;overflow:hidden;border-radius:var(--sm-radius);border:1px solid var(--sm-line);min-height:100%;display:flex;flex-direction:column}
+.sm-header{color:#fff;padding:8px 14px}
+.sm-title{font-weight:700;font-size:clamp(14px,2.6vw,18px);line-height:1.4;margin:0}
+.sm-body{padding:10px 12px;flex:1 0 auto;display:flex;flex-direction:column}
+.sm-body>.sm-stage{flex:1 0 auto}
+.sm-stage{position:relative;background:var(--space);border:1px solid var(--sm-line);border-radius:var(--sm-radius);padding:4px;display:grid;place-items:center;overflow:hidden;min-height:170px}
+.sm-stage.light{background:var(--sm-surface)}
+.sm-stage>svg{width:100%;height:auto;max-height:270px;display:block}
+/* منطقة رسم تملأ المساحة المتاحة كلها */
+.sm-stage.fill>svg,.sm-stage.fill>canvas{position:absolute;inset:0;width:100%;height:100%;max-height:none}
+.ovl{position:absolute;background:rgba(53,17,65,.92);border:1px solid var(--sm-purple-700);border-radius:8px;color:var(--sm-gray);font-size:12px;padding:5px 9px;line-height:1.4}
+.ovl b{color:var(--sm-gold-200)}
+.sm-stage text{font-family:var(--sm-font)}
+.sm-controls{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:var(--sm-gap)}
+.sm-tabs{display:flex;flex-wrap:wrap;gap:4px}
+.sm-btn{font:inherit;font-weight:600;font-size:13px;line-height:1.5;cursor:pointer;border:1.5px solid var(--sm-purple);background:#fff;color:var(--sm-purple);padding:3px 11px;border-radius:999px;transition:background .15s,color .15s,border-color .15s}
+.sm-btn:hover{border-color:var(--sm-purple-500);color:var(--sm-purple-500)}
+.sm-btn[aria-selected="true"],.sm-btn[aria-pressed="true"],.sm-btn.primary{background:var(--sm-accent);border-color:var(--sm-accent);color:var(--sm-on-accent)}
+.sm-btn:focus-visible,.sm-range:focus-visible{outline:3px solid var(--sm-purple-300);outline-offset:2px}
+.sm-btn.ghost{border-style:dashed}
+.sm-range-wrap{display:flex;align-items:center;gap:8px;flex:1 1 220px;font-size:13px}
+.sm-range{flex:1;accent-color:var(--sm-gold);height:22px;min-width:0}
+.sm-card{margin-top:var(--sm-gap);background:var(--sm-surface-2);border-inline-start:4px solid var(--sm-accent);border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
+.sm-card h3{margin:0 0 2px;font-size:14px;font-weight:700}
+.sm-card p{margin:0;color:var(--sm-ink-soft)}
+.sm-legend{display:flex;flex-wrap:wrap;gap:2px 12px;margin-top:6px;font-size:12px;color:var(--sm-ink-soft)}
+.sm-legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);margin-inline-end:6px;vertical-align:-1px;border:1px solid rgba(53,17,65,.25)}
+.sm-takeaway{margin-top:var(--sm-gap);background:var(--sm-purple);color:#fff;border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
+.sm-takeaway b{color:var(--sm-gold)}
+.pt{display:block;position:relative;padding-inline-start:12px}
+.pt::before{content:"";position:absolute;inset-inline-start:0;top:.6em;width:5px;height:5px;border-radius:50%;background:var(--sm-gold-700)}
+.sm-takeaway .pt::before{background:var(--sm-gold)}
+.sm-note{font-size:11px;color:var(--sm-ink-soft);margin:4px 0 0;line-height:1.45}
+@media (max-width:520px){
+  .sm-header{padding:6px 10px}.sm-body{padding:8px}.sm-stage{padding:2px}
+  .sm-wrap{border-radius:0;border-inline:0}
+  .sm-btn{font-size:12px;padding:2px 9px}
+  .sm-card,.sm-takeaway{font-size:12px;padding:5px 8px}.sm-card h3{font-size:13px}.sm-legend{font-size:11px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+#read{font-size:12.5px;min-width:170px}
+#read b{font-family:var(--sm-font-latin);font-weight:600}
+#read b .ar{font-family:var(--sm-font)}
+</style>
+</head>
+<body>
+<main class="sm-wrap" id="sm-root">
+  <header class="sm-header sm-pattern-dark">
+    <h1 class="sm-title">الثقب الأسود الأصغر أسخن: غيّر كتلته وشاهد</h1>
+  </header>
+  <div class="sm-body sm-pattern-light">
+
+    <section class="sm-stage fill">
+      <svg id="sc" viewBox="0 0 600 300" role="img" aria-labelledby="sc-desc">
+        <desc id="sc-desc">ثقب أسود يتغير حجمه وتوهّجه مع كتلته: الصغير صغير جدًا وحار ويتوهّج، والكبير كبير وبارد.</desc>
+        <defs>
+          <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+            <stop offset=".45" stop-color="#FFF6D6"/><stop offset=".6" stop-color="#EBB00F"/><stop offset="1" stop-color="#C07F00" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <g id="stars"></g>
+        <circle id="glow" cx="300" cy="150" r="60" fill="url(#halo)"/>
+        <circle id="hole" cx="300" cy="150" r="40" fill="#000" stroke="#81539D" stroke-width="2"/>
+        <g id="rays"></g>
+      </svg>
+      <div class="ovl" id="read" style="top:8px;right:8px">
+        <div>الحجم: <b id="r-size"></b></div>
+        <div>الحرارة: <b id="r-temp"></b></div>
+        <div>يتبخّر خلال: <b id="r-life"></b></div>
+      </div>
+    </section>
+    <div class="sm-controls">
+      <div class="sm-tabs" role="tablist" aria-label="أمثلة" id="pre">
+        <button class="sm-btn" role="tab" aria-selected="false">كتلة جبل</button>
+        <button class="sm-btn" role="tab" aria-selected="false">كتلة القمر</button>
+        <button class="sm-btn" role="tab" aria-selected="false">كتلة الأرض</button>
+        <button class="sm-btn" role="tab" aria-selected="true">كتلة الشمس</button>
+      </div>
+      <label class="sm-range-wrap"><span>الكتلة</span>
+        <input class="sm-range" id="m" type="range" min="110" max="313" value="303" aria-label="كتلة الثقب الأسود">
+      </label>
+    </div>
+    <div class="sm-card" aria-live="polite">
+      <h3 id="c-title"></h3>
+      <p id="c-text"></p>
+    </div>
+    <div class="sm-takeaway">
+      <b>فكرة هوكينغ (1974)</b><span class="pt">الثقب الأسود يُشع ببطء ويفقد كتلته: «يتبخّر»</span><span class="pt">كلما صغر ازداد حرارة وتبخّر أسرع. لم يُرصد هذا الإشعاع بعد</span>
+    </div>
+
+  </div>
+</main>
+<script>
+var SM = (function(){
+  var NS = 'http://www.w3.org/2000/svg';
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function el(tag, attrs, parent){
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  /* نقاط مختصرة: النص مفصول بـ | */
+  function pts(node, s){
+    node.textContent = '';
+    String(s).split('|').forEach(function(x){ var p = document.createElement('span'); p.className = 'pt'; p.textContent = x.trim(); node.appendChild(p); });
+  }
+  function tabs(container, onSelect){
+    var btns = container.querySelectorAll('.sm-btn');
+    btns.forEach(function(b, i){ b.addEventListener('click', function(){ select(i); onSelect(i); }); });
+    function select(i){ btns.forEach(function(b, j){ b.setAttribute('aria-selected', String(i === j)); }); }
+    return select;
+  }
+  /* أرقام عربية بفواصل الآلاف */
+  function fmt(n, d){ return Number(n).toLocaleString('en-US', {maximumFractionDigits: d || 0}); }
+  function postHeight(){
+    if (window.parent === window) return;
+    var h = Math.ceil(document.documentElement.getBoundingClientRect().height);
+    try { window.parent.postMessage({type:'sm-embed-height', height:h}, '*'); } catch(e){}
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(postHeight).observe(document.body);
+  window.addEventListener('load', postHeight);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(postHeight);
+  /* يجعل منطقة الرسم تملأ المساحة بلا فراغ: يختار viewBox بنسبة أبعاد الإطار ويضمن ظهور المنطقة الأساسية (w×h حول cx,cy) */
+  function fit(svg, cx, cy, w, h){
+    var box = svg.parentNode;
+    function go(){
+      var r = box.clientWidth / Math.max(1, box.clientHeight), vw, vh;
+      if (r > w / h){ vh = h; vw = h * r; } else { vw = w; vh = w / r; }
+      svg.setAttribute('viewBox', [cx - vw / 2, cy - vh / 2, vw, vh].map(function(v){ return v.toFixed(1); }).join(' '));
+      svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    }
+    if ('ResizeObserver' in window) new ResizeObserver(go).observe(box);
+    go();
+  }
+  return {el:el, pts:pts, tabs:tabs, fmt:fmt, reduce:reduce, fit:fit};
+})();
+</script>
+<script>
+
+(function(){
+  var el = SM.el;
+  var seed = 5; function rnd(){ seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+  var st = document.getElementById('stars');
+  for (var i = 0; i < 260; i++) el('circle', {cx:(rnd() * 1200 - 300).toFixed(1), cy:(rnd() * 700 - 200).toFixed(1), r:(rnd() * 1.1 + .3).toFixed(2), fill:'#DFDADE', opacity:(.2 + rnd() * .5).toFixed(2)}, st);
+  var rays = document.getElementById('rays'), R = [];
+  for (var k = 0; k < 16; k++) R.push(el('line', {stroke:'#EBB00F', 'stroke-width':2, 'stroke-linecap':'round'}, rays));
+
+  var MSUN = 1.989e30, AGE = 13.8e9;
+  var SUP = {'0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹','-':'⁻'};
+  function sci(x){
+    if (x >= 0.01 && x < 1e6) return SM.fmt(x, x < 10 ? 2 : 0);
+    var e = Math.floor(Math.log10(x)), m = x / Math.pow(10, e);
+    var mm = Math.round(m * 10) / 10; if (mm >= 10){ mm = 1; e++; }
+    return (mm === 1 ? '' : mm + '×') + '10' + String(e).split('').map(function(c){ return SUP[c]; }).join('');
+  }
+  function size(r){
+    if (r >= 1000) return sci(r / 1000) + ' كم';
+    if (r >= 1) return sci(r) + ' م';
+    if (r >= 1e-3) return sci(r * 1000) + ' مم';
+    return sci(r) + ' م';
+  }
+  function like(r){
+    if (r < 1e-14) return 'أصغر من نواة الذرة';
+    if (r < 1e-10) return 'أصغر من ذرة واحدة';
+    if (r < 5e-4) return 'أصغر من حبة رمل';
+    if (r < 0.03) return 'بحجم حبة بازلاء';
+    if (r < 100) return 'بحجم بيت';
+    if (r < 30000) return 'بحجم مدينة';
+    return 'أكبر من مدينة';
+  }
+  /* الرقم في عزل LTR حتى لا تنقلب الأسس، والوحدة بالعربية */
+  function set(id, s){
+    var m = s.match(/^([0-9.,×⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+)\s(.*)$/), n = document.getElementById(id);
+    n.textContent = '';
+    if (!m){ n.textContent = s; return; }
+    var b = document.createElement('bdi'); b.dir = 'ltr'; b.textContent = m[1];
+    n.appendChild(b); n.appendChild(document.createTextNode(' ' + m[2]));
+  }
+  function update(lm){
+    var M = Math.pow(10, lm);
+    var r = 1.485e-27 * M;          /* نصف قطر أفق الحدث (م) */
+    var T = 1.227e23 / M;           /* حرارة هوكينغ (كلفن) */
+    var life = 8.41e-17 * M * M * M / 3.156e7; /* زمن التبخر (سنة) */
+    /* حجم الرسم: سلّم لوغاريتمي من أصغر نقطة إلى قرص كبير */
+    var vis = 4 + (Math.log10(r) + 16) / 21 * 96;
+    document.getElementById('hole').setAttribute('r', vis.toFixed(1));
+    var hot = Math.max(0, Math.min(1, (Math.log10(T) - Math.log10(2.7)) / 11));
+    var g = document.getElementById('glow');
+    g.setAttribute('r', (vis * (1.3 + hot * 2.4)).toFixed(1));
+    g.setAttribute('opacity', T > 2.7 ? (0.25 + hot * 0.75).toFixed(2) : 0);
+    /* أشعة الإشعاع تظهر للصغير الحار فقط */
+    R.forEach(function(L, k){
+      var a = k / R.length * 2 * Math.PI, r1 = vis * (1.4 + hot), r2 = r1 + hot * 70;
+      L.setAttribute('x1', 300 + r1 * Math.cos(a)); L.setAttribute('y1', 150 + r1 * Math.sin(a));
+      L.setAttribute('x2', 300 + r2 * Math.cos(a)); L.setAttribute('y2', 150 + r2 * Math.sin(a));
+      L.setAttribute('opacity', (hot > 0.35 ? hot : 0).toFixed(2));
+    });
+    set('r-size', size(r));
+    set('r-temp', sci(T) + ' كلفن');
+    set('r-life', T < 2.7 ? 'لا يتبخّر الآن' : sci(life) + ' سنة');
+    var t, p;
+    if (T < 2.7){
+      t = 'كبير وبارد';
+      p = like(r) + '|أبرد من الفضاء حوله (2.7 كلفن)، فيمتص أكثر مما يُشع|لذلك يكبر ببطء بدل أن يتبخّر';
+    } else if (life < AGE){
+      t = 'صغير وحار جدًا';
+      p = like(r) + '|يُشع بقوة ويتبخّر بسرعة|لو وُلد مع الكون لاختفى قبل اليوم';
+    } else {
+      t = 'صغير وحار';
+      p = like(r) + '|يُشع أكثر مما يمتص فيفقد كتلته|يتبخّر، لكن في زمن أطول من عمر الكون';
+    }
+    document.getElementById('c-title').textContent = t;
+    SM.pts(document.getElementById('c-text'), p);
+  }
+  var m = document.getElementById('m');
+  var PRE = [12, Math.log10(7.35e22), Math.log10(5.97e24), Math.log10(MSUN)];
+  var sel = SM.tabs(document.getElementById('pre'), function(i){ m.value = Math.round(PRE[i] * 10); update(PRE[i]); });
+  m.addEventListener('input', function(){
+    var lm = m.value / 10;
+    var near = PRE.findIndex(function(x){ return Math.abs(x - lm) < 0.06; });
+    sel(near); update(lm);
+  });
+  SM.fit(document.getElementById('sc'), 300, 150, 330, 240);
+  update(PRE[3]);
+})();
+
+</script>
+</body>
+</html>

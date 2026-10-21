@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>فكرة لومتر: الكون يتمدد | STEAMomentos</title>
+<meta name="description" content="حرّك شريط الزمن لترى المجرات تتباعد، أو أرجِعه لتراها تلتقي في نقطة واحدة.">
+<!--
+  رسم تفاعلي لمقالة "الانفجار العظيم وتشكّل النظام الشمسي" على steamomentos.org
+  ملف مستقل (CSS و JS داخليان). الاعتماد الخارجي الوحيد: خطوط Google مع بدائل احتياطية.
+  التضمين: كتلة "صفحة مضمّنة" بارتفاع 650 بكسل، والرابط:
+    https://steamomentos.github.io/astronomy/alanfjar-alazym-walnzam-alshmsy/fig2-lemaitre-expansion.html
+  الرمز اللوني ثابت في كل رسوم المقالة: الضوء والإشعاع ذهبي، المادة والمجرات بنفسجي فاتح، الفضاء بنفسجي داكن.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sm-purple:#351141; --sm-gold:#EBB00F; --sm-gray:#DFDADE; --sm-white:#FFFFFF;
+  --sm-purple-700:#57375D; --sm-purple-600:#643A6B; --sm-purple-500:#81539D; --sm-purple-300:#B389CD;
+  --sm-gold-700:#C07F00; --sm-gold-600:#D79E03; --sm-gold-300:#E3C76F; --sm-gold-200:#F4D160;
+  --sm-wine-700:#79155B; --sm-wine-500:#A2678A; --sm-mauve:#A78295;
+  --sm-bg:var(--sm-white); --sm-surface:#FFFFFF; --sm-surface-2:#F4F1F4;
+  --sm-ink:var(--sm-purple); --sm-ink-soft:var(--sm-purple-600); --sm-line:var(--sm-gray);
+  --sm-accent:var(--sm-gold); --sm-on-accent:var(--sm-purple);
+  --sm-radius:10px; --sm-radius-sm:8px; --sm-gap:8px;
+  --sm-font:'Cairo','Montserrat','Segoe UI',Tahoma,sans-serif;
+  --sm-font-latin:'Montserrat','Cairo','Segoe UI',sans-serif;
+  /* الرمز اللوني (ثابت في كل رسوم المقالة): الضوء والإشعاع ذهبي، المادة والمجرات بنفسجي فاتح، الفضاء بنفسجي داكن */
+  --space:#1E0927; --light:#EBB00F; --matter:#B389CD;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;height:100%}
+body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.latin,code,.num{font-family:var(--sm-font-latin);direction:ltr;unicode-bidi:isolate}
+.sm-pattern-light{background-color:var(--sm-bg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23F7F2F9' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-pattern-dark{background-color:var(--sm-purple);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23472255' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-wrap{max-width:960px;margin:0 auto;overflow:hidden;border-radius:var(--sm-radius);border:1px solid var(--sm-line);min-height:100%;display:flex;flex-direction:column}
+.sm-header{color:#fff;padding:8px 14px}
+.sm-title{font-weight:700;font-size:clamp(14px,2.6vw,18px);line-height:1.4;margin:0}
+.sm-body{padding:10px 12px;flex:1 0 auto;display:flex;flex-direction:column}
+.sm-body>.sm-stage{flex:1 0 auto}
+.sm-stage{position:relative;background:var(--space);border:1px solid var(--sm-line);border-radius:var(--sm-radius);padding:4px;display:grid;place-items:center;overflow:hidden;min-height:170px}
+.sm-stage.light{background:var(--sm-surface)}
+.sm-stage>svg{width:100%;height:auto;max-height:270px;display:block}
+/* منطقة رسم تملأ المساحة المتاحة كلها */
+.sm-stage.fill>svg,.sm-stage.fill>canvas{position:absolute;inset:0;width:100%;height:100%;max-height:none}
+.ovl{position:absolute;background:rgba(53,17,65,.92);border:1px solid var(--sm-purple-700);border-radius:8px;color:var(--sm-gray);font-size:12px;padding:5px 9px;line-height:1.4}
+.ovl b{color:var(--sm-gold-200)}
+.sm-stage text{font-family:var(--sm-font)}
+.sm-controls{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:var(--sm-gap)}
+.sm-tabs{display:flex;flex-wrap:wrap;gap:4px}
+.sm-btn{font:inherit;font-weight:600;font-size:13px;line-height:1.5;cursor:pointer;border:1.5px solid var(--sm-purple);background:#fff;color:var(--sm-purple);padding:3px 11px;border-radius:999px;transition:background .15s,color .15s,border-color .15s}
+.sm-btn:hover{border-color:var(--sm-purple-500);color:var(--sm-purple-500)}
+.sm-btn[aria-selected="true"],.sm-btn[aria-pressed="true"],.sm-btn.primary{background:var(--sm-accent);border-color:var(--sm-accent);color:var(--sm-on-accent)}
+.sm-btn:focus-visible,.sm-range:focus-visible{outline:3px solid var(--sm-purple-300);outline-offset:2px}
+.sm-btn.ghost{border-style:dashed}
+.sm-range-wrap{display:flex;align-items:center;gap:8px;flex:1 1 220px;font-size:13px}
+.sm-range{flex:1;accent-color:var(--sm-gold);height:22px;min-width:0}
+.sm-card{margin-top:var(--sm-gap);background:var(--sm-surface-2);border-inline-start:4px solid var(--sm-accent);border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
+.sm-card h3{margin:0 0 2px;font-size:14px;font-weight:700}
+.sm-card p{margin:0;color:var(--sm-ink-soft)}
+.sm-legend{display:flex;flex-wrap:wrap;gap:2px 12px;margin-top:6px;font-size:12px;color:var(--sm-ink-soft)}
+.sm-legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);margin-inline-end:6px;vertical-align:-1px;border:1px solid rgba(53,17,65,.25)}
+.sm-takeaway{margin-top:var(--sm-gap);background:var(--sm-purple);color:#fff;border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
+.sm-takeaway b{color:var(--sm-gold)}
+.pt{display:block;position:relative;padding-inline-start:12px}
+.pt::before{content:"";position:absolute;inset-inline-start:0;top:.6em;width:5px;height:5px;border-radius:50%;background:var(--sm-gold-700)}
+.sm-takeaway .pt::before{background:var(--sm-gold)}
+.sm-note{font-size:11px;color:var(--sm-ink-soft);margin:4px 0 0;line-height:1.45}
+@media (max-width:520px){
+  .sm-header{padding:6px 10px}.sm-body{padding:8px}.sm-stage{padding:2px}
+  .sm-wrap{border-radius:0;border-inline:0}
+  .sm-btn{font-size:12px;padding:2px 9px}
+  .sm-card,.sm-takeaway{font-size:12px;padding:5px 8px}.sm-card h3{font-size:13px}.sm-legend{font-size:11px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<main class="sm-wrap" id="sm-root">
+  <header class="sm-header sm-pattern-dark">
+    <h1 class="sm-title">أرجِع الزمن: كل المجرات تعود إلى نقطة واحدة</h1>
+  </header>
+  <div class="sm-body sm-pattern-light">
+
+    <section class="sm-stage fill">
+      <svg id="sc" viewBox="0 0 600 300" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="sc-desc">
+        <desc id="sc-desc">مجرات على شبكة تمثل الفضاء. عند إرجاع الزمن تتقارب كلها حتى تلتقي في نقطة واحدة.</desc>
+        <defs>
+          <radialGradient id="hot" cx="50%" cy="50%" r="50%">
+            <stop offset="0" stop-color="#FFF6D6"/><stop offset=".35" stop-color="#EBB00F"/><stop offset="1" stop-color="#C07F00" stop-opacity="0"/>
+          </radialGradient>
+          <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 10 5 0 10z" fill="#EBB00F"/></marker>
+        </defs>
+        <g id="grid" stroke="#57375D" stroke-width="1"></g>
+        <circle id="glow" cx="300" cy="150" r="0" fill="url(#hot)"/>
+        <g id="gals"></g>
+        <g id="refs"></g>
+      </svg>
+      <div class="ovl" id="age" style="top:8px;right:8px;font-weight:700;color:#F4D160"></div>
+    </section>
+    <div class="sm-controls">
+      <button class="sm-btn primary" id="play">▶ شغّل من البداية</button>
+      <label class="sm-range-wrap"><span>الزمن</span>
+        <input class="sm-range" id="t" type="range" min="0" max="138" value="138" aria-label="عمر الكون">
+      </label>
+    </div>
+    <div class="sm-card" aria-live="polite">
+      <h3 id="c-title"></h3>
+      <p id="c-text"></p>
+    </div>
+    <div class="sm-takeaway">
+      <b>فكرة لومتر (1927)</b><span class="pt">المجرات تتباعد، فلا بد أنها كانت يومًا متلاصقة</span><span class="pt">مثل زبيب في عجين ينتفخ: كل حبة تبتعد عن جاراتها</span>
+    </div>
+
+  </div>
+</main>
+<script>
+var SM = (function(){
+  var NS = 'http://www.w3.org/2000/svg';
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function el(tag, attrs, parent){
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  /* نقاط مختصرة: النص مفصول بـ | */
+  function pts(node, s){
+    node.textContent = '';
+    String(s).split('|').forEach(function(x){ var p = document.createElement('span'); p.className = 'pt'; p.textContent = x.trim(); node.appendChild(p); });
+  }
+  function tabs(container, onSelect){
+    var btns = container.querySelectorAll('.sm-btn');
+    btns.forEach(function(b, i){ b.addEventListener('click', function(){ select(i); onSelect(i); }); });
+    function select(i){ btns.forEach(function(b, j){ b.setAttribute('aria-selected', String(i === j)); }); }
+    return select;
+  }
+  /* أرقام عربية بفواصل الآلاف */
+  function fmt(n, d){ return Number(n).toLocaleString('en-US', {maximumFractionDigits: d || 0}); }
+  function postHeight(){
+    if (window.parent === window) return;
+    var h = Math.ceil(document.documentElement.getBoundingClientRect().height);
+    try { window.parent.postMessage({type:'sm-embed-height', height:h}, '*'); } catch(e){}
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(postHeight).observe(document.body);
+  window.addEventListener('load', postHeight);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(postHeight);
+  /* يجعل منطقة الرسم تملأ المساحة بلا فراغ: يختار viewBox بنسبة أبعاد الإطار ويضمن ظهور المنطقة الأساسية (w×h حول cx,cy) */
+  function fit(svg, cx, cy, w, h){
+    var box = svg.parentNode;
+    function go(){
+      var r = box.clientWidth / Math.max(1, box.clientHeight), vw, vh;
+      if (r > w / h){ vh = h; vw = h * r; } else { vw = w; vh = w / r; }
+      svg.setAttribute('viewBox', [cx - vw / 2, cy - vh / 2, vw, vh].map(function(v){ return v.toFixed(1); }).join(' '));
+      svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    }
+    if ('ResizeObserver' in window) new ResizeObserver(go).observe(box);
+    go();
+  }
+  return {el:el, pts:pts, tabs:tabs, fmt:fmt, reduce:reduce, fit:fit};
+})();
+</script>
+<script>
+
+(function(){
+  var el = SM.el, cx = 300, cy = 150, S = 62;
+  var grid = document.getElementById('grid'), gals = document.getElementById('gals'), refs = document.getElementById('refs');
+  var seed = 3; function rnd(){ seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+  /* خطوط الشبكة: الفضاء نفسه يتمدد */
+  var lines = [];
+  for (var k = -8; k <= 8; k++){
+    lines.push({v:true, k:k, e:el('line', {}, grid)});
+    if (Math.abs(k) <= 5) lines.push({v:false, k:k, e:el('line', {}, grid)});
+  }
+  /* المجرات: نقاط على الشبكة مع إزاحة بسيطة */
+  var G = [];
+  for (var i = -7; i <= 7; i++) for (var j = -5; j <= 5; j++){
+    if (j === 0 && (i === 0 || i === -1 || i === -2)) continue;
+    var px = i + (rnd() - .5) * .5, py = j + (rnd() - .5) * .5;
+    var g = el('ellipse', {rx:7, ry:3.5, fill:'#B389CD', transform:'', opacity:.85}, gals);
+    G.push({x:px, y:py, e:g, r:(rnd() * 180) | 0});
+  }
+  /* نحن، والمجرتان المرجعيتان على يسارنا (أ على بُعد خطوة، ب على بُعد خطوتين) */
+  function mk(label, fill){
+    var g = el('g', {}, refs);
+    el('ellipse', {rx:8, ry:4, fill:fill, stroke:'#fff', 'stroke-width':1.2}, g);
+    var t = el('text', {y:-10, 'text-anchor':'middle', 'font-size':13, 'font-weight':700, fill:'#fff'}, g);
+    t.textContent = label; return g;
+  }
+  var lineA = el('line', {stroke:'#EBB00F', 'stroke-width':2, 'stroke-dasharray':'4 3'}, refs);
+  var arA = el('line', {stroke:'#EBB00F', 'stroke-width':2.5, 'marker-end':'url(#ar)'}, refs);
+  var arB = el('line', {stroke:'#EBB00F', 'stroke-width':2.5, 'marker-end':'url(#ar)'}, refs);
+  var us = mk('نحن', '#EBB00F'), A = mk('أ', '#B389CD'), B = mk('ب', '#B389CD');
+  var dA = el('text', {'font-size':12, fill:'#F4D160', 'text-anchor':'middle'}, refs);
+  var dB = el('text', {'font-size':12, fill:'#F4D160', 'text-anchor':'middle'}, refs);
+
+  var range = document.getElementById('t');
+  /* معامل التمدد: نموذج مبسّط يكبر مع الزمن (∝ t^2/3) */
+  function scale(t){ return Math.max(0.004, Math.pow(t / 13.8, 2 / 3)); }
+  function draw(t){
+    var a = scale(t), s = S * a;
+    lines.forEach(function(L){
+      if (L.v) L.e.setAttribute('x1', cx + L.k * s), L.e.setAttribute('x2', cx + L.k * s), L.e.setAttribute('y1', cy - 5.5 * s), L.e.setAttribute('y2', cy + 5.5 * s);
+      else L.e.setAttribute('y1', cy + L.k * s), L.e.setAttribute('y2', cy + L.k * s), L.e.setAttribute('x1', cx - 8 * s), L.e.setAttribute('x2', cx + 8 * s);
+      L.e.setAttribute('opacity', Math.min(1, a * 2));
+    });
+    /* لا مجرات في أول مليار سنة تقريبًا: تظهر تدريجيًا */
+    var gop = Math.max(0, Math.min(1, (t - 0.3) / 1.2));
+    var gs = Math.max(0.15, Math.min(1, a * 1.6));
+    G.forEach(function(g){
+      g.e.setAttribute('transform', 'translate(' + (cx + g.x * s) + ',' + (cy + g.y * s) + ') rotate(' + g.r + ') scale(' + gs + ')');
+      g.e.setAttribute('opacity', (0.85 * gop).toFixed(2));
+    });
+    var hot = Math.max(0, 1 - t / 1.5);
+    var glow = document.getElementById('glow');
+    glow.setAttribute('r', (14 + 120 * a) * (0.3 + hot));
+    glow.setAttribute('opacity', (0.15 + 0.85 * hot).toFixed(2));
+    var ax = cx - s, bx = cx - 2 * s;
+    us.setAttribute('transform', 'translate(' + cx + ',' + cy + ') scale(' + gs + ')');
+    A.setAttribute('transform', 'translate(' + ax + ',' + cy + ') scale(' + gs + ')');
+    B.setAttribute('transform', 'translate(' + bx + ',' + cy + ') scale(' + gs + ')');
+    var rop = Math.max(0, Math.min(1, (t - 1.5) / 1.5));
+    [A, B].forEach(function(g){ g.setAttribute('opacity', rop); });
+    us.setAttribute('opacity', gop);
+    lineA.setAttribute('x1', cx); lineA.setAttribute('x2', bx); lineA.setAttribute('y1', cy + 14); lineA.setAttribute('y2', cy + 14);
+    lineA.setAttribute('opacity', 0);
+    /* أسهم السرعة: طولها يتناسب مع البعد */
+    var v = 0.32 * s;
+    arA.setAttribute('x1', ax - 10); arA.setAttribute('x2', ax - 10 - v); arA.setAttribute('y1', cy); arA.setAttribute('y2', cy);
+    arB.setAttribute('x1', bx - 10); arB.setAttribute('x2', bx - 10 - 2 * v); arB.setAttribute('y1', cy); arB.setAttribute('y2', cy);
+    arA.setAttribute('opacity', rop); arB.setAttribute('opacity', rop);
+    dA.setAttribute('x', ax - 10 - v / 2); dA.setAttribute('y', cy + 30); dA.textContent = 'سرعة ×1';
+    dB.setAttribute('x', bx - 10 - v); dB.setAttribute('y', cy + 30); dB.textContent = 'سرعة ×2';
+    dA.style.display = dB.style.display = s > 40 ? '' : 'none';
+    dA.setAttribute('opacity', rop); dB.setAttribute('opacity', rop);
+
+    document.getElementById('age').textContent = t < 0.05 ? 'البداية' : 'عمر الكون: ' + SM.fmt(t, 1) + ' مليار سنة';
+    var c;
+    if (t < 0.05) c = ['قبل 13.8 مليار سنة', 'كل المادة والطاقة في حيّز صغير جدًا|كثيف جدًا وحار جدًا'];
+    else if (t < 1) c = ['الكون يتمدد ويبرد', 'لا نجوم ولا مجرات بعد|المادة تتجمّع ببطء بفعل الجاذبية'];
+    else if (t < 13.7) c = ['المجرات تظهر وتتباعد', 'الفضاء بينها هو الذي يتمدد|المجرة ب أبعد مرتين، فتبتعد أسرع مرتين'];
+    else c = ['اليوم', 'كل المجرات تبتعد عنا وعن بعضها|أرجِع الزمن بالشريط لترى أين تلتقي'];
+    document.getElementById('c-title').textContent = c[0];
+    SM.pts(document.getElementById('c-text'), c[1]);
+  }
+  range.addEventListener('input', function(){ stop(); draw(range.value / 10); });
+  var raf = null, btn = document.getElementById('play');
+  function stop(){ if (raf) cancelAnimationFrame(raf); raf = null; }
+  btn.addEventListener('click', function(){
+    stop();
+    if (SM.reduce){ range.value = 138; draw(13.8); return; }
+    var t0 = performance.now();
+    (function f(now){
+      var p = Math.min(1, (now - t0) / 7000), t = 13.8 * p * p;
+      range.value = Math.round(t * 10); draw(t);
+      if (p < 1) raf = requestAnimationFrame(f); else raf = null;
+    })(t0);
+  });
+  SM.fit(document.getElementById('sc'), 255, 150, 400, 270);
+  draw(13.8);
+})();
+
+</script>
+</body>
+</html>
