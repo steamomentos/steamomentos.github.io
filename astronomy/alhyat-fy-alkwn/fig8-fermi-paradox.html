@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مفارقة فيرمي | STEAMomentos</title>
+<meta name="description" content="غيّر احتمال نشوء الحياة على كوكب صالح، وانظر كم كوكبًا حيًا نتوقع في مجرتنا.">
+<!--
+  رسم تفاعلي لمقالة "الحياة في الكون" على steamomentos.org
+  ملف مستقل (CSS و JS داخليان). الاعتماد الخارجي الوحيد: خطوط Google مع بدائل احتياطية.
+  التضمين: كتلة "صفحة مضمّنة" بارتفاع 650 بكسل، والرابط:
+    https://steamomentos.github.io/astronomy/alhyat-fy-alkwn/fig8-fermi-paradox.html
+  الرمز اللوني ثابت في كل رسوم المقالة: الحياة والأكسجين ذهبي، الكربون بنفسجي، السيليكون نبيذي، الماء والمذيبات بنفسجي فاتح.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sm-purple:#351141; --sm-gold:#EBB00F; --sm-gray:#DFDADE; --sm-white:#FFFFFF;
+  --sm-purple-700:#57375D; --sm-purple-600:#643A6B; --sm-purple-500:#81539D; --sm-purple-300:#B389CD;
+  --sm-gold-700:#C07F00; --sm-gold-600:#D79E03; --sm-gold-300:#E3C76F; --sm-gold-200:#F4D160;
+  --sm-wine-700:#79155B; --sm-wine-500:#A2678A; --sm-mauve:#A78295;
+  --sm-bg:var(--sm-white); --sm-surface:#FFFFFF; --sm-surface-2:#F4F1F4;
+  --sm-ink:var(--sm-purple); --sm-ink-soft:var(--sm-purple-600); --sm-line:var(--sm-gray);
+  --sm-accent:var(--sm-gold); --sm-on-accent:var(--sm-purple);
+  --sm-radius:10px; --sm-radius-sm:8px; --sm-gap:8px;
+  --sm-font:'Cairo','Montserrat','Segoe UI',Tahoma,sans-serif;
+  --sm-font-latin:'Montserrat','Cairo','Segoe UI',sans-serif;
+  /* الرمز اللوني (ثابت في كل رسوم المقالة): الضوء والإشعاع ذهبي، المادة والمجرات بنفسجي فاتح، الفضاء بنفسجي داكن */
+  --space:#1E0927; --light:#EBB00F; --matter:#B389CD;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;height:100%}
+body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.latin,code,.num{font-family:var(--sm-font-latin);direction:ltr;unicode-bidi:isolate}
+.sm-pattern-light{background-color:var(--sm-bg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23F7F2F9' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-pattern-dark{background-color:var(--sm-purple);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23472255' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-wrap{max-width:960px;margin:0 auto;overflow:hidden;border-radius:var(--sm-radius);border:1px solid var(--sm-line);min-height:100%;display:flex;flex-direction:column}
+.sm-header{color:#fff;padding:8px 14px}
+.sm-title{font-weight:700;font-size:clamp(14px,2.6vw,18px);line-height:1.4;margin:0}
+.sm-body{padding:10px 12px;flex:1 0 auto;display:flex;flex-direction:column}
+.sm-body>.sm-stage{flex:1 0 auto}
+.sm-stage{position:relative;background:var(--space);border:1px solid var(--sm-line);border-radius:var(--sm-radius);padding:4px;display:grid;place-items:center;overflow:hidden;min-height:170px}
+.sm-stage.light{background:var(--sm-surface)}
+.sm-stage>svg{width:100%;height:auto;max-height:270px;display:block}
+/* منطقة رسم تملأ المساحة المتاحة كلها */
+.sm-stage.fill>svg,.sm-stage.fill>canvas{position:absolute;inset:0;width:100%;height:100%;max-height:none}
+.ovl{position:absolute;background:rgba(53,17,65,.92);border:1px solid var(--sm-purple-700);border-radius:8px;color:var(--sm-gray);font-size:12px;padding:5px 9px;line-height:1.4}
+.ovl b{color:var(--sm-gold-200)}
+.sm-stage text{font-family:var(--sm-font)}
+.sm-controls{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:var(--sm-gap)}
+.sm-tabs{display:flex;flex-wrap:wrap;gap:4px}
+.sm-btn{font:inherit;font-weight:600;font-size:13px;line-height:1.5;cursor:pointer;border:1.5px solid var(--sm-purple);background:#fff;color:var(--sm-purple);padding:3px 11px;border-radius:999px;transition:background .15s,color .15s,border-color .15s}
+.sm-btn:hover{border-color:var(--sm-purple-500);color:var(--sm-purple-500)}
+.sm-btn[aria-selected="true"],.sm-btn[aria-pressed="true"],.sm-btn.primary{background:var(--sm-accent);border-color:var(--sm-accent);color:var(--sm-on-accent)}
+.sm-btn:focus-visible,.sm-range:focus-visible{outline:3px solid var(--sm-purple-300);outline-offset:2px}
+.sm-btn.ghost{border-style:dashed}
+.sm-range-wrap{display:flex;align-items:center;gap:8px;flex:1 1 220px;font-size:13px}
+.sm-range{flex:1;accent-color:var(--sm-gold);height:22px;min-width:0}
+.sm-card{margin-top:var(--sm-gap);background:var(--sm-surface-2);border-inline-start:4px solid var(--sm-accent);border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
+.sm-card h3{margin:0 0 2px;font-size:14px;font-weight:700}
+.sm-card p{margin:0;color:var(--sm-ink-soft)}
+.sm-legend{display:flex;flex-wrap:wrap;gap:2px 12px;margin-top:6px;font-size:12px;color:var(--sm-ink-soft)}
+.sm-legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);margin-inline-end:6px;vertical-align:-1px;border:1px solid rgba(53,17,65,.25)}
+.sm-takeaway{margin-top:var(--sm-gap);background:var(--sm-purple);color:#fff;border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
+.sm-takeaway b{color:var(--sm-gold)}
+.pt{display:block;position:relative;padding-inline-start:12px}
+.pt::before{content:"";position:absolute;inset-inline-start:0;top:.6em;width:5px;height:5px;border-radius:50%;background:var(--sm-gold-700)}
+.sm-takeaway .pt::before{background:var(--sm-gold)}
+.sm-note{font-size:11px;color:var(--sm-ink-soft);margin:4px 0 0;line-height:1.45}
+@media (max-width:520px){
+  .sm-header{padding:6px 10px}.sm-body{padding:8px}.sm-stage{padding:2px}
+  .sm-wrap{border-radius:0;border-inline:0}
+  .sm-btn{font-size:12px;padding:2px 9px}
+  .sm-card,.sm-takeaway{font-size:12px;padding:5px 8px}.sm-card h3{font-size:13px}.sm-legend{font-size:11px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+
+/* الرمز اللوني لمقالة الحياة في الكون */
+:root{--life:#EBB00F;--carbon:#81539D;--silicon:#A2678A;--solvent:#B389CD}
+.sm-stage.fill{min-height:220px}
+.big{position:absolute;top:8px;right:10px;max-width:46%;text-align:start}
+.big small{display:block;font-size:11px;color:var(--sm-gray)}
+.big b{font-size:20px;color:var(--sm-gold-200);line-height:1.3}
+.prob{margin-top:6px}
+#p{display:block;width:100%;height:26px;cursor:pointer}
+.prob-axis{display:flex;justify-content:space-between;font-size:11px;color:var(--sm-ink-soft);line-height:1.3}
+@media (max-width:520px){.big{max-width:60%}.big b{font-size:17px}}
+</style>
+</head>
+<body>
+<main class="sm-wrap" id="sm-root">
+  <header class="sm-header sm-pattern-dark">
+    <h1 class="sm-title">مليارات الكواكب: هل تعني حتمًا أننا لسنا وحدنا؟</h1>
+  </header>
+  <div class="sm-body sm-pattern-light">
+    <section class="sm-stage fill">
+      <svg id="gal" role="img" aria-labelledby="g-desc"><desc id="g-desc">مجرة درب التبانة من الأعلى، والنقاط الذهبية كواكب حية متوقعة بحسب الاحتمال المختار، وعلامة لموقع الأرض.</desc></svg>
+      <div class="ovl big" aria-live="polite"><small>كواكب حية متوقعة في مجرتنا</small><b id="cnt"></b></div>
+    </section>
+    <div class="prob">
+      <input class="sm-range" id="p" type="range" min="0" max="20" step="1" value="6" aria-label="احتمال نشوء الحياة على كوكب صالح">
+      <div class="prob-axis" aria-hidden="true"><span>الحياة تنشأ بسهولة</span><span>الحياة نادرة جدًا</span></div>
+    </div>
+    <div class="sm-card">
+      <h3 id="c-title"></h3>
+      <p id="c-text"></p>
+    </div>
+    <div class="sm-takeaway">
+      <b>الخلاصة</b><span class="pt">لا نعرف احتمال نشوء الحياة، فعندنا مثال واحد هو الأرض</span><span class="pt">كثرة الكواكب لا تكفي دليلًا: الاحتمال قد يكون أصغر منها بكثير</span>
+    </div>
+  </div>
+</main>
+<script>
+var SM = (function(){
+  var NS = 'http://www.w3.org/2000/svg';
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function el(tag, attrs, parent){
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  /* نقاط مختصرة: النص مفصول بـ | */
+  function pts(node, s){
+    node.textContent = '';
+    String(s).split('|').forEach(function(x){ var p = document.createElement('span'); p.className = 'pt'; p.textContent = x.trim(); node.appendChild(p); });
+  }
+  function tabs(container, onSelect){
+    var btns = container.querySelectorAll('.sm-btn');
+    btns.forEach(function(b, i){ b.addEventListener('click', function(){ select(i); onSelect(i); }); });
+    function select(i){ btns.forEach(function(b, j){ b.setAttribute('aria-selected', String(i === j)); }); }
+    return select;
+  }
+  /* أرقام عربية بفواصل الآلاف */
+  function fmt(n, d){ return Number(n).toLocaleString('en-US', {maximumFractionDigits: d || 0}); }
+  function postHeight(){
+    if (window.parent === window) return;
+    var h = Math.ceil(document.documentElement.getBoundingClientRect().height);
+    try { window.parent.postMessage({type:'sm-embed-height', height:h}, '*'); } catch(e){}
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(postHeight).observe(document.body);
+  window.addEventListener('load', postHeight);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(postHeight);
+  /* يجعل منطقة الرسم تملأ المساحة بلا فراغ: يختار viewBox بنسبة أبعاد الإطار ويضمن ظهور المنطقة الأساسية (w×h حول cx,cy) */
+  function fit(svg, cx, cy, w, h){
+    var box = svg.parentNode;
+    function go(){
+      var r = box.clientWidth / Math.max(1, box.clientHeight), vw, vh;
+      if (r > w / h){ vh = h; vw = h * r; } else { vw = w; vh = w / r; }
+      svg.setAttribute('viewBox', [cx - vw / 2, cy - vh / 2, vw, vh].map(function(v){ return v.toFixed(1); }).join(' '));
+      svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    }
+    if ('ResizeObserver' in window) new ResizeObserver(go).observe(box);
+    go();
+  }
+  return {el:el, pts:pts, tabs:tabs, fmt:fmt, reduce:reduce, fit:fit};
+})();
+
+</script>
+<script>
+(function(){
+  /* عدد تقريبي للكواكب الشبيهة بالأرض في المنطقة الصالحة للحياة في مجرتنا */
+  var PLANETS = 10;   /* أُس العشرة: نحو 10 مليارات */
+  var ONE = ['', 'ألف', 'مليون', 'مليار', 'تريليون', 'كوادريليون', 'كوينتليون'];
+  var TEN = ['', 'آلاف', 'ملايين', 'مليارات', 'تريليونات', 'كوادريليونات', 'كوينتليونات'];
+  /* اسم 10 مرفوعة لـ n بالعربية */
+  function name(n){
+    var g = Math.floor(n / 3), r = n % 3;
+    if (!g) return ['1', '10', '100'][r];
+    return r === 0 ? ONE[g] : r === 1 ? '10 ' + TEN[g] : '100 ' + ONE[g];
+  }
+  var svg = document.getElementById('gal'), box = svg.parentNode;
+  SM.fit(svg, 300, 150, 340, 300);
+  /* نقاط المجرة: ذراعان حلزونيان وانتفاخ في المركز (شبه عشوائية ثابتة) */
+  var seed = 11; function rnd(){ seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+  var S = [];
+  for (var i = 0; i < 900; i++){
+    var arm = i % 2, t = Math.pow(rnd(), .8) * 3.2, th = t * 1.6 + arm * Math.PI, rad = 18 + t * 40;
+    var j = (rnd() - .5) * (10 + t * 9), k = (rnd() - .5) * (10 + t * 9);
+    S.push([300 + rad * Math.cos(th) + j, 150 + rad * Math.sin(th) * .92 + k]);
+  }
+  for (i = 0; i < 160; i++){ var a = rnd() * 6.28, r = Math.pow(rnd(), 2) * 34; S.push([300 + r * Math.cos(a), 150 + r * Math.sin(a)]); }
+  SM.el('circle', {cx:300, cy:150, r:30, fill:'#F4D160', opacity:.12}, svg);
+  S.forEach(function(p){ SM.el('circle', {cx:p[0].toFixed(1), cy:p[1].toFixed(1), r:(rnd() * .9 + .5).toFixed(2), fill:'#B389CD', opacity:(.25 + rnd() * .4).toFixed(2)}, svg); });
+  /* ترتيب عشوائي ثابت للنقاط التي ستضيء كواكب حية */
+  var order = S.map(function(p, i){ return [rnd(), i]; }).sort(function(a, b){ return a[0] - b[0]; }).map(function(x){ return x[1]; });
+  var lives = SM.el('g', {}, svg), DOTS = [];
+  order.slice(0, 300).forEach(function(i){ DOTS.push(SM.el('circle', {cx:S[i][0].toFixed(1), cy:S[i][1].toFixed(1), r:2.4, fill:'#EBB00F'}, lives)); });
+  /* الأرض: في ذراع، على بعد ثلثي المسافة من المركز تقريبًا */
+  var E = [300 + 92 * Math.cos(2.1), 150 + 92 * Math.sin(2.1) * .92];
+  SM.el('circle', {cx:E[0], cy:E[1], r:4, fill:'#EBB00F', stroke:'#fff', 'stroke-width':1.5}, svg);
+  SM.el('circle', {cx:E[0], cy:E[1], r:10, fill:'none', stroke:'#fff', 'stroke-width':1.5, 'stroke-dasharray':'3 3'}, svg);
+  var et = SM.el('text', {x:E[0], y:E[1] + 24, 'text-anchor':'middle', 'font-size':12, 'font-weight':700, fill:'#fff', 'paint-order':'stroke', stroke:'#1E0927', 'stroke-width':3}, svg);
+  et.textContent = 'نحن';
+
+  var p = document.getElementById('p');
+  function upd(){
+    var n = +p.value, e = PLANETS - n;     /* العدد المتوقع = 10^e */
+    var shown = e < 0 ? 0 : Math.min(DOTS.length, Math.round(Math.pow(10, e)) - 1);
+    DOTS.forEach(function(d, i){ d.style.display = i < shown ? '' : 'none'; });
+    var cnt;
+    if (e > 0) cnt = 'نحو ' + name(e);
+    else if (e === 0) cnt = 'نحو كوكب واحد: نحن';
+    else cnt = 'أقل من واحد';
+    document.getElementById('cnt').textContent = cnt;
+    document.getElementById('c-title').textContent = n === 0 ? 'لو نشأت الحياة على كل كوكب صالح' : 'لو نشأت الحياة على 1 من كل ' + name(n) + (n === 1 ? ' كواكب صالحة' : ' كوكب صالح');
+    var t;
+    if (e >= 3) t = 'الأحياء كثيرون في مجرتنا|فأين هم؟ هذا سؤال فيرمي في الخمسينيات|النقاط الذهبية عيّنة فقط، لا العدد كله';
+    else if (e > 0) t = 'قليلون ومتباعدون في مجرة واسعة|قد لا نلتقي بهم أبدًا';
+    else t = 'على الأرجح لا أحد غيرنا في مجرتنا|ولا تناقض حينها: صمت الكون متوقع';
+    SM.pts(document.getElementById('c-text'), t);
+  }
+  p.addEventListener('input', upd);
+  upd();
+})();
+</script>
+</body>
+</html>

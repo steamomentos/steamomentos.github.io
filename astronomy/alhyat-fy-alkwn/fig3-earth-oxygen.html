@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>تاريخ الأرض والأكسجين | STEAMomentos</title>
+<meta name="description" content="حرّك الشريط عبر 4.5 مليار سنة من تاريخ الأرض وشاهد كيف غيّر الأكسجين قصة الحياة.">
+<!--
+  رسم تفاعلي لمقالة "الحياة في الكون" على steamomentos.org
+  ملف مستقل (CSS و JS داخليان). الاعتماد الخارجي الوحيد: خطوط Google مع بدائل احتياطية.
+  التضمين: كتلة "صفحة مضمّنة" بارتفاع 650 بكسل، والرابط:
+    https://steamomentos.github.io/astronomy/alhyat-fy-alkwn/fig3-earth-oxygen.html
+  الرمز اللوني ثابت في كل رسوم المقالة: الحياة والأكسجين ذهبي، الكربون بنفسجي، السيليكون نبيذي، الماء والمذيبات بنفسجي فاتح.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sm-purple:#351141; --sm-gold:#EBB00F; --sm-gray:#DFDADE; --sm-white:#FFFFFF;
+  --sm-purple-700:#57375D; --sm-purple-600:#643A6B; --sm-purple-500:#81539D; --sm-purple-300:#B389CD;
+  --sm-gold-700:#C07F00; --sm-gold-600:#D79E03; --sm-gold-300:#E3C76F; --sm-gold-200:#F4D160;
+  --sm-wine-700:#79155B; --sm-wine-500:#A2678A; --sm-mauve:#A78295;
+  --sm-bg:var(--sm-white); --sm-surface:#FFFFFF; --sm-surface-2:#F4F1F4;
+  --sm-ink:var(--sm-purple); --sm-ink-soft:var(--sm-purple-600); --sm-line:var(--sm-gray);
+  --sm-accent:var(--sm-gold); --sm-on-accent:var(--sm-purple);
+  --sm-radius:10px; --sm-radius-sm:8px; --sm-gap:8px;
+  --sm-font:'Cairo','Montserrat','Segoe UI',Tahoma,sans-serif;
+  --sm-font-latin:'Montserrat','Cairo','Segoe UI',sans-serif;
+  /* الرمز اللوني (ثابت في كل رسوم المقالة): الضوء والإشعاع ذهبي، المادة والمجرات بنفسجي فاتح، الفضاء بنفسجي داكن */
+  --space:#1E0927; --light:#EBB00F; --matter:#B389CD;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;height:100%}
+body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.latin,code,.num{font-family:var(--sm-font-latin);direction:ltr;unicode-bidi:isolate}
+.sm-pattern-light{background-color:var(--sm-bg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23F7F2F9' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-pattern-dark{background-color:var(--sm-purple);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23472255' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-wrap{max-width:960px;margin:0 auto;overflow:hidden;border-radius:var(--sm-radius);border:1px solid var(--sm-line);min-height:100%;display:flex;flex-direction:column}
+.sm-header{color:#fff;padding:8px 14px}
+.sm-title{font-weight:700;font-size:clamp(14px,2.6vw,18px);line-height:1.4;margin:0}
+.sm-body{padding:10px 12px;flex:1 0 auto;display:flex;flex-direction:column}
+.sm-body>.sm-stage{flex:1 0 auto}
+.sm-stage{position:relative;background:var(--space);border:1px solid var(--sm-line);border-radius:var(--sm-radius);padding:4px;display:grid;place-items:center;overflow:hidden;min-height:170px}
+.sm-stage.light{background:var(--sm-surface)}
+.sm-stage>svg{width:100%;height:auto;max-height:270px;display:block}
+/* منطقة رسم تملأ المساحة المتاحة كلها */
+.sm-stage.fill>svg,.sm-stage.fill>canvas{position:absolute;inset:0;width:100%;height:100%;max-height:none}
+.ovl{position:absolute;background:rgba(53,17,65,.92);border:1px solid var(--sm-purple-700);border-radius:8px;color:var(--sm-gray);font-size:12px;padding:5px 9px;line-height:1.4}
+.ovl b{color:var(--sm-gold-200)}
+.sm-stage text{font-family:var(--sm-font)}
+.sm-controls{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:var(--sm-gap)}
+.sm-tabs{display:flex;flex-wrap:wrap;gap:4px}
+.sm-btn{font:inherit;font-weight:600;font-size:13px;line-height:1.5;cursor:pointer;border:1.5px solid var(--sm-purple);background:#fff;color:var(--sm-purple);padding:3px 11px;border-radius:999px;transition:background .15s,color .15s,border-color .15s}
+.sm-btn:hover{border-color:var(--sm-purple-500);color:var(--sm-purple-500)}
+.sm-btn[aria-selected="true"],.sm-btn[aria-pressed="true"],.sm-btn.primary{background:var(--sm-accent);border-color:var(--sm-accent);color:var(--sm-on-accent)}
+.sm-btn:focus-visible,.sm-range:focus-visible{outline:3px solid var(--sm-purple-300);outline-offset:2px}
+.sm-btn.ghost{border-style:dashed}
+.sm-range-wrap{display:flex;align-items:center;gap:8px;flex:1 1 220px;font-size:13px}
+.sm-range{flex:1;accent-color:var(--sm-gold);height:22px;min-width:0}
+.sm-card{margin-top:var(--sm-gap);background:var(--sm-surface-2);border-inline-start:4px solid var(--sm-accent);border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
+.sm-card h3{margin:0 0 2px;font-size:14px;font-weight:700}
+.sm-card p{margin:0;color:var(--sm-ink-soft)}
+.sm-legend{display:flex;flex-wrap:wrap;gap:2px 12px;margin-top:6px;font-size:12px;color:var(--sm-ink-soft)}
+.sm-legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);margin-inline-end:6px;vertical-align:-1px;border:1px solid rgba(53,17,65,.25)}
+.sm-takeaway{margin-top:var(--sm-gap);background:var(--sm-purple);color:#fff;border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
+.sm-takeaway b{color:var(--sm-gold)}
+.pt{display:block;position:relative;padding-inline-start:12px}
+.pt::before{content:"";position:absolute;inset-inline-start:0;top:.6em;width:5px;height:5px;border-radius:50%;background:var(--sm-gold-700)}
+.sm-takeaway .pt::before{background:var(--sm-gold)}
+.sm-note{font-size:11px;color:var(--sm-ink-soft);margin:4px 0 0;line-height:1.45}
+@media (max-width:520px){
+  .sm-header{padding:6px 10px}.sm-body{padding:8px}.sm-stage{padding:2px}
+  .sm-wrap{border-radius:0;border-inline:0}
+  .sm-btn{font-size:12px;padding:2px 9px}
+  .sm-card,.sm-takeaway{font-size:12px;padding:5px 8px}.sm-card h3{font-size:13px}.sm-legend{font-size:11px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+
+/* الرمز اللوني لمقالة الحياة في الكون */
+:root{--life:#EBB00F;--carbon:#81539D;--silicon:#A2678A;--solvent:#B389CD}
+.sm-stage.fill{min-height:210px}
+.ax{font-size:11px;fill:var(--sm-purple-600);font-family:var(--sm-font)}
+.eon{font-size:11px;font-weight:600;text-anchor:middle;dominant-baseline:central}
+.dist{margin-top:6px;position:relative}
+.dist-line{position:relative;height:12px;margin:0 9px;border-bottom:2px solid var(--sm-gray)}
+.dist-line i{position:absolute;bottom:-6px;width:10px;height:10px;border-radius:50%;transform:translateX(50%);border:1.5px solid #fff;background:var(--carbon)}
+.dist-line i.ox{background:var(--life)}
+.dist-line i.on{width:14px;height:14px;bottom:-8px;box-shadow:0 0 0 2px var(--sm-gold)}
+#pick{display:block;width:100%;height:26px;margin:2px 0 0;cursor:pointer}
+.dist-axis{display:flex;justify-content:space-between;font-size:11px;color:var(--sm-ink-soft);margin-top:4px;line-height:1.3}
+</style>
+</head>
+<body>
+<main class="sm-wrap" id="sm-root">
+  <header class="sm-header sm-pattern-dark">
+    <h1 class="sm-title">4.5 مليار سنة في شريط: متى ظهر الأكسجين وتغيّرت الحياة؟</h1>
+  </header>
+  <div class="sm-body sm-pattern-light">
+    <section class="sm-stage light fill">
+      <svg id="chart" role="img" aria-labelledby="ch-desc"><desc id="ch-desc">مخطط زمني لتاريخ الأرض من تكوّنها حتى اليوم، فيه منحنى تقريبي لكمية الأكسجين في الهواء وأشرطة الدهور الأربعة.</desc></svg>
+    </section>
+    <div class="dist">
+      <div class="dist-line" id="distLine" aria-hidden="true"></div>
+      <div class="dist-axis" aria-hidden="true"><span>تكوّن الأرض</span><span>اليوم</span></div>
+      <input class="sm-range" id="pick" type="range" min="0" max="7" step="1" value="0" aria-label="حرّك الشريط لتنتقل بين أحداث تاريخ الأرض من الأقدم إلى اليوم">
+    </div>
+    <div class="sm-card" aria-live="polite">
+      <h3 id="c-title"></h3>
+      <p id="c-text"></p>
+    </div>
+    <div class="sm-takeaway">
+      <b>الخلاصة</b><span class="pt">عاشت الحياة الأولى نحو مليار سنة بلا أكسجين تقريبًا</span><span class="pt">البكتيريا الزرقاء ملأت الهواء بالأكسجين، فتغيّرت الحياة كلها</span>
+    </div>
+  </div>
+</main>
+<script>
+var SM = (function(){
+  var NS = 'http://www.w3.org/2000/svg';
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function el(tag, attrs, parent){
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  /* نقاط مختصرة: النص مفصول بـ | */
+  function pts(node, s){
+    node.textContent = '';
+    String(s).split('|').forEach(function(x){ var p = document.createElement('span'); p.className = 'pt'; p.textContent = x.trim(); node.appendChild(p); });
+  }
+  function tabs(container, onSelect){
+    var btns = container.querySelectorAll('.sm-btn');
+    btns.forEach(function(b, i){ b.addEventListener('click', function(){ select(i); onSelect(i); }); });
+    function select(i){ btns.forEach(function(b, j){ b.setAttribute('aria-selected', String(i === j)); }); }
+    return select;
+  }
+  /* أرقام عربية بفواصل الآلاف */
+  function fmt(n, d){ return Number(n).toLocaleString('en-US', {maximumFractionDigits: d || 0}); }
+  function postHeight(){
+    if (window.parent === window) return;
+    var h = Math.ceil(document.documentElement.getBoundingClientRect().height);
+    try { window.parent.postMessage({type:'sm-embed-height', height:h}, '*'); } catch(e){}
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(postHeight).observe(document.body);
+  window.addEventListener('load', postHeight);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(postHeight);
+  /* يجعل منطقة الرسم تملأ المساحة بلا فراغ: يختار viewBox بنسبة أبعاد الإطار ويضمن ظهور المنطقة الأساسية (w×h حول cx,cy) */
+  function fit(svg, cx, cy, w, h){
+    var box = svg.parentNode;
+    function go(){
+      var r = box.clientWidth / Math.max(1, box.clientHeight), vw, vh;
+      if (r > w / h){ vh = h; vw = h * r; } else { vw = w; vh = w / r; }
+      svg.setAttribute('viewBox', [cx - vw / 2, cy - vh / 2, vw, vh].map(function(v){ return v.toFixed(1); }).join(' '));
+      svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    }
+    if ('ResizeObserver' in window) new ResizeObserver(go).observe(box);
+    go();
+  }
+  return {el:el, pts:pts, tabs:tabs, fmt:fmt, reduce:reduce, fit:fit};
+})();
+
+</script>
+<script>
+(function(){
+  var svg = document.getElementById('chart'), box = svg.parentNode;
+  var T = 4.6, X0, X1, Y0, Y1, W, H, cur, dot;
+  /* منحنى تقريبي للأكسجين (% من مستواه اليوم) */
+  var OX = [[4.6,0],[2.5,0],[2.4,1],[2.2,8],[2.0,3],[1.8,1],[0.85,1],[0.75,6],[0.6,20],[0.54,40],[0.42,70],[0.3,130],[0.25,80],[0.1,100],[0,100]];
+  /* الدهور الأربعة */
+  var EONS = [[4.6,4.0,'الجهنمي','#57375D'],[4.0,2.5,'السحيق','#643A6B'],[2.5,0.539,'الطلائع','#81539D'],[0.539,0,'الحياة الظاهرة','#B389CD']];
+  function x(t){ return X0 - (T - t) / T * (X0 - X1); }   /* t = مليار سنة مضت، الماضي يمينًا */
+  function y(p){ return Y0 - Math.min(p, 130) / 130 * (Y0 - Y1); }
+  function txt(at, s){ var t = SM.el('text', at, svg); t.textContent = s; return t; }
+  var narrow = null;
+  function build(){
+    svg.textContent = '';
+    W = narrow ? 360 : 600; H = narrow ? 340 : 244;
+    X0 = W - 18; X1 = 18; Y1 = 34; Y0 = H - 66;
+    EONS.forEach(function(e){
+      SM.el('rect', {x:x(e[1]), y:Y0 + 10, width:x(e[0]) - x(e[1]), height:22, fill:e[3]}, svg);
+      var w = x(e[0]) - x(e[1]);
+      if (w > e[2].length * 6) txt({x:(x(e[0]) + x(e[1])) / 2, y:Y0 + 21, 'class':'eon', fill:'#fff'}, e[2]);
+      else txt({x:X1 + 62, y:Y0 + 62, 'class':'eon', fill:'#643A6B', 'text-anchor':'middle'}, 'دهر ' + e[2]);
+    });
+    [4,3,2,1].forEach(function(t){
+      SM.el('line', {x1:x(t), y1:Y0, x2:x(t), y2:Y0 + 4, stroke:'#B389CD', 'stroke-width':1.5}, svg);
+      txt({x:x(t), y:Y0 + 46, 'text-anchor':'middle', 'class':'ax'}, t + ' مليار');
+    });
+    txt({x:X1, y:Y0 + 46, 'text-anchor':'end', 'class':'ax'}, 'اليوم');
+    SM.el('line', {x1:X1, y1:Y0, x2:X0, y2:Y0, stroke:'#DFDADE', 'stroke-width':2}, svg);
+    /* في RTL تعني start الحافة اليمنى */
+    txt({x:X0, y:16, 'text-anchor':'start', 'class':'ax'}, 'الأكسجين في الهواء (تقريبي، مقارنة باليوم)');
+    SM.el('line', {x1:X1, y1:y(100), x2:X0, y2:y(100), stroke:'#C07F00', 'stroke-width':1, 'stroke-dasharray':'3 4'}, svg);
+    txt({x:X0, y:y(100) - 5, 'text-anchor':'start', 'class':'ax'}, 'مستوى اليوم');
+    var d = 'M' + OX.map(function(p){ return x(p[0]).toFixed(1) + ' ' + y(p[1]).toFixed(1); }).join(' L');
+    SM.el('path', {d:d + ' L' + x(0) + ' ' + Y0 + ' L' + x(T) + ' ' + Y0 + 'z', fill:'#F4D160', opacity:.35}, svg);
+    SM.el('path', {d:d, fill:'none', stroke:'#EBB00F', 'stroke-width':3, 'stroke-linejoin':'round'}, svg);
+    cur = SM.el('line', {y1:Y1, y2:Y0, stroke:'#351141', 'stroke-width':2}, svg);
+    dot = SM.el('circle', {r:7, fill:'#351141', stroke:'#fff', 'stroke-width':2}, svg);
+  }
+  function fit(){
+    var n = box.clientWidth < 520;
+    if (n !== narrow){ narrow = n; build(); if (slider) pick(+slider.value); }
+    var r = box.clientWidth / Math.max(1, box.clientHeight), vw, vh;
+    if (r > W / H){ vh = H; vw = vh * r; } else { vw = W; vh = vw / r; }
+    svg.setAttribute('viewBox', [W / 2 - vw / 2, H / 2 - vh / 2, vw, vh].map(function(v){ return v.toFixed(1); }).join(' '));
+  }
+
+  var E = [
+    {t:4.54, n:'تكوّن الأرض', w:'قبل نحو 4.5 مليار سنة', p:'سطح منصهر وبراكين في كل مكان|لا ماء سائل ولا حياة'},
+    {t:4.4, n:'أولى المحيطات', w:'قبل نحو 4.4 مليار سنة', p:'بردت الأرض وتصلّب سطحها|هواؤها من غازات البراكين، بلا أكسجين تقريبًا'},
+    {t:3.7, n:'أقدم آثار الحياة', w:'قبل نحو 3.7 مليار سنة', p:'كائنات دقيقة تعيش بلا أكسجين|تصنع غذاءها من مواد كيميائية حولها'},
+    {t:3.0, n:'البكتيريا الزرقاء', w:'قبل نحو 3 مليارات سنة', p:'أول كائنات تصنع غذاءها من ضوء الشمس|تُطلق الأكسجين فضلاتٍ في الماء والهواء'},
+    {t:2.4, n:'حدث الأكسجة العظيم', w:'قبل نحو 2.4 مليار سنة', ox:1, p:'بدأ الأكسجين يتراكم في الهواء|كان سمًّا لكثير من الكائنات الأولى فانقرضت'},
+    {t:1.8, n:'أولى الخلايا المعقدة', w:'قبل نحو 1.8 مليار سنة', p:'خلايا لها نواة، تستخدم الأكسجين لتأخذ طاقة أكبر|منها جاءت النباتات والحيوانات لاحقًا'},
+    {t:0.54, n:'انتشار الحيوانات', w:'قبل نحو 540 مليون سنة', ox:1, p:'ارتفع الأكسجين قرب مستواه اليوم|ظهرت الحيوانات بأشكال كثيرة في وقت قصير'},
+    {t:0.0003, n:'ظهور الإنسان', w:'قبل نحو 300 ألف سنة', p:'في آخر لحظة من تاريخ الأرض|لو كان تاريخ الأرض يومًا، لظهرنا قبل نهايته بنحو 6 ثوانٍ'}
+  ];
+  function oxAt(t){
+    for (var i = 0; i < OX.length - 1; i++) if (t <= OX[i][0] && t >= OX[i + 1][0]){
+      var a = OX[i], b = OX[i + 1], f = (a[0] - t) / (a[0] - b[0]); return a[1] + (b[1] - a[1]) * f;
+    }
+    return 100;
+  }
+  var line = document.getElementById('distLine'), D = [];
+  E.forEach(function(e, i){
+    var b = document.createElement('i'); if (e.ox) b.className = 'ox';
+    b.style.right = (i / (E.length - 1) * 100) + '%'; b.title = e.n;
+    line.appendChild(b); D.push(b);
+  });
+  var slider = document.getElementById('pick');
+  function pick(i){
+    var e = E[i], px = x(e.t), o = oxAt(e.t);
+    cur.setAttribute('x1', px); cur.setAttribute('x2', px);
+    dot.setAttribute('cx', px); dot.setAttribute('cy', y(o));
+    D.forEach(function(d, j){ d.classList.toggle('on', i === j); });
+    document.getElementById('c-title').textContent = e.n + ': ' + e.w;
+    SM.pts(document.getElementById('c-text'), e.p);
+    slider.value = i;
+  }
+  slider.addEventListener('input', function(){ pick(+slider.value); });
+  fit();
+  if ('ResizeObserver' in window) new ResizeObserver(fit).observe(box);
+  pick(0);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>الكربون والسيليكون | STEAMomentos</title>
+<meta name="description" content="قارن قوة روابط الكربون والسيليكون، وانظر لماذا يتحول السيليكون إلى رمل حين يلقى الأكسجين.">
+<!--
+  رسم تفاعلي لمقالة "الحياة في الكون" على steamomentos.org
+  ملف مستقل (CSS و JS داخليان). الاعتماد الخارجي الوحيد: خطوط Google مع بدائل احتياطية.
+  التضمين: كتلة "صفحة مضمّنة" بارتفاع 650 بكسل، والرابط:
+    https://steamomentos.github.io/astronomy/alhyat-fy-alkwn/fig4-carbon-vs-silicon.html
+  الرمز اللوني ثابت في كل رسوم المقالة: الحياة والأكسجين ذهبي، الكربون بنفسجي، السيليكون نبيذي، الماء والمذيبات بنفسجي فاتح.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sm-purple:#351141; --sm-gold:#EBB00F; --sm-gray:#DFDADE; --sm-white:#FFFFFF;
+  --sm-purple-700:#57375D; --sm-purple-600:#643A6B; --sm-purple-500:#81539D; --sm-purple-300:#B389CD;
+  --sm-gold-700:#C07F00; --sm-gold-600:#D79E03; --sm-gold-300:#E3C76F; --sm-gold-200:#F4D160;
+  --sm-wine-700:#79155B; --sm-wine-500:#A2678A; --sm-mauve:#A78295;
+  --sm-bg:var(--sm-white); --sm-surface:#FFFFFF; --sm-surface-2:#F4F1F4;
+  --sm-ink:var(--sm-purple); --sm-ink-soft:var(--sm-purple-600); --sm-line:var(--sm-gray);
+  --sm-accent:var(--sm-gold); --sm-on-accent:var(--sm-purple);
+  --sm-radius:10px; --sm-radius-sm:8px; --sm-gap:8px;
+  --sm-font:'Cairo','Montserrat','Segoe UI',Tahoma,sans-serif;
+  --sm-font-latin:'Montserrat','Cairo','Segoe UI',sans-serif;
+  /* الرمز اللوني (ثابت في كل رسوم المقالة): الضوء والإشعاع ذهبي، المادة والمجرات بنفسجي فاتح، الفضاء بنفسجي داكن */
+  --space:#1E0927; --light:#EBB00F; --matter:#B389CD;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;height:100%}
+body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.latin,code,.num{font-family:var(--sm-font-latin);direction:ltr;unicode-bidi:isolate}
+.sm-pattern-light{background-color:var(--sm-bg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23F7F2F9' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-pattern-dark{background-color:var(--sm-purple);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23472255' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-wrap{max-width:960px;margin:0 auto;overflow:hidden;border-radius:var(--sm-radius);border:1px solid var(--sm-line);min-height:100%;display:flex;flex-direction:column}
+.sm-header{color:#fff;padding:8px 14px}
+.sm-title{font-weight:700;font-size:clamp(14px,2.6vw,18px);line-height:1.4;margin:0}
+.sm-body{padding:10px 12px;flex:1 0 auto;display:flex;flex-direction:column}
+.sm-body>.sm-stage{flex:1 0 auto}
+.sm-stage{position:relative;background:var(--space);border:1px solid var(--sm-line);border-radius:var(--sm-radius);padding:4px;display:grid;place-items:center;overflow:hidden;min-height:170px}
+.sm-stage.light{background:var(--sm-surface)}
+.sm-stage>svg{width:100%;height:auto;max-height:270px;display:block}
+/* منطقة رسم تملأ المساحة المتاحة كلها */
+.sm-stage.fill>svg,.sm-stage.fill>canvas{position:absolute;inset:0;width:100%;height:100%;max-height:none}
+.ovl{position:absolute;background:rgba(53,17,65,.92);border:1px solid var(--sm-purple-700);border-radius:8px;color:var(--sm-gray);font-size:12px;padding:5px 9px;line-height:1.4}
+.ovl b{color:var(--sm-gold-200)}
+.sm-stage text{font-family:var(--sm-font)}
+.sm-controls{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:var(--sm-gap)}
+.sm-tabs{display:flex;flex-wrap:wrap;gap:4px}
+.sm-btn{font:inherit;font-weight:600;font-size:13px;line-height:1.5;cursor:pointer;border:1.5px solid var(--sm-purple);background:#fff;color:var(--sm-purple);padding:3px 11px;border-radius:999px;transition:background .15s,color .15s,border-color .15s}
+.sm-btn:hover{border-color:var(--sm-purple-500);color:var(--sm-purple-500)}
+.sm-btn[aria-selected="true"],.sm-btn[aria-pressed="true"],.sm-btn.primary{background:var(--sm-accent);border-color:var(--sm-accent);color:var(--sm-on-accent)}
+.sm-btn:focus-visible,.sm-range:focus-visible{outline:3px solid var(--sm-purple-300);outline-offset:2px}
+.sm-btn.ghost{border-style:dashed}
+.sm-range-wrap{display:flex;align-items:center;gap:8px;flex:1 1 220px;font-size:13px}
+.sm-range{flex:1;accent-color:var(--sm-gold);height:22px;min-width:0}
+.sm-card{margin-top:var(--sm-gap);background:var(--sm-surface-2);border-inline-start:4px solid var(--sm-accent);border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
+.sm-card h3{margin:0 0 2px;font-size:14px;font-weight:700}
+.sm-card p{margin:0;color:var(--sm-ink-soft)}
+.sm-legend{display:flex;flex-wrap:wrap;gap:2px 12px;margin-top:6px;font-size:12px;color:var(--sm-ink-soft)}
+.sm-legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);margin-inline-end:6px;vertical-align:-1px;border:1px solid rgba(53,17,65,.25)}
+.sm-takeaway{margin-top:var(--sm-gap);background:var(--sm-purple);color:#fff;border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
+.sm-takeaway b{color:var(--sm-gold)}
+.pt{display:block;position:relative;padding-inline-start:12px}
+.pt::before{content:"";position:absolute;inset-inline-start:0;top:.6em;width:5px;height:5px;border-radius:50%;background:var(--sm-gold-700)}
+.sm-takeaway .pt::before{background:var(--sm-gold)}
+.sm-note{font-size:11px;color:var(--sm-ink-soft);margin:4px 0 0;line-height:1.45}
+@media (max-width:520px){
+  .sm-header{padding:6px 10px}.sm-body{padding:8px}.sm-stage{padding:2px}
+  .sm-wrap{border-radius:0;border-inline:0}
+  .sm-btn{font-size:12px;padding:2px 9px}
+  .sm-card,.sm-takeaway{font-size:12px;padding:5px 8px}.sm-card h3{font-size:13px}.sm-legend{font-size:11px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+
+/* الرمز اللوني لمقالة الحياة في الكون */
+:root{--life:#EBB00F;--carbon:#81539D;--silicon:#A2678A;--solvent:#B389CD}
+.cmp{box-sizing:border-box;display:flex;flex-direction:column;gap:6px;width:100%;height:100%;padding:6px}
+.pairs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pair{background:var(--sm-surface-2);border-radius:var(--sm-radius-sm);padding:4px 6px;text-align:center}
+.pair h4{margin:0;font-size:13px}
+.pair svg{width:100%;height:auto;max-height:64px;display:block}
+.pair small{display:block;font-size:11.5px;color:var(--sm-ink-soft)}
+.bars{display:flex;flex-direction:column;gap:3px;flex:1;justify-content:center}
+.grp{border-radius:var(--sm-radius-sm);padding:4px 6px;cursor:pointer;border:1.5px solid transparent}
+.grp.on{border-color:var(--sm-gold);background:#FFFBEF}
+.grp-n{font-size:12.5px;font-weight:700;margin-bottom:2px}
+.br{display:flex;align-items:center;gap:6px;font-size:12px;line-height:1.2;margin:2px 0}
+.br span.k{flex:0 0 46px;font-family:var(--sm-font-latin);font-size:11.5px;text-align:start}
+.br .tr{flex:1;height:14px;background:#F4F1F4;border-radius:7px;overflow:hidden}
+.br .fl{height:100%;border-radius:7px;transition:width .4s}
+.br .fl.c{background:var(--carbon)}.br .fl.s{background:var(--silicon)}
+.br b{flex:0 0 34px;font-family:var(--sm-font-latin);font-size:12px}
+.unit{font-size:11px;color:var(--sm-ink-soft);margin:0}
+.sm-legend{margin-top:0}.cmp .sm-legend,.cmp .unit{margin-top:-4px}
+@media (max-width:520px){.cmp{padding:4px;gap:6px}.pair svg{max-height:64px}}
+</style>
+</head>
+<body>
+<main class="sm-wrap" id="sm-root">
+  <header class="sm-header sm-pattern-dark">
+    <h1 class="sm-title">السيليكون يشبه الكربون، فلماذا لا تقوم عليه الحياة؟</h1>
+  </header>
+  <div class="sm-body sm-pattern-light">
+    <div class="sm-controls" style="margin-top:0;margin-bottom:6px">
+      <div class="sm-tabs" role="tablist" aria-label="نوع الرابطة" id="kinds">
+        <button class="sm-btn" role="tab" aria-selected="true">مع نفسه</button>
+        <button class="sm-btn" role="tab" aria-selected="false">مع الهيدروجين</button>
+        <button class="sm-btn" role="tab" aria-selected="false">مع الأكسجين</button>
+      </div>
+    </div>
+    <section class="sm-stage light">
+      <div class="cmp">
+        <div class="pairs">
+          <div class="pair"><h4>الكربون</h4><svg id="pc" viewBox="0 0 220 70" aria-hidden="true"></svg><small id="lc"></small></div>
+          <div class="pair"><h4>السيليكون</h4><svg id="ps" viewBox="0 0 220 70" aria-hidden="true"></svg><small id="ls"></small></div>
+        </div>
+        <div class="bars" id="bars"></div>
+        <div class="sm-legend"><span style="--c:#81539D">الكربون</span><span style="--c:#A2678A">السيليكون</span></div>
+        <p class="unit">طول العمود = الطاقة اللازمة لكسر الرابطة (كيلوجول لكل مول). كلما طال كانت الرابطة أمتن.</p>
+      </div>
+    </section>
+    <div class="sm-card" aria-live="polite">
+      <h3 id="c-title"></h3>
+      <p id="c-text"></p>
+    </div>
+    <div class="sm-takeaway">
+      <b>الخلاصة</b><span class="pt">سلاسل الكربون تبقى حتى مع وجود الأكسجين والماء</span><span class="pt">السيليكون يترك سلاسله ويتحد بالأكسجين، فيصير رملًا وصخرًا</span>
+    </div>
+  </div>
+</main>
+<script>
+var SM = (function(){
+  var NS = 'http://www.w3.org/2000/svg';
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function el(tag, attrs, parent){
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  /* نقاط مختصرة: النص مفصول بـ | */
+  function pts(node, s){
+    node.textContent = '';
+    String(s).split('|').forEach(function(x){ var p = document.createElement('span'); p.className = 'pt'; p.textContent = x.trim(); node.appendChild(p); });
+  }
+  function tabs(container, onSelect){
+    var btns = container.querySelectorAll('.sm-btn');
+    btns.forEach(function(b, i){ b.addEventListener('click', function(){ select(i); onSelect(i); }); });
+    function select(i){ btns.forEach(function(b, j){ b.setAttribute('aria-selected', String(i === j)); }); }
+    return select;
+  }
+  /* أرقام عربية بفواصل الآلاف */
+  function fmt(n, d){ return Number(n).toLocaleString('en-US', {maximumFractionDigits: d || 0}); }
+  function postHeight(){
+    if (window.parent === window) return;
+    var h = Math.ceil(document.documentElement.getBoundingClientRect().height);
+    try { window.parent.postMessage({type:'sm-embed-height', height:h}, '*'); } catch(e){}
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(postHeight).observe(document.body);
+  window.addEventListener('load', postHeight);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(postHeight);
+  /* يجعل منطقة الرسم تملأ المساحة بلا فراغ: يختار viewBox بنسبة أبعاد الإطار ويضمن ظهور المنطقة الأساسية (w×h حول cx,cy) */
+  function fit(svg, cx, cy, w, h){
+    var box = svg.parentNode;
+    function go(){
+      var r = box.clientWidth / Math.max(1, box.clientHeight), vw, vh;
+      if (r > w / h){ vh = h; vw = h * r; } else { vw = w; vh = w / r; }
+      svg.setAttribute('viewBox', [cx - vw / 2, cy - vh / 2, vw, vh].map(function(v){ return v.toFixed(1); }).join(' '));
+      svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    }
+    if ('ResizeObserver' in window) new ResizeObserver(go).observe(box);
+    go();
+  }
+  return {el:el, pts:pts, tabs:tabs, fmt:fmt, reduce:reduce, fit:fit};
+})();
+
+</script>
+<script>
+(function(){
+  /* قيم تقريبية شائعة في كتب الكيمياء: الطاقة بالكيلوجول لكل مول، والطول بالبيكومتر */
+  var K = [
+    {n:'مع نفسه', a:'C–C', b:'Si–Si', ea:346, eb:222, la:154, lb:233, x:['C','C'], y:['Si','Si'],
+     p:'رابطة السيليكون بنفسه أطول وأضعف بكثير|لذلك تتفكك سلاسله الطويلة بسهولة'},
+    {n:'مع الهيدروجين', a:'C–H', b:'Si–H', ea:411, eb:318, la:109, lb:148, x:['C','H'], y:['Si','H'],
+     p:'Si–H أضعف من C–H|مركّباتها تتفاعل بسرعة مع الماء والهواء'},
+    {n:'مع الأكسجين', a:'C–O', b:'Si–O', ea:358, eb:452, la:143, lb:163, x:['C','O'], y:['Si','O'],
+     p:'هنا ينقلب الأمر: Si–O أقوى روابط السيليكون|يسرق السيليكون الأكسجين من الماء ويصير سيليكا، أي الرمل والكوارتز'}
+  ];
+  var COL = {C:'#81539D', Si:'#A2678A', H:'#FFFFFF', O:'#EBB00F'};
+  var RAD = {C:15, Si:20, H:10, O:14};
+  function pair(svg, at, len){
+    svg.textContent = '';
+    var d = len * 0.62, x1 = 110 + d / 2, x2 = 110 - d / 2;   /* المسافة متناسبة مع طول الرابطة الحقيقي */
+    SM.el('line', {x1:x1, y1:34, x2:x2, y2:34, stroke:'#57375D', 'stroke-width':4}, svg);
+    [[x1, at[0]], [x2, at[1]]].forEach(function(q){
+      SM.el('circle', {cx:q[0], cy:34, r:RAD[q[1]], fill:COL[q[1]], stroke:q[1] === 'H' ? '#836096' : 'none', 'stroke-width':1.5}, svg);
+      var t = SM.el('text', {x:q[0], y:35, 'text-anchor':'middle', 'dominant-baseline':'central', 'font-size':12, 'font-weight':700, 'font-family':'Montserrat,sans-serif', fill:q[1] === 'H' || q[1] === 'O' ? '#351141' : '#fff'}, svg);
+      t.textContent = q[1];
+    });
+    var y = 62;
+    SM.el('path', {d:'M' + x2 + ' ' + (y - 4) + 'v8M' + x2 + ' ' + y + 'H' + x1 + 'M' + x1 + ' ' + (y - 4) + 'v8', stroke:'#B389CD', 'stroke-width':1.5, fill:'none'}, svg);
+  }
+  var bars = document.getElementById('bars'), G = [], MAX = 460;
+  K.forEach(function(k, i){
+    var g = document.createElement('div'); g.className = 'grp'; g.tabIndex = 0; g.setAttribute('role', 'button');
+    g.innerHTML = '<div class="grp-n">' + k.n + '</div>' +
+      '<div class="br"><span class="k">' + k.a + '</span><div class="tr"><div class="fl c" style="width:' + (k.ea / MAX * 100) + '%"></div></div><b>' + k.ea + '</b></div>' +
+      '<div class="br"><span class="k">' + k.b + '</span><div class="tr"><div class="fl s" style="width:' + (k.eb / MAX * 100) + '%"></div></div><b>' + k.eb + '</b></div>';
+    g.addEventListener('click', function(){ sel(i); pick(i); });
+    g.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); sel(i); pick(i); } });
+    bars.appendChild(g); G.push(g);
+  });
+  function pick(i){
+    var k = K[i];
+    pair(document.getElementById('pc'), k.x, k.la);
+    pair(document.getElementById('ps'), k.y, k.lb);
+    document.getElementById('lc').textContent = 'طول الرابطة ' + k.la + ' بيكومتر';
+    document.getElementById('ls').textContent = 'طول الرابطة ' + k.lb + ' بيكومتر';
+    G.forEach(function(g, j){ g.classList.toggle('on', i === j); });
+    document.getElementById('c-title').textContent = 'الرابطة ' + k.n + ': ' + (k.ea > k.eb ? 'الكربون أقوى' : 'السيليكون أقوى');
+    SM.pts(document.getElementById('c-text'), k.p);
+  }
+  var sel = SM.tabs(document.getElementById('kinds'), pick);
+  pick(0);
+})();
+</script>
+</body>
+</html>

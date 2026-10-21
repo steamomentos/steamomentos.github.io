@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>هل النار حية؟ | STEAMomentos</title>
+<meta name="description" content="اختبر البكتيريا والنار وبلّورة الملح بتعريفين للحياة، وانظر لماذا يخطئ التعريف الأيضي.">
+<!--
+  رسم تفاعلي لمقالة "الحياة في الكون" على steamomentos.org
+  ملف مستقل (CSS و JS داخليان). الاعتماد الخارجي الوحيد: خطوط Google مع بدائل احتياطية.
+  التضمين: كتلة "صفحة مضمّنة" بارتفاع 650 بكسل، والرابط:
+    https://steamomentos.github.io/astronomy/alhyat-fy-alkwn/fig1-what-is-life.html
+  الرمز اللوني ثابت في كل رسوم المقالة: الحياة والأكسجين ذهبي، الكربون بنفسجي، السيليكون نبيذي، الماء والمذيبات بنفسجي فاتح.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sm-purple:#351141; --sm-gold:#EBB00F; --sm-gray:#DFDADE; --sm-white:#FFFFFF;
+  --sm-purple-700:#57375D; --sm-purple-600:#643A6B; --sm-purple-500:#81539D; --sm-purple-300:#B389CD;
+  --sm-gold-700:#C07F00; --sm-gold-600:#D79E03; --sm-gold-300:#E3C76F; --sm-gold-200:#F4D160;
+  --sm-wine-700:#79155B; --sm-wine-500:#A2678A; --sm-mauve:#A78295;
+  --sm-bg:var(--sm-white); --sm-surface:#FFFFFF; --sm-surface-2:#F4F1F4;
+  --sm-ink:var(--sm-purple); --sm-ink-soft:var(--sm-purple-600); --sm-line:var(--sm-gray);
+  --sm-accent:var(--sm-gold); --sm-on-accent:var(--sm-purple);
+  --sm-radius:10px; --sm-radius-sm:8px; --sm-gap:8px;
+  --sm-font:'Cairo','Montserrat','Segoe UI',Tahoma,sans-serif;
+  --sm-font-latin:'Montserrat','Cairo','Segoe UI',sans-serif;
+  /* الرمز اللوني (ثابت في كل رسوم المقالة): الضوء والإشعاع ذهبي، المادة والمجرات بنفسجي فاتح، الفضاء بنفسجي داكن */
+  --space:#1E0927; --light:#EBB00F; --matter:#B389CD;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;height:100%}
+body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.latin,code,.num{font-family:var(--sm-font-latin);direction:ltr;unicode-bidi:isolate}
+.sm-pattern-light{background-color:var(--sm-bg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23F7F2F9' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-pattern-dark{background-color:var(--sm-purple);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23472255' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-wrap{max-width:960px;margin:0 auto;overflow:hidden;border-radius:var(--sm-radius);border:1px solid var(--sm-line);min-height:100%;display:flex;flex-direction:column}
+.sm-header{color:#fff;padding:8px 14px}
+.sm-title{font-weight:700;font-size:clamp(14px,2.6vw,18px);line-height:1.4;margin:0}
+.sm-body{padding:10px 12px;flex:1 0 auto;display:flex;flex-direction:column}
+.sm-body>.sm-stage{flex:1 0 auto}
+.sm-stage{position:relative;background:var(--space);border:1px solid var(--sm-line);border-radius:var(--sm-radius);padding:4px;display:grid;place-items:center;overflow:hidden;min-height:170px}
+.sm-stage.light{background:var(--sm-surface)}
+.sm-stage>svg{width:100%;height:auto;max-height:270px;display:block}
+/* منطقة رسم تملأ المساحة المتاحة كلها */
+.sm-stage.fill>svg,.sm-stage.fill>canvas{position:absolute;inset:0;width:100%;height:100%;max-height:none}
+.ovl{position:absolute;background:rgba(53,17,65,.92);border:1px solid var(--sm-purple-700);border-radius:8px;color:var(--sm-gray);font-size:12px;padding:5px 9px;line-height:1.4}
+.ovl b{color:var(--sm-gold-200)}
+.sm-stage text{font-family:var(--sm-font)}
+.sm-controls{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:var(--sm-gap)}
+.sm-tabs{display:flex;flex-wrap:wrap;gap:4px}
+.sm-btn{font:inherit;font-weight:600;font-size:13px;line-height:1.5;cursor:pointer;border:1.5px solid var(--sm-purple);background:#fff;color:var(--sm-purple);padding:3px 11px;border-radius:999px;transition:background .15s,color .15s,border-color .15s}
+.sm-btn:hover{border-color:var(--sm-purple-500);color:var(--sm-purple-500)}
+.sm-btn[aria-selected="true"],.sm-btn[aria-pressed="true"],.sm-btn.primary{background:var(--sm-accent);border-color:var(--sm-accent);color:var(--sm-on-accent)}
+.sm-btn:focus-visible,.sm-range:focus-visible{outline:3px solid var(--sm-purple-300);outline-offset:2px}
+.sm-btn.ghost{border-style:dashed}
+.sm-range-wrap{display:flex;align-items:center;gap:8px;flex:1 1 220px;font-size:13px}
+.sm-range{flex:1;accent-color:var(--sm-gold);height:22px;min-width:0}
+.sm-card{margin-top:var(--sm-gap);background:var(--sm-surface-2);border-inline-start:4px solid var(--sm-accent);border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
+.sm-card h3{margin:0 0 2px;font-size:14px;font-weight:700}
+.sm-card p{margin:0;color:var(--sm-ink-soft)}
+.sm-legend{display:flex;flex-wrap:wrap;gap:2px 12px;margin-top:6px;font-size:12px;color:var(--sm-ink-soft)}
+.sm-legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);margin-inline-end:6px;vertical-align:-1px;border:1px solid rgba(53,17,65,.25)}
+.sm-takeaway{margin-top:var(--sm-gap);background:var(--sm-purple);color:#fff;border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
+.sm-takeaway b{color:var(--sm-gold)}
+.pt{display:block;position:relative;padding-inline-start:12px}
+.pt::before{content:"";position:absolute;inset-inline-start:0;top:.6em;width:5px;height:5px;border-radius:50%;background:var(--sm-gold-700)}
+.sm-takeaway .pt::before{background:var(--sm-gold)}
+.sm-note{font-size:11px;color:var(--sm-ink-soft);margin:4px 0 0;line-height:1.45}
+@media (max-width:520px){
+  .sm-header{padding:6px 10px}.sm-body{padding:8px}.sm-stage{padding:2px}
+  .sm-wrap{border-radius:0;border-inline:0}
+  .sm-btn{font-size:12px;padding:2px 9px}
+  .sm-card,.sm-takeaway{font-size:12px;padding:5px 8px}.sm-card h3{font-size:13px}.sm-legend{font-size:11px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+
+/* الرمز اللوني لمقالة الحياة في الكون */
+:root{--life:#EBB00F;--carbon:#81539D;--silicon:#A2678A;--solvent:#B389CD}
+.who{display:flex;gap:12px;align-items:stretch;width:100%;height:100%;padding:8px}
+.who-pic{flex:0 0 150px;display:grid;place-items:center;background:var(--sm-surface-2);border-radius:var(--sm-radius-sm)}
+.who-pic svg{width:130px;height:130px}
+.defs{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:8px;min-width:0}
+.def{background:#fff;border:1px solid var(--sm-line);border-radius:var(--sm-radius-sm);padding:6px 8px;display:flex;flex-direction:column}
+.def{justify-content:flex-start}.def h4{margin:0 0 6px;font-size:15px;line-height:1.35}
+.def h4 small{display:block;font-weight:400;font-size:12px;color:var(--sm-ink-soft)}
+.row{display:flex;gap:8px;align-items:flex-start;font-size:14px;line-height:1.45;padding:5px 0}
+.row i{flex:0 0 18px;height:18px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-weight:700;font-size:12px;margin-top:1px}
+.row i.y{background:var(--life);color:var(--sm-purple)}
+.row i.n{background:var(--sm-gray);color:var(--sm-purple-600)}
+.verdict{margin-top:auto;padding-top:4px;font-weight:700;font-size:14px;border-top:1px dashed var(--sm-line)}
+.verdict.y{color:var(--sm-gold-700)}
+.verdict.n{color:var(--sm-purple-600)}
+.verdict.bad::after{content:" (خطأ)";color:var(--sm-wine-700)}
+@media (max-width:560px){
+  .who{flex-direction:column;gap:6px;padding:4px}
+  .who-pic{flex:0 0 auto;padding:2px}.who-pic svg{width:56px;height:56px}
+  .defs{grid-template-columns:1fr;gap:6px}
+  .row{font-size:12px;padding:1px 0;gap:6px}.def h4{font-size:13px;margin-bottom:4px}.def h4 small{font-size:11px}.verdict{font-size:13px}
+}
+</style>
+</head>
+<body>
+<main class="sm-wrap" id="sm-root">
+  <header class="sm-header sm-pattern-dark">
+    <h1 class="sm-title">هل النار حية؟ تعريف واحد يقول نعم</h1>
+  </header>
+  <div class="sm-body sm-pattern-light">
+    <div class="sm-controls" style="margin-top:0;margin-bottom:6px">
+      <div class="sm-tabs" role="tablist" aria-label="اختر شيئًا تختبره" id="cands">
+        <button class="sm-btn" role="tab" aria-selected="true">بكتيريا</button>
+        <button class="sm-btn" role="tab" aria-selected="false">نار</button>
+        <button class="sm-btn" role="tab" aria-selected="false">بلّورة ملح</button>
+      </div>
+    </div>
+    <section class="sm-stage light">
+      <div class="who">
+        <div class="who-pic" id="pic" aria-hidden="true"></div>
+        <div class="defs">
+          <div class="def"><h4>التعريف الأيضي<small>كل ما يتغذى ويُخرج فضلات وينمو ويتكاثر</small></h4><div id="d1"></div><div class="verdict" id="v1"></div></div>
+          <div class="def"><h4>الخصائص التي يتفق عليها العلماء<small>إن توفرت كلها فالنظام على الأغلب حي</small></h4><div id="d2"></div><div class="verdict" id="v2"></div></div>
+        </div>
+      </div>
+    </section>
+    <div class="sm-card" aria-live="polite">
+      <h3 id="c-title"></h3>
+      <p id="c-text"></p>
+    </div>
+    <div class="sm-takeaway">
+      <b>الخلاصة</b><span class="pt">التعريف بالصفات وحدها قد يُدخل النار في الأحياء</span><span class="pt">لذلك اقترح كليلاند وتشايبا البحث عن نظرية للحياة بدل تعريف</span>
+    </div>
+  </div>
+</main>
+<script>
+var SM = (function(){
+  var NS = 'http://www.w3.org/2000/svg';
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function el(tag, attrs, parent){
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  /* نقاط مختصرة: النص مفصول بـ | */
+  function pts(node, s){
+    node.textContent = '';
+    String(s).split('|').forEach(function(x){ var p = document.createElement('span'); p.className = 'pt'; p.textContent = x.trim(); node.appendChild(p); });
+  }
+  function tabs(container, onSelect){
+    var btns = container.querySelectorAll('.sm-btn');
+    btns.forEach(function(b, i){ b.addEventListener('click', function(){ select(i); onSelect(i); }); });
+    function select(i){ btns.forEach(function(b, j){ b.setAttribute('aria-selected', String(i === j)); }); }
+    return select;
+  }
+  /* أرقام عربية بفواصل الآلاف */
+  function fmt(n, d){ return Number(n).toLocaleString('en-US', {maximumFractionDigits: d || 0}); }
+  function postHeight(){
+    if (window.parent === window) return;
+    var h = Math.ceil(document.documentElement.getBoundingClientRect().height);
+    try { window.parent.postMessage({type:'sm-embed-height', height:h}, '*'); } catch(e){}
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(postHeight).observe(document.body);
+  window.addEventListener('load', postHeight);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(postHeight);
+  /* يجعل منطقة الرسم تملأ المساحة بلا فراغ: يختار viewBox بنسبة أبعاد الإطار ويضمن ظهور المنطقة الأساسية (w×h حول cx,cy) */
+  function fit(svg, cx, cy, w, h){
+    var box = svg.parentNode;
+    function go(){
+      var r = box.clientWidth / Math.max(1, box.clientHeight), vw, vh;
+      if (r > w / h){ vh = h; vw = h * r; } else { vw = w; vh = w / r; }
+      svg.setAttribute('viewBox', [cx - vw / 2, cy - vh / 2, vw, vh].map(function(v){ return v.toFixed(1); }).join(' '));
+      svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    }
+    if ('ResizeObserver' in window) new ResizeObserver(go).observe(box);
+    go();
+  }
+  return {el:el, pts:pts, tabs:tabs, fmt:fmt, reduce:reduce, fit:fit};
+})();
+
+</script>
+<script>
+(function(){
+  var ICON = [
+    /* بكتيريا: كبسولة بسياط */
+    '<svg viewBox="0 0 100 100"><path d="M18 62c-8 4-12 12-8 20M14 50c-10-2-14 4-12 10" fill="none" stroke="#81539D" stroke-width="2" stroke-linecap="round"/><rect x="20" y="30" width="66" height="34" rx="17" transform="rotate(-18 53 47)" fill="#EBB00F"/><rect x="26" y="36" width="54" height="22" rx="11" transform="rotate(-18 53 47)" fill="none" stroke="#C07F00" stroke-width="2"/><path d="M42 50c6-6 12 2 18-4" fill="none" stroke="#351141" stroke-width="2" stroke-linecap="round"/></svg>',
+    /* نار */
+    '<svg viewBox="0 0 100 100"><path d="M50 8c4 18 26 26 26 50a26 26 0 0 1-52 0c0-12 8-20 12-28 2 8 6 12 10 12-2-14 0-24 4-34z" fill="#EBB00F"/><path d="M50 52c2 8 12 10 12 20a12 12 0 0 1-24 0c0-6 6-10 6-16 2 4 4 4 6 4z" fill="#C07F00"/><path d="M26 92h48" stroke="#643843" stroke-width="5" stroke-linecap="round"/></svg>',
+    /* بلّورة ملح */
+    '<svg viewBox="0 0 100 100"><path d="M50 14 82 30v38L50 86 18 68V30z" fill="#DFDADE" stroke="#81539D" stroke-width="2"/><path d="M50 14 82 30 50 46 18 30z" fill="#fff" stroke="#81539D" stroke-width="2"/><path d="M50 46v40" stroke="#81539D" stroke-width="2"/><path d="M68 70 80 64v12L68 82z" fill="#B389CD"/></svg>'
+  ];
+  /* 1 = تنطبق، 0 = لا تنطبق */
+  var C = [
+    {n:'بكتيريا',
+     a:[[1,'تتغذى على مواد من محيطها'],[1,'تُخرج فضلات وحرارة'],[1,'تنمو'],[1,'تتكاثر بالانقسام']],
+     b:[[1,'خلية منظمة تحمل معلومات وراثية'],[1,'كيمياء داخلية تختلف عن محيطها'],[1,'نسلها يتغير ويتكيّف مع البيئة']],
+     t:'البكتيريا تنجح في الاختبارين|التعريفان يتفقان هنا، فلا مشكلة'},
+    {n:'نار',
+     a:[[1,'تتغذى على الحطب والأكسجين'],[1,'تُخرج حرارة ودخانًا'],[1,'تنمو وتنتشر'],[1,'تتكاثر: شرارة تشعل نارًا جديدة']],
+     b:[[0,'لا هيكل منظم ولا معلومات وراثية'],[0,'احتراق عادي لا كيمياء خاصة بها'],[0,'لا تورّث صفات تتكيّف بها']],
+     t:'التعريف الأيضي يعدّ النار حية، وهذا خطأ|هذا المثال من المقالة نفسها'},
+    {n:'بلّورة ملح',
+     a:[[1,'تأخذ الملح من الماء حولها'],[0,'لا تُخرج فضلات'],[1,'تنمو طبقة فوق طبقة'],[1,'قطعة منها تبدأ بلّورة جديدة']],
+     b:[[0,'منظمة، لكن لا تحمل معلومات وراثية'],[0,'لا تستهلك طاقة من محيطها'],[0,'النسخ الجديدة لا تتكيّف']],
+     t:'البلّورة تنمو وتتكرر، لكنها ليست حية|النمو والتكرار وحدهما لا يكفيان'}
+  ];
+  function rows(box, list){
+    box.textContent = '';
+    list.forEach(function(r){
+      var d = document.createElement('div'); d.className = 'row';
+      var i = document.createElement('i'); i.className = r[0] ? 'y' : 'n'; i.textContent = r[0] ? '✓' : '✗';
+      i.setAttribute('aria-label', r[0] ? 'تنطبق' : 'لا تنطبق');
+      var s = document.createElement('span'); s.textContent = r[1];
+      d.appendChild(i); d.appendChild(s); box.appendChild(d);
+    });
+    return list.every(function(r){ return r[0]; });
+  }
+  function verdict(el, alive, wrong){
+    el.className = 'verdict ' + (alive ? 'y' : 'n') + (wrong ? ' bad' : '');
+    el.textContent = alive ? 'النتيجة: حي' : 'النتيجة: ليس حيًا';
+  }
+  function pick(i){
+    var c = C[i];
+    document.getElementById('pic').innerHTML = ICON[i];
+    var a = rows(document.getElementById('d1'), c.a), b = rows(document.getElementById('d2'), c.b);
+    verdict(document.getElementById('v1'), a, a !== b);
+    verdict(document.getElementById('v2'), b, false);
+    document.getElementById('c-title').textContent = c.n;
+    SM.pts(document.getElementById('c-text'), c.t);
+  }
+  SM.tabs(document.getElementById('cands'), pick);
+  pick(0);
+})();
+</script>
+</body>
+</html>

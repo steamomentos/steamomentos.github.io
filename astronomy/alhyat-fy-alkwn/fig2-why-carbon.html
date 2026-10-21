@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>لماذا الكربون؟ | STEAMomentos</title>
+<meta name="description" content="ثلاث صفات تجعل الكربون أساس الحياة على الأرض: أربع روابط، وسلاسل طويلة، وأشكال مرآتية.">
+<!--
+  رسم تفاعلي لمقالة "الحياة في الكون" على steamomentos.org
+  ملف مستقل (CSS و JS داخليان). الاعتماد الخارجي الوحيد: خطوط Google مع بدائل احتياطية.
+  التضمين: كتلة "صفحة مضمّنة" بارتفاع 650 بكسل، والرابط:
+    https://steamomentos.github.io/astronomy/alhyat-fy-alkwn/fig2-why-carbon.html
+  الرمز اللوني ثابت في كل رسوم المقالة: الحياة والأكسجين ذهبي، الكربون بنفسجي، السيليكون نبيذي، الماء والمذيبات بنفسجي فاتح.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sm-purple:#351141; --sm-gold:#EBB00F; --sm-gray:#DFDADE; --sm-white:#FFFFFF;
+  --sm-purple-700:#57375D; --sm-purple-600:#643A6B; --sm-purple-500:#81539D; --sm-purple-300:#B389CD;
+  --sm-gold-700:#C07F00; --sm-gold-600:#D79E03; --sm-gold-300:#E3C76F; --sm-gold-200:#F4D160;
+  --sm-wine-700:#79155B; --sm-wine-500:#A2678A; --sm-mauve:#A78295;
+  --sm-bg:var(--sm-white); --sm-surface:#FFFFFF; --sm-surface-2:#F4F1F4;
+  --sm-ink:var(--sm-purple); --sm-ink-soft:var(--sm-purple-600); --sm-line:var(--sm-gray);
+  --sm-accent:var(--sm-gold); --sm-on-accent:var(--sm-purple);
+  --sm-radius:10px; --sm-radius-sm:8px; --sm-gap:8px;
+  --sm-font:'Cairo','Montserrat','Segoe UI',Tahoma,sans-serif;
+  --sm-font-latin:'Montserrat','Cairo','Segoe UI',sans-serif;
+  /* الرمز اللوني (ثابت في كل رسوم المقالة): الضوء والإشعاع ذهبي، المادة والمجرات بنفسجي فاتح، الفضاء بنفسجي داكن */
+  --space:#1E0927; --light:#EBB00F; --matter:#B389CD;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;height:100%}
+body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.latin,code,.num{font-family:var(--sm-font-latin);direction:ltr;unicode-bidi:isolate}
+.sm-pattern-light{background-color:var(--sm-bg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23F7F2F9' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-pattern-dark{background-color:var(--sm-purple);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23472255' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-wrap{max-width:960px;margin:0 auto;overflow:hidden;border-radius:var(--sm-radius);border:1px solid var(--sm-line);min-height:100%;display:flex;flex-direction:column}
+.sm-header{color:#fff;padding:8px 14px}
+.sm-title{font-weight:700;font-size:clamp(14px,2.6vw,18px);line-height:1.4;margin:0}
+.sm-body{padding:10px 12px;flex:1 0 auto;display:flex;flex-direction:column}
+.sm-body>.sm-stage{flex:1 0 auto}
+.sm-stage{position:relative;background:var(--space);border:1px solid var(--sm-line);border-radius:var(--sm-radius);padding:4px;display:grid;place-items:center;overflow:hidden;min-height:170px}
+.sm-stage.light{background:var(--sm-surface)}
+.sm-stage>svg{width:100%;height:auto;max-height:270px;display:block}
+/* منطقة رسم تملأ المساحة المتاحة كلها */
+.sm-stage.fill>svg,.sm-stage.fill>canvas{position:absolute;inset:0;width:100%;height:100%;max-height:none}
+.ovl{position:absolute;background:rgba(53,17,65,.92);border:1px solid var(--sm-purple-700);border-radius:8px;color:var(--sm-gray);font-size:12px;padding:5px 9px;line-height:1.4}
+.ovl b{color:var(--sm-gold-200)}
+.sm-stage text{font-family:var(--sm-font)}
+.sm-controls{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:var(--sm-gap)}
+.sm-tabs{display:flex;flex-wrap:wrap;gap:4px}
+.sm-btn{font:inherit;font-weight:600;font-size:13px;line-height:1.5;cursor:pointer;border:1.5px solid var(--sm-purple);background:#fff;color:var(--sm-purple);padding:3px 11px;border-radius:999px;transition:background .15s,color .15s,border-color .15s}
+.sm-btn:hover{border-color:var(--sm-purple-500);color:var(--sm-purple-500)}
+.sm-btn[aria-selected="true"],.sm-btn[aria-pressed="true"],.sm-btn.primary{background:var(--sm-accent);border-color:var(--sm-accent);color:var(--sm-on-accent)}
+.sm-btn:focus-visible,.sm-range:focus-visible{outline:3px solid var(--sm-purple-300);outline-offset:2px}
+.sm-btn.ghost{border-style:dashed}
+.sm-range-wrap{display:flex;align-items:center;gap:8px;flex:1 1 220px;font-size:13px}
+.sm-range{flex:1;accent-color:var(--sm-gold);height:22px;min-width:0}
+.sm-card{margin-top:var(--sm-gap);background:var(--sm-surface-2);border-inline-start:4px solid var(--sm-accent);border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
+.sm-card h3{margin:0 0 2px;font-size:14px;font-weight:700}
+.sm-card p{margin:0;color:var(--sm-ink-soft)}
+.sm-legend{display:flex;flex-wrap:wrap;gap:2px 12px;margin-top:6px;font-size:12px;color:var(--sm-ink-soft)}
+.sm-legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);margin-inline-end:6px;vertical-align:-1px;border:1px solid rgba(53,17,65,.25)}
+.sm-takeaway{margin-top:var(--sm-gap);background:var(--sm-purple);color:#fff;border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
+.sm-takeaway b{color:var(--sm-gold)}
+.pt{display:block;position:relative;padding-inline-start:12px}
+.pt::before{content:"";position:absolute;inset-inline-start:0;top:.6em;width:5px;height:5px;border-radius:50%;background:var(--sm-gold-700)}
+.sm-takeaway .pt::before{background:var(--sm-gold)}
+.sm-note{font-size:11px;color:var(--sm-ink-soft);margin:4px 0 0;line-height:1.45}
+@media (max-width:520px){
+  .sm-header{padding:6px 10px}.sm-body{padding:8px}.sm-stage{padding:2px}
+  .sm-wrap{border-radius:0;border-inline:0}
+  .sm-btn{font-size:12px;padding:2px 9px}
+  .sm-card,.sm-takeaway{font-size:12px;padding:5px 8px}.sm-card h3{font-size:13px}.sm-legend{font-size:11px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+
+/* الرمز اللوني لمقالة الحياة في الكون */
+:root{--life:#EBB00F;--carbon:#81539D;--silicon:#A2678A;--solvent:#B389CD}
+.sm-stage.fill{min-height:220px}
+.atom-C{fill:var(--carbon)}.atom-H{fill:#fff;stroke:#836096;stroke-width:1.5}.atom-O{fill:var(--life)}.atom-N{fill:#57375D}
+.bond{stroke:#57375D;stroke-width:4;stroke-linecap:round}
+.lbl{font-size:13px;font-weight:700;text-anchor:middle;dominant-baseline:central}
+.lbl.w{fill:#fff}.lbl.d{fill:var(--sm-purple)}
+.cap{font-size:13px;fill:var(--sm-purple-600);text-anchor:middle}
+.big{font-size:15px;font-weight:700;fill:var(--sm-purple);text-anchor:middle}
+.e{fill:var(--life);stroke:var(--sm-purple);stroke-width:1}
+.shell{fill:none;stroke:#B389CD;stroke-width:1.5;stroke-dasharray:4 4}
+.mirror{stroke:#B389CD;stroke-width:2;stroke-dasharray:6 5}
+.len{margin-top:6px}
+.len-row{display:flex;align-items:center;gap:8px;font-size:13px}
+.len-row b{font-family:var(--sm-font-latin);min-width:1.5em;text-align:center}
+.len-axis{display:flex;justify-content:space-between;font-size:11px;color:var(--sm-ink-soft);line-height:1.3}
+</style>
+</head>
+<body>
+<main class="sm-wrap" id="sm-root">
+  <header class="sm-header sm-pattern-dark">
+    <h1 class="sm-title">لماذا الكربون؟ ذرة واحدة تبني ملايين الجزيئات</h1>
+  </header>
+  <div class="sm-body sm-pattern-light">
+    <div class="sm-controls" style="margin-top:0;margin-bottom:6px">
+      <div class="sm-tabs" role="tablist" aria-label="صفات الكربون" id="views">
+        <button class="sm-btn" role="tab" aria-selected="true">أربع روابط</button>
+        <button class="sm-btn" role="tab" aria-selected="false">سلاسل طويلة</button>
+        <button class="sm-btn" role="tab" aria-selected="false">صورة المرآة</button>
+      </div>
+    </div>
+    <section class="sm-stage light fill">
+      <svg id="art" role="img" aria-labelledby="art-desc"><desc id="art-desc">رسم لجزيئات الكربون يتغير حسب الصفة المختارة.</desc><g id="g"></g></svg>
+    </section>
+    <div class="len" id="lenBox" hidden>
+      <div class="len-row"><label for="len">عدد ذرات الكربون</label><input class="sm-range" id="len" type="range" min="1" max="10" step="1" value="4"><b id="lenV">4</b></div>
+      <div class="len-axis" aria-hidden="true"><span>1</span><span>10</span></div>
+    </div>
+    <div class="sm-card" aria-live="polite">
+      <h3 id="c-title"></h3>
+      <p id="c-text"></p>
+    </div>
+    <div class="sm-takeaway">
+      <b>الخلاصة</b><span class="pt">الكربون يرتبط بأربع ذرات، ويبني سلاسل طويلة متفرعة</span><span class="pt">لذلك صنع أكبر تنوع من الجزيئات التي تحتاجها الحياة</span>
+    </div>
+  </div>
+</main>
+<script>
+var SM = (function(){
+  var NS = 'http://www.w3.org/2000/svg';
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function el(tag, attrs, parent){
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  /* نقاط مختصرة: النص مفصول بـ | */
+  function pts(node, s){
+    node.textContent = '';
+    String(s).split('|').forEach(function(x){ var p = document.createElement('span'); p.className = 'pt'; p.textContent = x.trim(); node.appendChild(p); });
+  }
+  function tabs(container, onSelect){
+    var btns = container.querySelectorAll('.sm-btn');
+    btns.forEach(function(b, i){ b.addEventListener('click', function(){ select(i); onSelect(i); }); });
+    function select(i){ btns.forEach(function(b, j){ b.setAttribute('aria-selected', String(i === j)); }); }
+    return select;
+  }
+  /* أرقام عربية بفواصل الآلاف */
+  function fmt(n, d){ return Number(n).toLocaleString('en-US', {maximumFractionDigits: d || 0}); }
+  function postHeight(){
+    if (window.parent === window) return;
+    var h = Math.ceil(document.documentElement.getBoundingClientRect().height);
+    try { window.parent.postMessage({type:'sm-embed-height', height:h}, '*'); } catch(e){}
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(postHeight).observe(document.body);
+  window.addEventListener('load', postHeight);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(postHeight);
+  /* يجعل منطقة الرسم تملأ المساحة بلا فراغ: يختار viewBox بنسبة أبعاد الإطار ويضمن ظهور المنطقة الأساسية (w×h حول cx,cy) */
+  function fit(svg, cx, cy, w, h){
+    var box = svg.parentNode;
+    function go(){
+      var r = box.clientWidth / Math.max(1, box.clientHeight), vw, vh;
+      if (r > w / h){ vh = h; vw = h * r; } else { vw = w; vh = w / r; }
+      svg.setAttribute('viewBox', [cx - vw / 2, cy - vh / 2, vw, vh].map(function(v){ return v.toFixed(1); }).join(' '));
+      svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    }
+    if ('ResizeObserver' in window) new ResizeObserver(go).observe(box);
+    go();
+  }
+  return {el:el, pts:pts, tabs:tabs, fmt:fmt, reduce:reduce, fit:fit};
+})();
+
+</script>
+<script>
+(function(){
+  var svg = document.getElementById('art'), g = document.getElementById('g');
+  /* منطقة الرسم تتغير حسب العرض: على الجوال نرتب الأجزاء عموديًا */
+  var box = svg.parentNode, R = [300, 125, 600, 250], narrow = box.clientWidth < 520;
+  function apply(){
+    var r = box.clientWidth / Math.max(1, box.clientHeight), vw, vh;
+    if (r > R[2] / R[3]){ vh = R[3]; vw = vh * r; } else { vw = R[2]; vh = vw / r; }
+    svg.setAttribute('viewBox', [R[0] - vw / 2, R[1] - vh / 2, vw, vh].map(function(v){ return v.toFixed(1); }).join(' '));
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(function(){
+    var n = box.clientWidth < 520; if (n !== narrow){ narrow = n; draw(); } apply();
+  }).observe(box);
+  function atom(x, y, t, r){
+    SM.el('circle', {cx:x, cy:y, r:r || (t === 'H' ? 11 : 17), 'class':'atom-' + t}, g);
+    var l = SM.el('text', {x:x, y:y + 1, 'class':'lbl ' + (t === 'H' || t === 'O' ? 'd' : 'w')}, g); l.textContent = t;
+  }
+  function bond(x1, y1, x2, y2){ SM.el('line', {x1:x1, y1:y1, x2:x2, y2:y2, 'class':'bond'}, g); }
+  function text(x, y, s, c){ var t = SM.el('text', {x:x, y:y, 'class':c || 'cap'}, g); t.textContent = s; return t; }
+
+  /* عدد الأشكال المختلفة (المتشكّلات) للألكان بعدد n من ذرات الكربون */
+  var ISO = [1,1,1,2,3,5,9,18,35,75];
+  function forms(k){ return k === 1 ? 'شكل واحد' : k === 2 ? 'شكلان' : k <= 10 ? k + ' أشكال' : k + ' شكلًا'; }
+  function atoms(k){ return k === 1 ? 'ذرة واحدة' : k === 2 ? 'ذرتان' : k <= 10 ? k + ' ذرات' : k + ' ذرة'; }
+
+  function four(){
+    /* ذرة الكربون بإلكتروناتها الأربعة، ثم الميثان. أفقيًا على الحاسوب وعموديًا على الجوال */
+    var A = narrow ? [300, 75] : [450, 110], M = narrow ? [300, 295] : [180, 110];
+    R = narrow ? [300, 195, 300, 430] : [300, 125, 600, 250];
+    SM.el('circle', {cx:A[0], cy:A[1], r:58, 'class':'shell'}, g);
+    atom(A[0], A[1], 'C', 22);
+    [[0,-58],[58,0],[0,58],[-58,0]].forEach(function(p){ SM.el('circle', {cx:A[0] + p[0], cy:A[1] + p[1], r:7, 'class':'e'}, g); });
+    text(A[0], A[1] + 95, 'أربعة إلكترونات في المدار الأخير');
+    var d = SM.el('defs', {}, g), m = SM.el('marker', {id:'ar', viewBox:'0 0 10 10', refX:8, refY:5, markerWidth:7, markerHeight:7, orient:'auto'}, d);
+    SM.el('path', {d:'M0 0 10 5 0 10z', fill:'#B389CD'}, m);
+    SM.el('path', {d:narrow ? 'M300 185v28' : 'M362 110h-60', stroke:'#B389CD', 'stroke-width':2, 'marker-end':'url(#ar)', fill:'none'}, g);
+    [[0,-62],[62,0],[0,62],[-62,0]].forEach(function(p){ bond(M[0], M[1], M[0] + p[0], M[1] + p[1]); });
+    atom(M[0], M[1], 'C', 20);
+    [[0,-62],[62,0],[0,62],[-62,0]].forEach(function(p){ atom(M[0] + p[0], M[1] + p[1], 'H'); });
+    text(M[0], M[1] + 95, 'تصير أربع روابط: الميثان');
+  }
+
+  function chain(n){
+    /* سلسلة متعرجة من n ذرات كربون، مع الهيدروجين */
+    R = narrow ? [300, 130, 400, 230] : [300, 125, 600, 250];
+    var step = Math.min(52, (narrow ? 330 : 470) / Math.max(1, n - 1)), w = step * (n - 1), x0 = 300 + w / 2, P = [];
+    for (var i = 0; i < n; i++) P.push([x0 - i * step, 100 + (i % 2 ? 26 : -26) * (n > 1 ? 1 : 0)]);
+    /* هيكل الكربون فقط، والهيدروجين محذوف للتبسيط */
+    var r = n > 7 ? 15 : 18;
+    for (i = 0; i < n - 1; i++) bond(P[i][0], P[i][1], P[i + 1][0], P[i + 1][1]);
+    P.forEach(function(p){ atom(p[0], p[1], 'C', r); });
+    text(300, 30, 'ذرات الكربون فقط (الهيدروجين محذوف للتبسيط)', 'cap');
+    text(300, 205, ISO[n - 1] === 1 ? 'لهذه السلسلة شكل واحد فقط' : ISO[n - 1] === 2 ? 'هذا أحد شكلين ممكنين' : 'هذا واحد من ' + forms(ISO[n - 1]), 'big');
+    text(300, 228, narrow ? 'ترتيب مختلف للذرات = جزيء مختلف' : 'الذرات نفسها، مرتبة بطرق مختلفة، تعطي جزيئات مختلفة');
+  }
+
+  function mirror(){
+    /* الألانين ونظيره في المرآة: كربون في الوسط وأربع مجموعات مختلفة */
+    SM.el('line', {x1:300, y1:20, x2:300, y2:190, 'class':'mirror'}, g);
+    text(300, 205, 'مرآة');
+    function side(cx, s){
+      var G = [['NH₂',-66 * s,-38,'#57375D'],['COOH',66 * s,-38,'#EBB00F'],['CH₃',0,68,'#81539D'],['H',-34 * s,56,'#fff']];
+      G.forEach(function(a){ bond(cx, 110, cx + a[1], 110 + a[2]); });
+      atom(cx, 110, 'C', 20);
+      G.forEach(function(a){
+        var w = a[0].length * 10 + 14;
+        SM.el('rect', {x:cx + a[1] - w / 2, y:110 + a[2] - 13, width:w, height:26, rx:13, fill:a[3], stroke:'#836096', 'stroke-width':a[0] === 'H' ? 1.5 : 0}, g);
+        var t = SM.el('text', {x:cx + a[1], y:110 + a[2] + 1, 'class':'lbl latin ' + (a[0] === 'H' || a[0] === 'COOH' ? 'd' : 'w')}, g); t.textContent = a[0];
+      });
+    }
+    R = narrow ? [300, 125, 430, 250] : [300, 125, 600, 250];
+    var o = narrow ? 110 : 130;
+    side(300 - o, 1); side(300 + o, -1);
+    text(300 - o, 228, 'الشكل الذي تستخدمه الحياة');
+    text(300 + o, 228, 'نسخته في المرآة');
+  }
+
+  var V = [
+    {t:'أربع روابط', p:'في المدار الأخير للكربون أربعة إلكترونات|فيرتبط بأربع ذرات أخرى في الوقت نفسه'},
+    {t:'سلاسل طويلة', p:''},
+    {t:'صورة المرآة', p:'الجزيء ونسخته في المرآة مثل اليد اليمنى واليسرى|الذرات نفسها، لكن لا ينطبق أحدهما على الآخر|الأحماض الأمينية في أجسامنا من شكل واحد فقط'}
+  ];
+  var lenBox = document.getElementById('lenBox'), len = document.getElementById('len'), view = 0;
+  function draw(){
+    g.textContent = '';
+    if (view === 0) four();
+    if (view === 1){
+      var n = +len.value; document.getElementById('lenV').textContent = n; chain(n);
+      V[1].p = 'حرّك الشريط لتطيل السلسلة|' + atoms(n) + ' كربون: ' + forms(ISO[n - 1]) + '|بعشر ذرات فقط: 75 شكلًا، والعدد يقفز مع كل ذرة';
+    }
+    if (view === 2) mirror();
+    lenBox.hidden = view !== 1;
+    apply();
+    document.getElementById('c-title').textContent = V[view].t;
+    SM.pts(document.getElementById('c-text'), V[view].p);
+  }
+  len.addEventListener('input', draw);
+  SM.tabs(document.getElementById('views'), function(i){ view = i; draw(); });
+  draw();
+})();
+</script>
+</body>
+</html>

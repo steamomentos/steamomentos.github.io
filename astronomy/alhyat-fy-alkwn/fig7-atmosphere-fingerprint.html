@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>بصمة الغلاف الجوي | STEAMomentos</title>
+<meta name="description" content="قارن ضوء النجم بعد عبوره أغلفة الأرض اليوم والأرض الفتية والمريخ، وانظر أي الغازات تشير إلى حياة.">
+<!--
+  رسم تفاعلي لمقالة "الحياة في الكون" على steamomentos.org
+  ملف مستقل (CSS و JS داخليان). الاعتماد الخارجي الوحيد: خطوط Google مع بدائل احتياطية.
+  التضمين: كتلة "صفحة مضمّنة" بارتفاع 650 بكسل، والرابط:
+    https://steamomentos.github.io/astronomy/alhyat-fy-alkwn/fig7-atmosphere-fingerprint.html
+  الرمز اللوني ثابت في كل رسوم المقالة: الحياة والأكسجين ذهبي، الكربون بنفسجي، السيليكون نبيذي، الماء والمذيبات بنفسجي فاتح.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sm-purple:#351141; --sm-gold:#EBB00F; --sm-gray:#DFDADE; --sm-white:#FFFFFF;
+  --sm-purple-700:#57375D; --sm-purple-600:#643A6B; --sm-purple-500:#81539D; --sm-purple-300:#B389CD;
+  --sm-gold-700:#C07F00; --sm-gold-600:#D79E03; --sm-gold-300:#E3C76F; --sm-gold-200:#F4D160;
+  --sm-wine-700:#79155B; --sm-wine-500:#A2678A; --sm-mauve:#A78295;
+  --sm-bg:var(--sm-white); --sm-surface:#FFFFFF; --sm-surface-2:#F4F1F4;
+  --sm-ink:var(--sm-purple); --sm-ink-soft:var(--sm-purple-600); --sm-line:var(--sm-gray);
+  --sm-accent:var(--sm-gold); --sm-on-accent:var(--sm-purple);
+  --sm-radius:10px; --sm-radius-sm:8px; --sm-gap:8px;
+  --sm-font:'Cairo','Montserrat','Segoe UI',Tahoma,sans-serif;
+  --sm-font-latin:'Montserrat','Cairo','Segoe UI',sans-serif;
+  /* الرمز اللوني (ثابت في كل رسوم المقالة): الضوء والإشعاع ذهبي، المادة والمجرات بنفسجي فاتح، الفضاء بنفسجي داكن */
+  --space:#1E0927; --light:#EBB00F; --matter:#B389CD;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;height:100%}
+body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.latin,code,.num{font-family:var(--sm-font-latin);direction:ltr;unicode-bidi:isolate}
+.sm-pattern-light{background-color:var(--sm-bg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23F7F2F9' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-pattern-dark{background-color:var(--sm-purple);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23472255' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-wrap{max-width:960px;margin:0 auto;overflow:hidden;border-radius:var(--sm-radius);border:1px solid var(--sm-line);min-height:100%;display:flex;flex-direction:column}
+.sm-header{color:#fff;padding:8px 14px}
+.sm-title{font-weight:700;font-size:clamp(14px,2.6vw,18px);line-height:1.4;margin:0}
+.sm-body{padding:10px 12px;flex:1 0 auto;display:flex;flex-direction:column}
+.sm-body>.sm-stage{flex:1 0 auto}
+.sm-stage{position:relative;background:var(--space);border:1px solid var(--sm-line);border-radius:var(--sm-radius);padding:4px;display:grid;place-items:center;overflow:hidden;min-height:170px}
+.sm-stage.light{background:var(--sm-surface)}
+.sm-stage>svg{width:100%;height:auto;max-height:270px;display:block}
+/* منطقة رسم تملأ المساحة المتاحة كلها */
+.sm-stage.fill>svg,.sm-stage.fill>canvas{position:absolute;inset:0;width:100%;height:100%;max-height:none}
+.ovl{position:absolute;background:rgba(53,17,65,.92);border:1px solid var(--sm-purple-700);border-radius:8px;color:var(--sm-gray);font-size:12px;padding:5px 9px;line-height:1.4}
+.ovl b{color:var(--sm-gold-200)}
+.sm-stage text{font-family:var(--sm-font)}
+.sm-controls{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:var(--sm-gap)}
+.sm-tabs{display:flex;flex-wrap:wrap;gap:4px}
+.sm-btn{font:inherit;font-weight:600;font-size:13px;line-height:1.5;cursor:pointer;border:1.5px solid var(--sm-purple);background:#fff;color:var(--sm-purple);padding:3px 11px;border-radius:999px;transition:background .15s,color .15s,border-color .15s}
+.sm-btn:hover{border-color:var(--sm-purple-500);color:var(--sm-purple-500)}
+.sm-btn[aria-selected="true"],.sm-btn[aria-pressed="true"],.sm-btn.primary{background:var(--sm-accent);border-color:var(--sm-accent);color:var(--sm-on-accent)}
+.sm-btn:focus-visible,.sm-range:focus-visible{outline:3px solid var(--sm-purple-300);outline-offset:2px}
+.sm-btn.ghost{border-style:dashed}
+.sm-range-wrap{display:flex;align-items:center;gap:8px;flex:1 1 220px;font-size:13px}
+.sm-range{flex:1;accent-color:var(--sm-gold);height:22px;min-width:0}
+.sm-card{margin-top:var(--sm-gap);background:var(--sm-surface-2);border-inline-start:4px solid var(--sm-accent);border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
+.sm-card h3{margin:0 0 2px;font-size:14px;font-weight:700}
+.sm-card p{margin:0;color:var(--sm-ink-soft)}
+.sm-legend{display:flex;flex-wrap:wrap;gap:2px 12px;margin-top:6px;font-size:12px;color:var(--sm-ink-soft)}
+.sm-legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);margin-inline-end:6px;vertical-align:-1px;border:1px solid rgba(53,17,65,.25)}
+.sm-takeaway{margin-top:var(--sm-gap);background:var(--sm-purple);color:#fff;border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
+.sm-takeaway b{color:var(--sm-gold)}
+.pt{display:block;position:relative;padding-inline-start:12px}
+.pt::before{content:"";position:absolute;inset-inline-start:0;top:.6em;width:5px;height:5px;border-radius:50%;background:var(--sm-gold-700)}
+.sm-takeaway .pt::before{background:var(--sm-gold)}
+.sm-note{font-size:11px;color:var(--sm-ink-soft);margin:4px 0 0;line-height:1.45}
+@media (max-width:520px){
+  .sm-header{padding:6px 10px}.sm-body{padding:8px}.sm-stage{padding:2px}
+  .sm-wrap{border-radius:0;border-inline:0}
+  .sm-btn{font-size:12px;padding:2px 9px}
+  .sm-card,.sm-takeaway{font-size:12px;padding:5px 8px}.sm-card h3{font-size:13px}.sm-legend{font-size:11px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+
+/* الرمز اللوني لمقالة الحياة في الكون */
+:root{--life:#EBB00F;--carbon:#81539D;--silicon:#A2678A;--solvent:#B389CD}
+.sm-stage.fill{min-height:200px}
+.ax{font-size:11px;fill:var(--sm-purple-600)}
+.ml{font-size:11px;font-weight:700;text-anchor:middle}
+.chips{display:flex;flex-wrap:wrap;gap:4px 6px;margin-top:6px}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:12px;padding:1px 9px;border-radius:999px;border:1.5px solid var(--sm-line);color:var(--sm-ink-soft);background:#fff}
+.chip i{width:10px;height:10px;border-radius:50%;background:var(--c)}
+.chip.off{opacity:.45;text-decoration:line-through}
+.chip.on{border-color:var(--c);color:var(--sm-ink);font-weight:600}
+</style>
+</head>
+<body>
+<main class="sm-wrap" id="sm-root">
+  <header class="sm-header sm-pattern-dark">
+    <h1 class="sm-title">الضوء العابر يكشف غازات الكوكب: أيّها بصمة حياة؟</h1>
+  </header>
+  <div class="sm-body sm-pattern-light">
+    <div class="sm-controls" style="margin-top:0;margin-bottom:6px">
+      <div class="sm-tabs" role="tablist" aria-label="الكوكب" id="pls">
+        <button class="sm-btn" role="tab" aria-selected="true">الأرض اليوم</button>
+        <button class="sm-btn" role="tab" aria-selected="false">الأرض الفتية</button>
+        <button class="sm-btn" role="tab" aria-selected="false">المريخ</button>
+      </div>
+    </div>
+    <section class="sm-stage light fill">
+      <svg id="sp" role="img" aria-labelledby="sp-desc"><desc id="sp-desc">منحنى لضوء النجم بعد عبوره الغلاف الجوي للكوكب، فيه انخفاضات عند الأطوال الموجية التي تمتصها غازاته.</desc></svg>
+    </section>
+    <div class="chips" id="chips"></div>
+    <div class="sm-card" aria-live="polite">
+      <h3 id="c-title"></h3>
+      <p id="c-text"></p>
+    </div>
+    <div class="sm-takeaway">
+      <b>الخلاصة</b><span class="pt">كل غاز يمتص ألوانًا معينة من الضوء، فيترك فيه بصمة</span><span class="pt">الأكسجين والميثان معًا علامة قوية على حياة، لكنها ليست دليلًا قاطعًا</span>
+    </div>
+  </div>
+</main>
+<script>
+var SM = (function(){
+  var NS = 'http://www.w3.org/2000/svg';
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function el(tag, attrs, parent){
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  /* نقاط مختصرة: النص مفصول بـ | */
+  function pts(node, s){
+    node.textContent = '';
+    String(s).split('|').forEach(function(x){ var p = document.createElement('span'); p.className = 'pt'; p.textContent = x.trim(); node.appendChild(p); });
+  }
+  function tabs(container, onSelect){
+    var btns = container.querySelectorAll('.sm-btn');
+    btns.forEach(function(b, i){ b.addEventListener('click', function(){ select(i); onSelect(i); }); });
+    function select(i){ btns.forEach(function(b, j){ b.setAttribute('aria-selected', String(i === j)); }); }
+    return select;
+  }
+  /* أرقام عربية بفواصل الآلاف */
+  function fmt(n, d){ return Number(n).toLocaleString('en-US', {maximumFractionDigits: d || 0}); }
+  function postHeight(){
+    if (window.parent === window) return;
+    var h = Math.ceil(document.documentElement.getBoundingClientRect().height);
+    try { window.parent.postMessage({type:'sm-embed-height', height:h}, '*'); } catch(e){}
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(postHeight).observe(document.body);
+  window.addEventListener('load', postHeight);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(postHeight);
+  /* يجعل منطقة الرسم تملأ المساحة بلا فراغ: يختار viewBox بنسبة أبعاد الإطار ويضمن ظهور المنطقة الأساسية (w×h حول cx,cy) */
+  function fit(svg, cx, cy, w, h){
+    var box = svg.parentNode;
+    function go(){
+      var r = box.clientWidth / Math.max(1, box.clientHeight), vw, vh;
+      if (r > w / h){ vh = h; vw = h * r; } else { vw = w; vh = w / r; }
+      svg.setAttribute('viewBox', [cx - vw / 2, cy - vh / 2, vw, vh].map(function(v){ return v.toFixed(1); }).join(' '));
+      svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    }
+    if ('ResizeObserver' in window) new ResizeObserver(go).observe(box);
+    go();
+  }
+  return {el:el, pts:pts, tabs:tabs, fmt:fmt, reduce:reduce, fit:fit};
+})();
+
+</script>
+<script>
+(function(){
+  /* نطاقات امتصاص مبسطة في الأشعة المرئية وتحت الحمراء القريبة: [المركز بالميكرون، العرض، العمق] */
+  var M = [
+    {k:'O2', n:'الأكسجين', c:'#EBB00F', b:[[0.76,0.02,0.55]]},
+    {k:'O3', n:'الأوزون', c:'#E3C76F', b:[[0.6,0.08,0.18]]},
+    {k:'H2O', n:'بخار الماء', c:'#B389CD', b:[[0.94,0.03,0.3],[1.13,0.03,0.3],[1.4,0.05,0.5],[1.87,0.06,0.55]]},
+    {k:'CH4', n:'الميثان', c:'#81539D', b:[[1.7,0.04,0.35],[2.3,0.06,0.5],[3.3,0.08,0.75]]},
+    {k:'CO2', n:'ثاني أكسيد الكربون', c:'#A2678A', b:[[2.0,0.03,0.3],[2.7,0.07,0.6],[4.3,0.1,0.9]]}
+  ];
+  /* نسبة وجود كل غاز (0 = غائب) */
+  var P = [
+    {n:'الأرض اليوم', a:{O2:1, O3:1, H2O:1, CH4:0.45, CO2:0.5}, t:'الأرض اليوم: أكسجين وميثان معًا', p:'الميثان يتفكك بسرعة إذا وُجد معه أكسجين|بقاؤهما معًا يعني أن شيئًا يجددهما دائمًا: الحياة'},
+    {n:'الأرض الفتية', a:{H2O:1, CH4:1, CO2:1}, t:'الأرض الفتية: ميثان بلا أكسجين', p:'كانت فيها حياة دقيقة، لكن بصمتها أضعف|الميثان وحده قد يأتي من البراكين أيضًا'},
+    {n:'المريخ', a:{H2O:0.15, CO2:1}, t:'المريخ: ثاني أكسيد الكربون وحده تقريبًا', p:'غلاف رقيق بلا أكسجين ولا ميثان يُذكر|لا بصمة حياة واضحة في هوائه'}
+  ];
+  var L0 = 0.5, L1 = 4.6;
+  var svg = document.getElementById('sp'), box = svg.parentNode, narrow = null, cur = 0, W, H, X0, X1, Y0, Y1;
+  function x(l){ return X0 - (l - L0) / (L1 - L0) * (X0 - X1); }   /* RTL: الأقصر يمينًا */
+  function txt(at, s){ var t = SM.el('text', at, svg); t.textContent = s; return t; }
+  function draw(){
+    svg.textContent = '';
+    W = narrow ? 380 : 600; H = narrow ? 300 : 240;
+    X0 = W - 14; X1 = 14; Y1 = 40; Y0 = H - 50;
+    var a = P[cur].a, pts = [], top = Y1 + 10, depthPx = (Y0 - top) * 0.85;
+    for (var i = 0; i <= 400; i++){
+      var l = L0 + (L1 - L0) * i / 400, f = 0;
+      M.forEach(function(m){ var s = a[m.k] || 0; if (s) m.b.forEach(function(b){ f += s * b[2] * Math.exp(-Math.pow((l - b[0]) / b[1], 2) / 2); }); });
+      pts.push(x(l).toFixed(1) + ' ' + (top + Math.min(f, 1) * depthPx).toFixed(1));
+    }
+    /* أشرطة خفيفة تحت كل نطاق امتصاص */
+    M.forEach(function(m){ var s = a[m.k] || 0; m.b.forEach(function(b){
+      SM.el('rect', {x:x(b[0] + b[1] * 1.5), y:top, width:x(b[0] - b[1] * 1.5) - x(b[0] + b[1] * 1.5), height:Y0 - top, fill:m.c, opacity:s ? .16 : .05}, svg);
+    }); });
+    SM.el('path', {d:'M' + pts.join(' L'), fill:'none', stroke:'#351141', 'stroke-width':2.5, 'stroke-linejoin':'round'}, svg);
+    /* أسماء الغازات فوق أعمق انخفاض لكل غاز حاضر */
+    M.forEach(function(m){
+      if (!a[m.k]) return;
+      var b = m.b.reduce(function(p, q){ return q[2] > p[2] ? q : p; });
+      if (narrow && m.k === 'O3') return;
+      txt({x:x(b[0]), y:top - 8, 'class':'ml', fill:m.c === '#E3C76F' || m.c === '#EBB00F' ? '#C07F00' : m.c}, m.k.replace(/(\d)/, function(d){ return '₀₁₂₃₄₅₆₇₈₉'[d]; }));
+    });
+    SM.el('line', {x1:X1, y1:Y0, x2:X0, y2:Y0, stroke:'#DFDADE', 'stroke-width':2}, svg);
+    [1,2,3,4].forEach(function(l){ txt({x:x(l), y:Y0 + 16, 'text-anchor':'middle', 'class':'ax'}, l + ' ميكرون'); });
+    txt({x:W / 2, y:Y0 + 36, 'text-anchor':'middle', 'class':'ax'}, 'طول موجة الضوء (أشعة تحت حمراء)');
+    txt({x:X0, y:14, 'text-anchor':'start', 'class':'ax'}, 'كمية الضوء الواصلة، والانخفاض = غاز امتصّه');
+    var w = Math.max(1, box.clientWidth), h = Math.max(1, box.clientHeight), r = w / h, vw, vh;
+    if (r > W / H){ vh = H; vw = vh * r; } else { vw = W; vh = vw / r; }
+    svg.setAttribute('viewBox', [W / 2 - vw / 2, H / 2 - vh / 2, vw, vh].map(function(v){ return v.toFixed(1); }).join(' '));
+  }
+  var chips = document.getElementById('chips'), C = [];
+  M.forEach(function(m){
+    var c = document.createElement('span'); c.className = 'chip'; c.style.setProperty('--c', m.c);
+    c.innerHTML = '<i></i>' + m.n; chips.appendChild(c); C.push(c);
+  });
+  function pick(i){
+    cur = i; draw();
+    M.forEach(function(m, j){ var on = !!P[i].a[m.k]; C[j].classList.toggle('on', on); C[j].classList.toggle('off', !on); });
+    document.getElementById('c-title').textContent = P[i].t;
+    SM.pts(document.getElementById('c-text'), P[i].p);
+  }
+  function fit(){ var n = box.clientWidth < 520; narrow = n; draw(); }
+  if ('ResizeObserver' in window) new ResizeObserver(fit).observe(box);
+  SM.tabs(document.getElementById('pls'), pick);
+  narrow = box.clientWidth < 520;
+  pick(0);
+})();
+</script>
+</body>
+</html>
