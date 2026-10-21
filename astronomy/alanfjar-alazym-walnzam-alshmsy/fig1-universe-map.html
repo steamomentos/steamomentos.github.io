@@ -84,11 +84,11 @@ body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font
 .mk text{font-size:11px;fill:#fff;paint-order:stroke;stroke:#2A0F35;stroke-width:3px}
 .mk:focus{outline:none}.mk:focus-visible circle.dot{stroke:var(--sm-purple-300);stroke-width:4}
 .dist{margin-top:6px;position:relative}
-.dist-line{position:relative;height:26px;margin:0 9px;border-bottom:2px solid var(--sm-gray);top:-12px;margin-bottom:-26px}
+.dist-line{position:relative;height:12px;margin:0 9px;border-bottom:2px solid var(--sm-gray)}
 .dist-line i{position:absolute;bottom:-6px;width:10px;height:10px;border-radius:50%;transform:translateX(50%);border:1.5px solid #fff}
-.dist-line i.on{opacity:0}
-#pick{position:relative;width:100%;height:28px;margin:0;background:transparent;cursor:pointer}
-.dist-axis{display:flex;justify-content:space-between;font-size:11px;color:var(--sm-ink-soft);margin-top:-4px}
+.dist-line i.on{width:14px;height:14px;bottom:-8px;box-shadow:0 0 0 2px var(--sm-gold)}
+#pick{display:block;width:100%;height:26px;margin:2px 0 0;cursor:pointer}
+.dist-axis{display:flex;justify-content:space-between;font-size:11px;color:var(--sm-ink-soft);margin-top:4px;line-height:1.3}
 </style>
 </head>
 <body>
@@ -118,8 +118,8 @@ body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font
     </section>
     <div class="dist">
       <div class="dist-line" id="distLine" aria-hidden="true"></div>
-      <input class="sm-range" id="pick" type="range" min="0" max="11" step="1" value="0" aria-label="اختر تجمّعًا من الأقرب إلى الأبعد">
-      <div class="dist-axis" aria-hidden="true"><span>الأقرب</span><span>حرّك الشريط</span><span>الأبعد</span></div>
+      <div class="dist-axis" aria-hidden="true"><span>الأقرب</span><span>الأبعد</span></div>
+      <input class="sm-range" id="pick" type="range" min="0" max="11" step="1" value="0" aria-label="حرّك الشريط لتختار تجمّعًا من الأقرب إلى الأبعد">
     </div>
     <div class="sm-card" aria-live="polite">
       <h3 id="c-title"></h3>
