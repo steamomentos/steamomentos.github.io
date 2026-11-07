@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>سباق الشحن: مكثف فائق أمام بطارية | STEAMomentos</title>
+<meta name="description" content="شغّل السباق لترى الفرق في سرعة الشحن وعدد مرات الشحن بين المكثف الفائق وبطارية الليثيوم.">
+<!--
+  رسم تفاعلي لمقالة "مكثفات الجرافين الفائقة" على steamomentos.org
+  ملف مستقل (CSS و JS داخليان). الاعتماد الخارجي الوحيد: خطوط Google مع بدائل احتياطية.
+  التضمين: كتلة "صفحة مضمّنة" بارتفاع 650 بكسل، والرابط:
+    https://steamomentos.github.io/chemistry/mkthfat-algrafyn-alfaeqa/fig5-charge-race.html
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sm-purple:#351141; --sm-gold:#EBB00F; --sm-gray:#DFDADE; --sm-white:#FFFFFF;
+  --sm-purple-700:#57375D; --sm-purple-600:#643A6B; --sm-purple-500:#81539D; --sm-purple-300:#B389CD;
+  --sm-gold-700:#C07F00; --sm-gold-600:#D79E03; --sm-gold-300:#E3C76F; --sm-gold-200:#F4D160;
+  --sm-wine-700:#79155B; --sm-wine-500:#A2678A; --sm-mauve:#A78295;
+  --sm-bg:var(--sm-white); --sm-surface:#FFFFFF; --sm-surface-2:#F4F1F4;
+  --sm-ink:var(--sm-purple); --sm-ink-soft:var(--sm-purple-600); --sm-line:var(--sm-gray);
+  --sm-accent:var(--sm-gold); --sm-on-accent:var(--sm-purple);
+  --sm-radius:10px; --sm-radius-sm:8px; --sm-gap:8px;
+  --sm-font:'Cairo','Montserrat','Segoe UI',Tahoma,sans-serif;
+  --sm-font-latin:'Montserrat','Cairo','Segoe UI',sans-serif;
+  /* الرمز اللوني (ثابت في كل رسوم المقالة): الضوء والإشعاع ذهبي، المادة والمجرات بنفسجي فاتح، الفضاء بنفسجي داكن */
+  --space:#1E0927; --light:#EBB00F; --matter:#B389CD;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;height:100%}
+body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.latin,code,.num{font-family:var(--sm-font-latin);direction:ltr;unicode-bidi:isolate}
+.sm-pattern-light{background-color:var(--sm-bg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23F7F2F9' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-pattern-dark{background-color:var(--sm-purple);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23472255' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-wrap{max-width:960px;margin:0 auto;overflow:hidden;border-radius:var(--sm-radius);border:1px solid var(--sm-line);min-height:100%;display:flex;flex-direction:column}
+.sm-header{color:#fff;padding:8px 14px}
+.sm-title{font-weight:700;font-size:clamp(14px,2.6vw,18px);line-height:1.4;margin:0}
+.sm-body{padding:10px 12px;flex:1 0 auto;display:flex;flex-direction:column}
+.sm-body>.sm-stage{flex:1 0 auto}
+.sm-stage{position:relative;background:var(--space);border:1px solid var(--sm-line);border-radius:var(--sm-radius);padding:4px;display:grid;place-items:center;overflow:hidden;min-height:170px}
+.sm-stage.light{background:var(--sm-surface)}
+.sm-stage>svg{width:100%;height:auto;max-height:270px;display:block}
+/* منطقة رسم تملأ المساحة المتاحة كلها */
+.sm-stage.fill>svg,.sm-stage.fill>canvas{position:absolute;inset:0;width:100%;height:100%;max-height:none}
+.ovl{position:absolute;background:rgba(53,17,65,.92);border:1px solid var(--sm-purple-700);border-radius:8px;color:var(--sm-gray);font-size:12px;padding:5px 9px;line-height:1.4}
+.ovl b{color:var(--sm-gold-200)}
+.sm-stage text{font-family:var(--sm-font)}
+.sm-controls{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:var(--sm-gap)}
+.sm-tabs{display:flex;flex-wrap:wrap;gap:4px}
+.sm-btn{font:inherit;font-weight:600;font-size:13px;line-height:1.5;cursor:pointer;border:1.5px solid var(--sm-purple);background:#fff;color:var(--sm-purple);padding:3px 11px;border-radius:999px;transition:background .15s,color .15s,border-color .15s}
+.sm-btn:hover{border-color:var(--sm-purple-500);color:var(--sm-purple-500)}
+.sm-btn[aria-selected="true"],.sm-btn[aria-pressed="true"],.sm-btn.primary{background:var(--sm-accent);border-color:var(--sm-accent);color:var(--sm-on-accent)}
+.sm-btn:focus-visible,.sm-range:focus-visible{outline:3px solid var(--sm-purple-300);outline-offset:2px}
+.sm-btn.ghost{border-style:dashed}
+.sm-range-wrap{display:flex;align-items:center;gap:8px;flex:1 1 220px;font-size:13px}
+.sm-range{flex:1;accent-color:var(--sm-gold);height:22px;min-width:0}
+.sm-card{margin-top:var(--sm-gap);background:var(--sm-surface-2);border-inline-start:4px solid var(--sm-accent);border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
+.sm-card h3{margin:0 0 2px;font-size:14px;font-weight:700}
+.sm-card p{margin:0;color:var(--sm-ink-soft)}
+.sm-legend{display:flex;flex-wrap:wrap;gap:2px 12px;margin-top:6px;font-size:12px;color:var(--sm-ink-soft)}
+.sm-legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);margin-inline-end:6px;vertical-align:-1px;border:1px solid rgba(53,17,65,.25)}
+.sm-takeaway{margin-top:var(--sm-gap);background:var(--sm-purple);color:#fff;border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
+.sm-takeaway b{color:var(--sm-gold)}
+.pt{display:block;position:relative;padding-inline-start:12px}
+.pt::before{content:"";position:absolute;inset-inline-start:0;top:.6em;width:5px;height:5px;border-radius:50%;background:var(--sm-gold-700)}
+.sm-takeaway .pt::before{background:var(--sm-gold)}
+.sm-note{font-size:11px;color:var(--sm-ink-soft);margin:4px 0 0;line-height:1.45}
+@media (max-width:520px){
+  .sm-header{padding:6px 10px}.sm-body{padding:8px}.sm-stage{padding:2px}
+  .sm-wrap{border-radius:0;border-inline:0}
+  .sm-btn{font-size:12px;padding:2px 9px}
+  .sm-card,.sm-takeaway{font-size:12px;padding:5px 8px}.sm-card h3{font-size:13px}.sm-legend{font-size:11px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+
+
+/* الخاص بهذا الرسم */
+.pick{margin-top:6px}
+.sm-stage.light{align-items:stretch}
+.pick .sm-range{display:block;width:100%}
+.pick-axis{display:flex;justify-content:space-between;font-size:11px;color:var(--sm-ink-soft);line-height:1.3}
+.pick-axis.abs{display:block;position:relative;height:17px}
+.pick-axis.abs span{position:absolute;top:0;transform:translateX(50%);white-space:nowrap}
+.pick-axis.abs span:first-child{transform:none}
+.pick-axis.abs span:last-child{transform:none}
+.sm-stage.light{padding:10px;display:flex;flex-direction:column;justify-content:center;gap:14px}
+.ln{display:flex;align-items:center;gap:8px}
+.ln-n{flex:0 0 92px;font-size:13px;font-weight:700;line-height:1.25}
+.ln-n small{display:block;font-weight:400;font-size:11px;color:var(--sm-ink-soft)}
+.bat{flex:1;height:30px;border:3px solid var(--sm-purple);border-radius:7px;position:relative;overflow:hidden;background:#fff}
+.bat::after{content:"";position:absolute;inset-inline-end:-9px;top:7px;width:6px;height:10px;background:var(--sm-purple);border-radius:2px}
+.bat b{position:absolute;top:0;bottom:0;right:0;width:0;background:var(--c)}
+.bat span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+.clk{text-align:center;font-size:13px;color:var(--sm-ink-soft)}
+.cyc{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cyc div{background:#F4F1F4;border-radius:8px;padding:4px 8px;text-align:center;font-size:12px}
+.cyc b{display:block;font-size:16px;color:var(--sm-purple)}
+</style>
+</head>
+<body>
+<main class="sm-wrap" id="sm-root">
+  <header class="sm-header sm-pattern-dark">
+    <h1 class="sm-title">المكثف الفائق يمتلئ في ثوانٍ ويتحمل الشحن مئات آلاف المرات</h1>
+  </header>
+  <div class="sm-body sm-pattern-light">
+    <section class="sm-stage light">
+      <div class="ln"><div class="ln-n">مكثف فائق<small>شحن سطحي</small></div><div class="bat" style="--c:#EBB00F"><b id="b1"></b><span id="t1">0%</span></div></div>
+      <div class="ln"><div class="ln-n">بطارية ليثيوم<small>تفاعل كيميائي</small></div><div class="bat" style="--c:#81539D"><b id="b2"></b><span id="t2">0%</span></div></div>
+      <div class="clk" id="clk">اضغط «ابدأ السباق»</div>
+      <div class="cyc"><div>عمر المكثف الفائق<b>أكثر من 100 ألف دورة</b></div><div>عمر بطارية الليثيوم<b>نحو 1000–3000 دورة</b></div></div>
+    </section>
+    <div class="sm-controls"><button class="sm-btn primary" id="go">ابدأ السباق</button></div>
+    <div class="sm-card" aria-live="polite"><h3>أين يفيد هذا؟</h3><p id="cx"></p></div>
+    <div class="sm-takeaway"><b>الخلاصة</b><span class="pt">المكثف الفائق مكمّل للبطارية لا بديل عنها</span><span class="pt">يناسب الدفعات السريعة: الكبح والتسارع والنسخ الاحتياطي</span></div>
+  </div>
+</main>
+<script>
+var SM = (function(){
+  var NS = 'http://www.w3.org/2000/svg';
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function el(tag, attrs, parent){
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  /* نقاط مختصرة: النص مفصول بـ | */
+  function pts(node, s){
+    node.textContent = '';
+    String(s).split('|').forEach(function(x){ var p = document.createElement('span'); p.className = 'pt'; p.textContent = x.trim(); node.appendChild(p); });
+  }
+  function tabs(container, onSelect){
+    var btns = container.querySelectorAll('.sm-btn');
+    btns.forEach(function(b, i){ b.addEventListener('click', function(){ select(i); onSelect(i); }); });
+    function select(i){ btns.forEach(function(b, j){ b.setAttribute('aria-selected', String(i === j)); }); }
+    return select;
+  }
+  /* أرقام عربية بفواصل الآلاف */
+  function fmt(n, d){ return Number(n).toLocaleString('en-US', {maximumFractionDigits: d || 0}); }
+  function postHeight(){
+    if (window.parent === window) return;
+    var h = Math.ceil(document.documentElement.getBoundingClientRect().height);
+    try { window.parent.postMessage({type:'sm-embed-height', height:h}, '*'); } catch(e){}
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(postHeight).observe(document.body);
+  window.addEventListener('load', postHeight);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(postHeight);
+  /* يجعل منطقة الرسم تملأ المساحة بلا فراغ: يختار viewBox بنسبة أبعاد الإطار ويضمن ظهور المنطقة الأساسية (w×h حول cx,cy) */
+  function fit(svg, cx, cy, w, h){
+    var box = svg.parentNode;
+    function go(){
+      var r = box.clientWidth / Math.max(1, box.clientHeight), vw, vh;
+      if (r > w / h){ vh = h; vw = h * r; } else { vw = w; vh = w / r; }
+      svg.setAttribute('viewBox', [cx - vw / 2, cy - vh / 2, vw, vh].map(function(v){ return v.toFixed(1); }).join(' '));
+      svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    }
+    if ('ResizeObserver' in window) new ResizeObserver(go).observe(box);
+    go();
+  }
+  return {el:el, pts:pts, tabs:tabs, fmt:fmt, reduce:reduce, fit:fit};
+})();
+
+</script>
+<script>
+/* تسميات الشريط تحت مواضع التوقف تمامًا (RTL: الأول يمينًا) */
+document.querySelectorAll('.pick-axis.abs').forEach(function(ax){
+  var sp = ax.children, n = sp.length;
+  for (var i = 0; i < n; i++){
+    if (i === 0) sp[i].style.right = '0';
+    else if (i === n - 1) sp[i].style.left = '0';
+    else sp[i].style.right = 'calc(8px + (100% - 16px) * ' + (i / (n - 1)) + ')';
+  }
+});
+(function(){
+SM.pts(document.getElementById('cx'), 'حافلات وقطارات تخزّن طاقة الكبح ثم تستخدمها في الانطلاق|حافلات كهربائية تشحن خلال توقفها القصير في المحطة');
+var raf, go = document.getElementById('go');
+/* زمن مضغوط للعرض: ثانية من الرسم = دقيقة تقريبًا. المكثف ~10 ثوانٍ حقيقية، البطارية ~60 دقيقة */
+go.addEventListener('click', function(){
+  cancelAnimationFrame(raf);
+  var t0 = performance.now();
+  function step(now){
+    var t = (now - t0) / 1000, cap = Math.min(1, t / 0.5), bat = Math.min(1, t / 6);
+    document.getElementById('b1').style.width = cap * 100 + '%'; document.getElementById('t1').textContent = Math.round(cap * 100) + '%';
+    document.getElementById('b2').style.width = bat * 100 + '%'; document.getElementById('t2').textContent = Math.round(bat * 100) + '%';
+    var mins = Math.round(t * 10);
+    document.getElementById('clk').textContent = cap >= 1 && bat < 1 ? 'المكثف امتلأ في ثوانٍ، والبطارية ما زالت تشحن (نحو ' + mins + ' دقيقة)' : bat >= 1 ? 'البطارية احتاجت نحو ساعة. لكنها تخزّن طاقة أكثر بكثير' : 'يشحن...';
+    if (bat < 1 && !SM.reduce) raf = requestAnimationFrame(step);
+    else if (SM.reduce){ document.getElementById('b1').style.width = document.getElementById('b2').style.width = '100%'; document.getElementById('clk').textContent = 'المكثف: ثوانٍ. البطارية: نحو ساعة'; }
+  }
+  raf = requestAnimationFrame(step);
+});
+})();
+</script>
+</body>
+</html>

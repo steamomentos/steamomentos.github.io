@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>سبع مواد لتخزين الهيدروجين: بالربط أو بالالتصاق | STEAMomentos</title>
+<meta name="description" content="تنقّل بين المواد السبع في المقالة: بعضها يربط الهيدروجين كيميائيًا داخل جزيئاته، وبعضها يلصقه على سطح مسامي واسع.">
+<!--
+  رسم تفاعلي لمقالة "تطبيقات المركبات العضوية في تخزين الهيدروجين" على steamomentos.org
+  ملف مستقل (CSS و JS داخليان). الاعتماد الخارجي الوحيد: خطوط Google مع بدائل احتياطية.
+  التضمين: كتلة "صفحة مضمّنة" بارتفاع 650 بكسل، والرابط:
+    https://steamomentos.github.io/chemistry/almrkbat-alodwya-fy-tkhzyn-alhydrogyn/fig3-materials.html
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sm-purple:#351141; --sm-gold:#EBB00F; --sm-gray:#DFDADE; --sm-white:#FFFFFF;
+  --sm-purple-700:#57375D; --sm-purple-600:#643A6B; --sm-purple-500:#81539D; --sm-purple-300:#B389CD;
+  --sm-gold-700:#C07F00; --sm-gold-600:#D79E03; --sm-gold-300:#E3C76F; --sm-gold-200:#F4D160;
+  --sm-wine-700:#79155B; --sm-wine-500:#A2678A; --sm-mauve:#A78295;
+  --sm-bg:var(--sm-white); --sm-surface:#FFFFFF; --sm-surface-2:#F4F1F4;
+  --sm-ink:var(--sm-purple); --sm-ink-soft:var(--sm-purple-600); --sm-line:var(--sm-gray);
+  --sm-accent:var(--sm-gold); --sm-on-accent:var(--sm-purple);
+  --sm-radius:10px; --sm-radius-sm:8px; --sm-gap:8px;
+  --sm-font:'Cairo','Montserrat','Segoe UI',Tahoma,sans-serif;
+  --sm-font-latin:'Montserrat','Cairo','Segoe UI',sans-serif;
+  /* الرمز اللوني (ثابت في كل رسوم المقالة): الضوء والإشعاع ذهبي، المادة والمجرات بنفسجي فاتح، الفضاء بنفسجي داكن */
+  --space:#1E0927; --light:#EBB00F; --matter:#B389CD;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;height:100%}
+body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.latin,code,.num{font-family:var(--sm-font-latin);direction:ltr;unicode-bidi:isolate}
+.sm-pattern-light{background-color:var(--sm-bg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23F7F2F9' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-pattern-dark{background-color:var(--sm-purple);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23472255' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-wrap{max-width:960px;margin:0 auto;overflow:hidden;border-radius:var(--sm-radius);border:1px solid var(--sm-line);min-height:100%;display:flex;flex-direction:column}
+.sm-header{color:#fff;padding:8px 14px}
+.sm-title{font-weight:700;font-size:clamp(14px,2.6vw,18px);line-height:1.4;margin:0}
+.sm-body{padding:10px 12px;flex:1 0 auto;display:flex;flex-direction:column}
+.sm-body>.sm-stage{flex:1 0 auto}
+.sm-stage{position:relative;background:var(--space);border:1px solid var(--sm-line);border-radius:var(--sm-radius);padding:4px;display:grid;place-items:center;overflow:hidden;min-height:170px}
+.sm-stage.light{background:var(--sm-surface)}
+.sm-stage>svg{width:100%;height:auto;max-height:270px;display:block}
+/* منطقة رسم تملأ المساحة المتاحة كلها */
+.sm-stage.fill>svg,.sm-stage.fill>canvas{position:absolute;inset:0;width:100%;height:100%;max-height:none}
+.ovl{position:absolute;background:rgba(53,17,65,.92);border:1px solid var(--sm-purple-700);border-radius:8px;color:var(--sm-gray);font-size:12px;padding:5px 9px;line-height:1.4}
+.ovl b{color:var(--sm-gold-200)}
+.sm-stage text{font-family:var(--sm-font)}
+.sm-controls{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:var(--sm-gap)}
+.sm-tabs{display:flex;flex-wrap:wrap;gap:4px}
+.sm-btn{font:inherit;font-weight:600;font-size:13px;line-height:1.5;cursor:pointer;border:1.5px solid var(--sm-purple);background:#fff;color:var(--sm-purple);padding:3px 11px;border-radius:999px;transition:background .15s,color .15s,border-color .15s}
+.sm-btn:hover{border-color:var(--sm-purple-500);color:var(--sm-purple-500)}
+.sm-btn[aria-selected="true"],.sm-btn[aria-pressed="true"],.sm-btn.primary{background:var(--sm-accent);border-color:var(--sm-accent);color:var(--sm-on-accent)}
+.sm-btn:focus-visible,.sm-range:focus-visible{outline:3px solid var(--sm-purple-300);outline-offset:2px}
+.sm-btn.ghost{border-style:dashed}
+.sm-range-wrap{display:flex;align-items:center;gap:8px;flex:1 1 220px;font-size:13px}
+.sm-range{flex:1;accent-color:var(--sm-gold);height:22px;min-width:0}
+.sm-card{margin-top:var(--sm-gap);background:var(--sm-surface-2);border-inline-start:4px solid var(--sm-accent);border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
+.sm-card h3{margin:0 0 2px;font-size:14px;font-weight:700}
+.sm-card p{margin:0;color:var(--sm-ink-soft)}
+.sm-legend{display:flex;flex-wrap:wrap;gap:2px 12px;margin-top:6px;font-size:12px;color:var(--sm-ink-soft)}
+.sm-legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);margin-inline-end:6px;vertical-align:-1px;border:1px solid rgba(53,17,65,.25)}
+.sm-takeaway{margin-top:var(--sm-gap);background:var(--sm-purple);color:#fff;border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
+.sm-takeaway b{color:var(--sm-gold)}
+.pt{display:block;position:relative;padding-inline-start:12px}
+.pt::before{content:"";position:absolute;inset-inline-start:0;top:.6em;width:5px;height:5px;border-radius:50%;background:var(--sm-gold-700)}
+.sm-takeaway .pt::before{background:var(--sm-gold)}
+.sm-note{font-size:11px;color:var(--sm-ink-soft);margin:4px 0 0;line-height:1.45}
+@media (max-width:520px){
+  .sm-header{padding:6px 10px}.sm-body{padding:8px}.sm-stage{padding:2px}
+  .sm-wrap{border-radius:0;border-inline:0}
+  .sm-btn{font-size:12px;padding:2px 9px}
+  .sm-card,.sm-takeaway{font-size:12px;padding:5px 8px}.sm-card h3{font-size:13px}.sm-legend{font-size:11px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+
+
+/* الخاص بهذا الرسم */
+.pick{margin-top:6px}
+.sm-stage.light{align-items:stretch}
+.pick .sm-range{display:block;width:100%}
+.pick-axis{display:flex;justify-content:space-between;font-size:11px;color:var(--sm-ink-soft);line-height:1.3}
+.pick-axis.abs{display:block;position:relative;height:17px}
+.pick-axis.abs span{position:absolute;top:0;transform:translateX(50%);white-space:nowrap}
+.pick-axis.abs span:first-child{transform:none}
+.pick-axis.abs span:last-child{transform:none}
+.sm-stage.light{padding:4px}
+.badge{position:absolute;top:8px;inset-inline-start:8px;font-size:12px;font-weight:700;border-radius:999px;padding:2px 10px;color:#fff}
+.badge.chem{background:var(--sm-wine-700)}
+.badge.phys{background:var(--sm-purple-500)}
+</style>
+</head>
+<body>
+<main class="sm-wrap" id="sm-root">
+  <header class="sm-header sm-pattern-dark">
+    <h1 class="sm-title">طريقتان لحبس الهيدروجين: ربطه داخل الجزيء أو لصقه على سطح مسامي</h1>
+  </header>
+  <div class="sm-body sm-pattern-light">
+    <section class="sm-stage light fill"><svg id="g" role="img" aria-label="رسم مبسط لبنية المادة المختارة"></svg><span class="badge" id="bd"></span></section>
+    <div class="pick">
+      <input class="sm-range" id="s" type="range" min="0" max="6" step="1" value="0" aria-label="اختر مادة">
+      <div class="pick-axis abs" aria-hidden="true"><span>AB</span><span>كربون</span><span>أنابيب</span><span>COF</span><span>MOF</span><span>LOHC</span><span>POSS</span></div>
+    </div>
+    <div class="sm-card" aria-live="polite"><h3 id="ct"></h3><p id="cx"></p></div>
+    <div class="sm-takeaway"><b>الخلاصة</b><span class="pt">الربط الكيميائي يخزّن كثيرًا لكن الإطلاق يحتاج حرارة</span><span class="pt">الالتصاق سهل العكس لكنه ضعيف عند حرارة الغرفة</span></div>
+  </div>
+</main>
+<script>
+var SM = (function(){
+  var NS = 'http://www.w3.org/2000/svg';
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function el(tag, attrs, parent){
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  /* نقاط مختصرة: النص مفصول بـ | */
+  function pts(node, s){
+    node.textContent = '';
+    String(s).split('|').forEach(function(x){ var p = document.createElement('span'); p.className = 'pt'; p.textContent = x.trim(); node.appendChild(p); });
+  }
+  function tabs(container, onSelect){
+    var btns = container.querySelectorAll('.sm-btn');
+    btns.forEach(function(b, i){ b.addEventListener('click', function(){ select(i); onSelect(i); }); });
+    function select(i){ btns.forEach(function(b, j){ b.setAttribute('aria-selected', String(i === j)); }); }
+    return select;
+  }
+  /* أرقام عربية بفواصل الآلاف */
+  function fmt(n, d){ return Number(n).toLocaleString('en-US', {maximumFractionDigits: d || 0}); }
+  function postHeight(){
+    if (window.parent === window) return;
+    var h = Math.ceil(document.documentElement.getBoundingClientRect().height);
+    try { window.parent.postMessage({type:'sm-embed-height', height:h}, '*'); } catch(e){}
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(postHeight).observe(document.body);
+  window.addEventListener('load', postHeight);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(postHeight);
+  /* يجعل منطقة الرسم تملأ المساحة بلا فراغ: يختار viewBox بنسبة أبعاد الإطار ويضمن ظهور المنطقة الأساسية (w×h حول cx,cy) */
+  function fit(svg, cx, cy, w, h){
+    var box = svg.parentNode;
+    function go(){
+      var r = box.clientWidth / Math.max(1, box.clientHeight), vw, vh;
+      if (r > w / h){ vh = h; vw = h * r; } else { vw = w; vh = w / r; }
+      svg.setAttribute('viewBox', [cx - vw / 2, cy - vh / 2, vw, vh].map(function(v){ return v.toFixed(1); }).join(' '));
+      svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    }
+    if ('ResizeObserver' in window) new ResizeObserver(go).observe(box);
+    go();
+  }
+  return {el:el, pts:pts, tabs:tabs, fmt:fmt, reduce:reduce, fit:fit};
+})();
+
+</script>
+<script>
+/* تسميات الشريط تحت مواضع التوقف تمامًا (RTL: الأول يمينًا) */
+document.querySelectorAll('.pick-axis.abs').forEach(function(ax){
+  var sp = ax.children, n = sp.length;
+  for (var i = 0; i < n; i++){
+    if (i === 0) sp[i].style.right = '0';
+    else if (i === n - 1) sp[i].style.left = '0';
+    else sp[i].style.right = 'calc(8px + (100% - 16px) * ' + (i / (n - 1)) + ')';
+  }
+});
+(function(){
+var svg = document.getElementById('g'), el = SM.el;
+SM.fit(svg, 200, 110, 360, 200);
+var H = '#EBB00F', P = '#81539D', D = '#351141', W = '#A2678A';
+function h2(g, x, y){ el('circle', {cx:x - 4, cy:y, r:4, fill:H}, g); el('circle', {cx:x + 4, cy:y, r:4, fill:H}, g); }
+function atom(g, x, y, c, t, r){ el('circle', {cx:x, cy:y, r:r || 13, fill:c}, g); if (t) el('text', {x:x, y:y + 4, 'text-anchor':'middle', fill:'#fff', 'font-size':11, 'font-weight':700}, g).textContent = t; }
+function hex(g, cx, cy, r, st){ var d = ''; for (var i = 0; i < 6; i++){ var a = Math.PI / 3 * i + Math.PI / 6; d += (i ? 'L' : 'M') + (cx + r * Math.cos(a)).toFixed(1) + ' ' + (cy + r * Math.sin(a)).toFixed(1); } el('path', {d:d + 'Z', fill:'none', stroke:st || P, 'stroke-width':3}, g); }
+var M = [
+  {n:'أمونيا بوران (NH₃BH₃)', t:'chem', x:'نحو 20% من وزنه هيدروجين|يطلقه بالتسخين أو بمحفز|إعادة شحنه بالهيدروجين ما زالت صعبة', d:function(g){
+    atom(g, 165, 110, '#643A6B', 'N', 18); atom(g, 235, 110, '#C07F00', 'B', 18);
+    el('line', {x1:183, y1:110, x2:217, y2:110, stroke:D, 'stroke-width':4}, g);
+    [[140, 80], [140, 140], [146, 110]].forEach(function(p, i){ el('line', {x1:165, y1:110, x2:p[0] - (i === 2 ? 20 : 0), y2:p[1], stroke:D, 'stroke-width':2}, g); atom(g, p[0] - (i === 2 ? 24 : 0), p[1], H, 'H', 9); });
+    [[260, 80], [260, 140], [274, 110]].forEach(function(p){ el('line', {x1:235, y1:110, x2:p[0], y2:p[1], stroke:D, 'stroke-width':2}, g); atom(g, p[0], p[1], H, 'H', 9); });
+    atom(g, 165, 110, '#643A6B', 'N', 18); atom(g, 235, 110, '#C07F00', 'B', 18);
+  }},
+  {n:'الكربون النشط', t:'phys', x:'مسام كثيرة عشوائية الأحجام|سطح غرام واحد منه يعادل عدة ملاعب كرة سلة|يلتصق الهيدروجين بالسطح ويُفلت بسهولة', d:function(g){
+    el('rect', {x:90, y:30, width:220, height:160, rx:30, fill:'#57375D'}, g);
+    [[130, 70, 18], [190, 60, 10], [250, 80, 22], [150, 140, 25], [220, 140, 14], [270, 150, 9], [200, 105, 12]].forEach(function(p){ el('circle', {cx:p[0], cy:p[1], r:p[2], fill:'#fff'}, g); h2(g, p[0], p[1] - p[2] + 6); });
+  }},
+  {n:'أنابيب الكربون النانوية', t:'phys', x:'صفيحة كربون ملفوفة على شكل أنبوب|قطرها بضعة نانومترات إلى عشرات|يلتصق الهيدروجين داخلها وخارجها بقوى ضعيفة', d:function(g){
+    el('rect', {x:70, y:80, width:260, height:60, rx:30, fill:'none', stroke:P, 'stroke-width':4}, g);
+    for (var i = 0; i < 9; i++) hex(g, 95 + i * 26, 110, 13, '#B389CD');
+    [[120, 70], [200, 66], [280, 70], [160, 110], [240, 110], [130, 152], [260, 152]].forEach(function(p){ h2(g, p[0], p[1]); });
+  }},
+  {n:'الأطر العضوية التساهمية (COFs)', t:'phys', x:'وحدات عضوية خفيفة مرتبطة بروابط قوية|مسام منتظمة تمامًا كخلايا النحل|تُحسَّن بالانسكاب الهيدروجيني', d:function(g){
+    for (var r = 0; r < 3; r++) for (var c = 0; c < 4; c++) hex(g, 110 + c * 60 + (r % 2) * 30, 50 + r * 52, 30, P);
+    [[140, 50], [230, 102], [170, 154], [290, 50]].forEach(function(p){ h2(g, p[0], p[1]); });
+  }},
+  {n:'الأطر المعدنية العضوية (MOFs)', t:'phys', x:'عُقد معدنية تربطها جسور عضوية|مثل MOF-5: نحو 2500–3000 م² لكل غرام|مسام قابلة للتعديل حسب الحاجة', d:function(g){
+    var N = [[120, 50], [280, 50], [120, 170], [280, 170]];
+    el('path', {d:'M120 50H280V170H120Z M120 50L280 170 M280 50 120 170', fill:'none', stroke:'#B389CD', 'stroke-width':4}, g);
+    N.forEach(function(p){ el('rect', {x:p[0] - 16, y:p[1] - 16, width:32, height:32, rx:6, fill:'#C07F00'}, g); });
+    [[200, 80], [160, 110], [240, 110], [200, 140]].forEach(function(p){ h2(g, p[0], p[1]); });
+    el('text', {x:120, y:206, 'text-anchor':'middle', fill:D, 'font-size':11}, g).textContent = 'عقدة معدنية';
+    el('text', {x:200, y:206, 'text-anchor':'middle', fill:D, 'font-size':11}, g).textContent = 'جسر عضوي';
+  }},
+  {n:'الحوامل العضوية السائلة (LOHC)', t:'chem', x:'سائل كالوقود يأخذ الهيدروجين بروابط كيميائية|يُنقل بالخزانات والأنابيب العادية|مثل التولوين ⇄ ميثيل سيكلوهكسان', d:function(g){
+    hex(g, 110, 110, 40, P); el('circle', {cx:110, cy:110, r:22, fill:'none', stroke:P, 'stroke-width':3}, g);
+    el('text', {x:110, y:175, 'text-anchor':'middle', fill:D, 'font-size':11}, g).textContent = 'فارغ';
+    el('text', {x:200, y:100, 'text-anchor':'middle', fill:'#C07F00', 'font-size':22}, g).textContent = '⇄';
+    el('text', {x:200, y:125, 'text-anchor':'middle', fill:D, 'font-size':11}, g).textContent = '+3 H₂';
+    hex(g, 290, 110, 40, P);
+    for (var i = 0; i < 6; i++){ var a = Math.PI / 3 * i + Math.PI / 6; el('circle', {cx:290 + 54 * Math.cos(a), cy:110 + 54 * Math.sin(a), r:6, fill:H}, g); }
+    el('text', {x:290, y:186, 'text-anchor':'middle', fill:D, 'font-size':11}, g).textContent = 'مشحون';
+  }},
+  {n:'البوليمرات الهجينة (POSS)', t:'phys', x:'أقفاص سيليكون وأكسجين صغيرة|تربطها سلاسل بوليمر عضوية|تعديل تركيبها يغيّر المسام والسعة', d:function(g){
+    function cage(x, y){ el('rect', {x:x - 22, y:y - 22, width:44, height:44, fill:'none', stroke:W, 'stroke-width':3}, g); el('rect', {x:x - 10, y:y - 34, width:44, height:44, fill:'none', stroke:W, 'stroke-width':2, opacity:.6}, g); [[-22, -22], [22, -22], [-22, 22], [22, 22]].forEach(function(p){ el('circle', {cx:x + p[0], cy:y + p[1], r:5, fill:'#643A6B'}, g); }); }
+    cage(120, 80); cage(280, 80); cage(200, 160);
+    el('path', {d:'M142 80 Q200 40 258 80 M130 102 Q150 160 178 160 M270 102 Q250 160 222 160', fill:'none', stroke:P, 'stroke-width':3}, g);
+    [[200, 95], [170, 125], [235, 125]].forEach(function(p){ h2(g, p[0], p[1]); });
+  }}
+];
+var g = el('g', {}, svg), s = document.getElementById('s'), bd = document.getElementById('bd');
+function upd(){
+  var m = M[+s.value]; g.innerHTML = ''; m.d(g);
+  bd.className = 'badge ' + m.t; bd.textContent = m.t === 'chem' ? 'تخزين كيميائي' : 'التصاق على السطح';
+  document.getElementById('ct').textContent = m.n;
+  SM.pts(document.getElementById('cx'), m.x);
+}
+s.addEventListener('input', upd); upd();
+})();
+</script>
+</body>
+</html>

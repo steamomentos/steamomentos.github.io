@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>الاحتباس الحراري: غطاء يحبس الحرارة | STEAMomentos</title>
+<meta name="description" content="حرّك الشريط لترى كيف يحبس ثاني أكسيد الكربون جزءًا أكبر من حرارة الأرض كلما زاد تركيزه.">
+<!--
+  رسم تفاعلي لمقالة "ثاني أكسيد الكربون: مصادره، استغلاله، والتوجهات البيئية والاقتصادية" على steamomentos.org
+  ملف مستقل (CSS و JS داخليان). الاعتماد الخارجي الوحيد: خطوط Google مع بدائل احتياطية.
+  التضمين: كتلة "صفحة مضمّنة" بارتفاع 650 بكسل، والرابط:
+    https://steamomentos.github.io/chemistry/thany-aksyd-alkrbwn/fig1-greenhouse.html
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sm-purple:#351141; --sm-gold:#EBB00F; --sm-gray:#DFDADE; --sm-white:#FFFFFF;
+  --sm-purple-700:#57375D; --sm-purple-600:#643A6B; --sm-purple-500:#81539D; --sm-purple-300:#B389CD;
+  --sm-gold-700:#C07F00; --sm-gold-600:#D79E03; --sm-gold-300:#E3C76F; --sm-gold-200:#F4D160;
+  --sm-wine-700:#79155B; --sm-wine-500:#A2678A; --sm-mauve:#A78295;
+  --sm-bg:var(--sm-white); --sm-surface:#FFFFFF; --sm-surface-2:#F4F1F4;
+  --sm-ink:var(--sm-purple); --sm-ink-soft:var(--sm-purple-600); --sm-line:var(--sm-gray);
+  --sm-accent:var(--sm-gold); --sm-on-accent:var(--sm-purple);
+  --sm-radius:10px; --sm-radius-sm:8px; --sm-gap:8px;
+  --sm-font:'Cairo','Montserrat','Segoe UI',Tahoma,sans-serif;
+  --sm-font-latin:'Montserrat','Cairo','Segoe UI',sans-serif;
+  /* الرمز اللوني (ثابت في كل رسوم المقالة): الضوء والإشعاع ذهبي، المادة والمجرات بنفسجي فاتح، الفضاء بنفسجي داكن */
+  --space:#1E0927; --light:#EBB00F; --matter:#B389CD;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;height:100%}
+body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.latin,code,.num{font-family:var(--sm-font-latin);direction:ltr;unicode-bidi:isolate}
+.sm-pattern-light{background-color:var(--sm-bg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23F7F2F9' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-pattern-dark{background-color:var(--sm-purple);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23472255' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-wrap{max-width:960px;margin:0 auto;overflow:hidden;border-radius:var(--sm-radius);border:1px solid var(--sm-line);min-height:100%;display:flex;flex-direction:column}
+.sm-header{color:#fff;padding:8px 14px}
+.sm-title{font-weight:700;font-size:clamp(14px,2.6vw,18px);line-height:1.4;margin:0}
+.sm-body{padding:10px 12px;flex:1 0 auto;display:flex;flex-direction:column}
+.sm-body>.sm-stage{flex:1 0 auto}
+.sm-stage{position:relative;background:var(--space);border:1px solid var(--sm-line);border-radius:var(--sm-radius);padding:4px;display:grid;place-items:center;overflow:hidden;min-height:170px}
+.sm-stage.light{background:var(--sm-surface)}
+.sm-stage>svg{width:100%;height:auto;max-height:270px;display:block}
+/* منطقة رسم تملأ المساحة المتاحة كلها */
+.sm-stage.fill>svg,.sm-stage.fill>canvas{position:absolute;inset:0;width:100%;height:100%;max-height:none}
+.ovl{position:absolute;background:rgba(53,17,65,.92);border:1px solid var(--sm-purple-700);border-radius:8px;color:var(--sm-gray);font-size:12px;padding:5px 9px;line-height:1.4}
+.ovl b{color:var(--sm-gold-200)}
+.sm-stage text{font-family:var(--sm-font)}
+.sm-controls{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:var(--sm-gap)}
+.sm-tabs{display:flex;flex-wrap:wrap;gap:4px}
+.sm-btn{font:inherit;font-weight:600;font-size:13px;line-height:1.5;cursor:pointer;border:1.5px solid var(--sm-purple);background:#fff;color:var(--sm-purple);padding:3px 11px;border-radius:999px;transition:background .15s,color .15s,border-color .15s}
+.sm-btn:hover{border-color:var(--sm-purple-500);color:var(--sm-purple-500)}
+.sm-btn[aria-selected="true"],.sm-btn[aria-pressed="true"],.sm-btn.primary{background:var(--sm-accent);border-color:var(--sm-accent);color:var(--sm-on-accent)}
+.sm-btn:focus-visible,.sm-range:focus-visible{outline:3px solid var(--sm-purple-300);outline-offset:2px}
+.sm-btn.ghost{border-style:dashed}
+.sm-range-wrap{display:flex;align-items:center;gap:8px;flex:1 1 220px;font-size:13px}
+.sm-range{flex:1;accent-color:var(--sm-gold);height:22px;min-width:0}
+.sm-card{margin-top:var(--sm-gap);background:var(--sm-surface-2);border-inline-start:4px solid var(--sm-accent);border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
+.sm-card h3{margin:0 0 2px;font-size:14px;font-weight:700}
+.sm-card p{margin:0;color:var(--sm-ink-soft)}
+.sm-legend{display:flex;flex-wrap:wrap;gap:2px 12px;margin-top:6px;font-size:12px;color:var(--sm-ink-soft)}
+.sm-legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);margin-inline-end:6px;vertical-align:-1px;border:1px solid rgba(53,17,65,.25)}
+.sm-takeaway{margin-top:var(--sm-gap);background:var(--sm-purple);color:#fff;border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
+.sm-takeaway b{color:var(--sm-gold)}
+.pt{display:block;position:relative;padding-inline-start:12px}
+.pt::before{content:"";position:absolute;inset-inline-start:0;top:.6em;width:5px;height:5px;border-radius:50%;background:var(--sm-gold-700)}
+.sm-takeaway .pt::before{background:var(--sm-gold)}
+.sm-note{font-size:11px;color:var(--sm-ink-soft);margin:4px 0 0;line-height:1.45}
+@media (max-width:520px){
+  .sm-header{padding:6px 10px}.sm-body{padding:8px}.sm-stage{padding:2px}
+  .sm-wrap{border-radius:0;border-inline:0}
+  .sm-btn{font-size:12px;padding:2px 9px}
+  .sm-card,.sm-takeaway{font-size:12px;padding:5px 8px}.sm-card h3{font-size:13px}.sm-legend{font-size:11px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+
+
+/* الخاص بهذا الرسم */
+.pick{margin-top:6px}
+.sm-stage.light{align-items:stretch}
+.pick .sm-range{display:block;width:100%}
+.pick-axis{display:flex;justify-content:space-between;font-size:11px;color:var(--sm-ink-soft);line-height:1.3}
+.pick-axis.abs{display:block;position:relative;height:17px}
+.pick-axis.abs span{position:absolute;top:0;transform:translateX(50%);white-space:nowrap}
+.pick-axis.abs span:first-child{transform:none}
+.pick-axis.abs span:last-child{transform:none}
+:root{--sky:#1E0927;--sun:#EBB00F;--heat:#A2678A;--co2:#B389CD;--earth:#643A6B}
+.sm-stage{background:var(--sky)}
+.deg{position:absolute;top:8px;inset-inline-start:10px;background:rgba(53,17,65,.92);border:1px solid var(--sm-purple-700);border-radius:8px;color:#fff;padding:4px 10px;text-align:center;line-height:1.2}
+.deg b{display:block;font-family:var(--sm-font-latin);font-size:22px;color:var(--sm-gold);direction:ltr}
+.deg small{font-size:11px;color:var(--sm-gray)}
+.esc{transition:opacity .4s}
+@keyframes up{from{stroke-dashoffset:0}to{stroke-dashoffset:-24}}
+.flow{stroke-dasharray:8 4;animation:up 1s linear infinite}
+</style>
+</head>
+<body>
+<main class="sm-wrap" id="sm-root">
+  <header class="sm-header sm-pattern-dark">
+    <h1 class="sm-title">ثاني أكسيد الكربون يحبس الحرارة: قليله يحفظ الحياة وكثيره يسخّن الأرض</h1>
+  </header>
+  <div class="sm-body sm-pattern-light">
+    <section class="sm-stage fill" aria-label="الشمس تسخن الأرض والغلاف الجوي يعيد جزءًا من الحرارة">
+      <svg id="g" role="img"></svg>
+      <div class="deg" aria-live="polite"><small>متوسط حرارة الأرض</small><b id="t"></b></div>
+    </section>
+    <div class="pick">
+      <input class="sm-range" id="s" type="range" min="0" max="3" step="1" value="2" aria-label="تركيز ثاني أكسيد الكربون في الهواء">
+      <div class="pick-axis abs" aria-hidden="true"><span>بلا غازات دفيئة</span><span>قبل المصانع</span><span>اليوم</span><span>لو تضاعف</span></div>
+    </div>
+    <div class="sm-card" aria-live="polite"><h3 id="ct"></h3><p id="cx"></p></div>
+    <div class="sm-takeaway"><b>الخلاصة</b><span class="pt">الاحتباس الطبيعي يرفع حرارة الأرض نحو 33 درجة فتصلح للحياة</span><span class="pt">زيادة CO<sub>2</sub> تحبس حرارة أكثر، وهذا هو الاحترار</span></div>
+  </div>
+</main>
+<script>
+var SM = (function(){
+  var NS = 'http://www.w3.org/2000/svg';
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function el(tag, attrs, parent){
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  /* نقاط مختصرة: النص مفصول بـ | */
+  function pts(node, s){
+    node.textContent = '';
+    String(s).split('|').forEach(function(x){ var p = document.createElement('span'); p.className = 'pt'; p.textContent = x.trim(); node.appendChild(p); });
+  }
+  function tabs(container, onSelect){
+    var btns = container.querySelectorAll('.sm-btn');
+    btns.forEach(function(b, i){ b.addEventListener('click', function(){ select(i); onSelect(i); }); });
+    function select(i){ btns.forEach(function(b, j){ b.setAttribute('aria-selected', String(i === j)); }); }
+    return select;
+  }
+  /* أرقام عربية بفواصل الآلاف */
+  function fmt(n, d){ return Number(n).toLocaleString('en-US', {maximumFractionDigits: d || 0}); }
+  function postHeight(){
+    if (window.parent === window) return;
+    var h = Math.ceil(document.documentElement.getBoundingClientRect().height);
+    try { window.parent.postMessage({type:'sm-embed-height', height:h}, '*'); } catch(e){}
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(postHeight).observe(document.body);
+  window.addEventListener('load', postHeight);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(postHeight);
+  /* يجعل منطقة الرسم تملأ المساحة بلا فراغ: يختار viewBox بنسبة أبعاد الإطار ويضمن ظهور المنطقة الأساسية (w×h حول cx,cy) */
+  function fit(svg, cx, cy, w, h){
+    var box = svg.parentNode;
+    function go(){
+      var r = box.clientWidth / Math.max(1, box.clientHeight), vw, vh;
+      if (r > w / h){ vh = h; vw = h * r; } else { vw = w; vh = w / r; }
+      svg.setAttribute('viewBox', [cx - vw / 2, cy - vh / 2, vw, vh].map(function(v){ return v.toFixed(1); }).join(' '));
+      svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    }
+    if ('ResizeObserver' in window) new ResizeObserver(go).observe(box);
+    go();
+  }
+  return {el:el, pts:pts, tabs:tabs, fmt:fmt, reduce:reduce, fit:fit};
+})();
+
+</script>
+<script>
+/* تسميات الشريط تحت مواضع التوقف تمامًا (RTL: الأول يمينًا) */
+document.querySelectorAll('.pick-axis.abs').forEach(function(ax){
+  var sp = ax.children, n = sp.length;
+  for (var i = 0; i < n; i++){
+    if (i === 0) sp[i].style.right = '0';
+    else if (i === n - 1) sp[i].style.left = '0';
+    else sp[i].style.right = 'calc(8px + (100% - 16px) * ' + (i / (n - 1)) + ')';
+  }
+});
+(function(){
+var svg = document.getElementById('g'), el = SM.el;
+SM.fit(svg, 200, 130, 400, 250);
+/* الأرض */
+el('circle', {cx:200, cy:470, r:300, fill:'var(--earth)'}, svg);
+el('circle', {cx:200, cy:470, r:300, fill:'none', stroke:'#B389CD', 'stroke-opacity':.35, 'stroke-width':2}, svg);
+var atm = el('circle', {cx:200, cy:470, r:345, fill:'#81539D', 'fill-opacity':.12, stroke:'#B389CD', 'stroke-opacity':.4, 'stroke-dasharray':'3 5'}, svg);
+el('text', {x:200, y:208, 'text-anchor':'middle', fill:'#DFDADE', 'font-size':12}, svg).textContent = 'الأرض';
+var lab = el('text', {x:78, y:172, 'text-anchor':'middle', fill:'#B389CD', 'font-size':11}, svg); lab.textContent = 'الغلاف الجوي';
+/* جزيئات CO2 في الغلاف */
+var dots = el('g', {}, svg), D = [];
+for (var i = 0; i < 70; i++){
+  var a = -2.6 + Math.random() * 2.2, rr = 305 + Math.random() * 36;
+  D.push(el('circle', {cx:200 + rr * Math.cos(a), cy:470 + rr * Math.sin(a), r:2.6, fill:'var(--co2)'}, dots));
+}
+/* الشمس وأشعتها */
+el('circle', {cx:-40, cy:-10, r:60, fill:'var(--sun)'}, svg);
+el('path', {d:'M20 30 L150 175', stroke:'var(--sun)', 'stroke-width':10, 'stroke-linecap':'round', class:'flow'}, svg);
+el('text', {x:60, y:110, fill:'#F4D160', 'font-size':11, transform:'rotate(48 60 110)'}, svg).textContent = 'ضوء الشمس';
+/* الحرارة الصاعدة: أسهم تخرج وأسهم تعود */
+var esc = [], back = [];
+[[200, 'M200 172 L240 60'], [250, 'M250 175 L300 70'], [300, 'M290 182 L350 90']].forEach(function(p, k){
+  esc.push(el('path', {d:p[1], stroke:'var(--heat)', 'stroke-width':4, fill:'none', 'stroke-linecap':'round', class:'flow esc'}, svg));
+});
+[['M215 130 Q235 110 228 172'], ['M265 140 Q285 118 278 176'], ['M315 150 Q335 128 325 186']].forEach(function(p){
+  back.push(el('path', {d:p[0], stroke:'#E3C76F', 'stroke-width':4, fill:'none', 'stroke-linecap':'round', class:'flow esc'}, svg));
+});
+el('text', {x:300, y:44, 'text-anchor':'middle', fill:'#A78295', 'font-size':11}, svg).textContent = 'حرارة تتسرّب للفضاء';
+var bt = el('text', {x:270, y:108, fill:'#E3C76F', 'font-size':11}, svg); bt.textContent = 'حرارة تعود للأرض';
+var S = [
+  {t:'−18°', n:0,  b:0, e:3, h:'بلا غازات دفيئة', x:'الحرارة كلها تتسرّب إلى الفضاء|الأرض متجمدة، نحو 18 تحت الصفر'},
+  {t:'14°',  n:30, b:2, e:2, h:'قبل المصانع: نحو 280 جزءًا في المليون', x:'غطاء طبيعي يعيد جزءًا من الحرارة|حرارة مناسبة للحياة'},
+  {t:'15.3°', n:45, b:2, e:2, h:'اليوم: أكثر من 420 جزءًا في المليون', x:'زاد CO₂ نحو النصف منذ بدء المصانع|سخنت الأرض نحو 1.3 درجة'},
+  {t:'≈17°', n:70, b:3, e:1, h:'لو تضاعف CO₂ (560 جزءًا في المليون)', x:'يُقدَّر الاحترار بنحو 3 درجات، بين 2.5 و4|وهذا تقدير علمي لا نتيجة مؤكدة'}
+];
+var s = document.getElementById('s');
+function upd(){
+  var c = S[+s.value];
+  D.forEach(function(d, i){ d.setAttribute('opacity', i < c.n ? 1 : 0); });
+  esc.forEach(function(p, i){ p.style.opacity = i < c.e ? 1 : .08; });
+  back.forEach(function(p, i){ p.style.opacity = i < c.b ? 1 : 0; });
+  bt.style.opacity = c.b ? 1 : 0;
+  atm.setAttribute('fill-opacity', .05 + c.n / 400);
+  document.getElementById('t').textContent = c.t + 'C';
+  document.getElementById('ct').textContent = c.h;
+  SM.pts(document.getElementById('cx'), c.x);
+}
+s.addEventListener('input', upd); upd();
+})();
+</script>
+</body>
+</html>

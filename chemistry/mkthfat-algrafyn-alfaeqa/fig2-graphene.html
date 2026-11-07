@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>الجرافين: صفيحة بسمك ذرة واحدة | STEAMomentos</title>
+<meta name="description" content="الجرافين شبكة سداسية من ذرات الكربون بسمك ذرة واحدة. انتقل بين بنيته ومساحة سطحه وما يحدث حين تتراص صفائحه.">
+<!--
+  رسم تفاعلي لمقالة "مكثفات الجرافين الفائقة" على steamomentos.org
+  ملف مستقل (CSS و JS داخليان). الاعتماد الخارجي الوحيد: خطوط Google مع بدائل احتياطية.
+  التضمين: كتلة "صفحة مضمّنة" بارتفاع 650 بكسل، والرابط:
+    https://steamomentos.github.io/chemistry/mkthfat-algrafyn-alfaeqa/fig2-graphene.html
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sm-purple:#351141; --sm-gold:#EBB00F; --sm-gray:#DFDADE; --sm-white:#FFFFFF;
+  --sm-purple-700:#57375D; --sm-purple-600:#643A6B; --sm-purple-500:#81539D; --sm-purple-300:#B389CD;
+  --sm-gold-700:#C07F00; --sm-gold-600:#D79E03; --sm-gold-300:#E3C76F; --sm-gold-200:#F4D160;
+  --sm-wine-700:#79155B; --sm-wine-500:#A2678A; --sm-mauve:#A78295;
+  --sm-bg:var(--sm-white); --sm-surface:#FFFFFF; --sm-surface-2:#F4F1F4;
+  --sm-ink:var(--sm-purple); --sm-ink-soft:var(--sm-purple-600); --sm-line:var(--sm-gray);
+  --sm-accent:var(--sm-gold); --sm-on-accent:var(--sm-purple);
+  --sm-radius:10px; --sm-radius-sm:8px; --sm-gap:8px;
+  --sm-font:'Cairo','Montserrat','Segoe UI',Tahoma,sans-serif;
+  --sm-font-latin:'Montserrat','Cairo','Segoe UI',sans-serif;
+  /* الرمز اللوني (ثابت في كل رسوم المقالة): الضوء والإشعاع ذهبي، المادة والمجرات بنفسجي فاتح، الفضاء بنفسجي داكن */
+  --space:#1E0927; --light:#EBB00F; --matter:#B389CD;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;height:100%}
+body{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--sm-font);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.latin,code,.num{font-family:var(--sm-font-latin);direction:ltr;unicode-bidi:isolate}
+.sm-pattern-light{background-color:var(--sm-bg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23F7F2F9' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-pattern-dark{background-color:var(--sm-purple);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cg fill='none' stroke='%23472255' stroke-width='2'%3E%3Cpath d='M26 0 52 15v30L26 60 0 45V15z'/%3E%3Cpath d='M26 60v30M26 12 42 21v18L26 48 10 39V21z'/%3E%3C/g%3E%3C/svg%3E")}
+.sm-wrap{max-width:960px;margin:0 auto;overflow:hidden;border-radius:var(--sm-radius);border:1px solid var(--sm-line);min-height:100%;display:flex;flex-direction:column}
+.sm-header{color:#fff;padding:8px 14px}
+.sm-title{font-weight:700;font-size:clamp(14px,2.6vw,18px);line-height:1.4;margin:0}
+.sm-body{padding:10px 12px;flex:1 0 auto;display:flex;flex-direction:column}
+.sm-body>.sm-stage{flex:1 0 auto}
+.sm-stage{position:relative;background:var(--space);border:1px solid var(--sm-line);border-radius:var(--sm-radius);padding:4px;display:grid;place-items:center;overflow:hidden;min-height:170px}
+.sm-stage.light{background:var(--sm-surface)}
+.sm-stage>svg{width:100%;height:auto;max-height:270px;display:block}
+/* منطقة رسم تملأ المساحة المتاحة كلها */
+.sm-stage.fill>svg,.sm-stage.fill>canvas{position:absolute;inset:0;width:100%;height:100%;max-height:none}
+.ovl{position:absolute;background:rgba(53,17,65,.92);border:1px solid var(--sm-purple-700);border-radius:8px;color:var(--sm-gray);font-size:12px;padding:5px 9px;line-height:1.4}
+.ovl b{color:var(--sm-gold-200)}
+.sm-stage text{font-family:var(--sm-font)}
+.sm-controls{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:var(--sm-gap)}
+.sm-tabs{display:flex;flex-wrap:wrap;gap:4px}
+.sm-btn{font:inherit;font-weight:600;font-size:13px;line-height:1.5;cursor:pointer;border:1.5px solid var(--sm-purple);background:#fff;color:var(--sm-purple);padding:3px 11px;border-radius:999px;transition:background .15s,color .15s,border-color .15s}
+.sm-btn:hover{border-color:var(--sm-purple-500);color:var(--sm-purple-500)}
+.sm-btn[aria-selected="true"],.sm-btn[aria-pressed="true"],.sm-btn.primary{background:var(--sm-accent);border-color:var(--sm-accent);color:var(--sm-on-accent)}
+.sm-btn:focus-visible,.sm-range:focus-visible{outline:3px solid var(--sm-purple-300);outline-offset:2px}
+.sm-btn.ghost{border-style:dashed}
+.sm-range-wrap{display:flex;align-items:center;gap:8px;flex:1 1 220px;font-size:13px}
+.sm-range{flex:1;accent-color:var(--sm-gold);height:22px;min-width:0}
+.sm-card{margin-top:var(--sm-gap);background:var(--sm-surface-2);border-inline-start:4px solid var(--sm-accent);border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
+.sm-card h3{margin:0 0 2px;font-size:14px;font-weight:700}
+.sm-card p{margin:0;color:var(--sm-ink-soft)}
+.sm-legend{display:flex;flex-wrap:wrap;gap:2px 12px;margin-top:6px;font-size:12px;color:var(--sm-ink-soft)}
+.sm-legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);margin-inline-end:6px;vertical-align:-1px;border:1px solid rgba(53,17,65,.25)}
+.sm-takeaway{margin-top:var(--sm-gap);background:var(--sm-purple);color:#fff;border-radius:var(--sm-radius-sm);padding:6px 10px;font-size:13px}
+.sm-takeaway b{color:var(--sm-gold)}
+.pt{display:block;position:relative;padding-inline-start:12px}
+.pt::before{content:"";position:absolute;inset-inline-start:0;top:.6em;width:5px;height:5px;border-radius:50%;background:var(--sm-gold-700)}
+.sm-takeaway .pt::before{background:var(--sm-gold)}
+.sm-note{font-size:11px;color:var(--sm-ink-soft);margin:4px 0 0;line-height:1.45}
+@media (max-width:520px){
+  .sm-header{padding:6px 10px}.sm-body{padding:8px}.sm-stage{padding:2px}
+  .sm-wrap{border-radius:0;border-inline:0}
+  .sm-btn{font-size:12px;padding:2px 9px}
+  .sm-card,.sm-takeaway{font-size:12px;padding:5px 8px}.sm-card h3{font-size:13px}.sm-legend{font-size:11px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+
+
+/* الخاص بهذا الرسم */
+.pick{margin-top:6px}
+.sm-stage.light{align-items:stretch}
+.pick .sm-range{display:block;width:100%}
+.pick-axis{display:flex;justify-content:space-between;font-size:11px;color:var(--sm-ink-soft);line-height:1.3}
+.pick-axis.abs{display:block;position:relative;height:17px}
+.pick-axis.abs span{position:absolute;top:0;transform:translateX(50%);white-space:nowrap}
+.pick-axis.abs span:first-child{transform:none}
+.pick-axis.abs span:last-child{transform:none}
+.sm-stage.light{padding:4px}
+.lv{transition:opacity .5s}
+</style>
+</head>
+<body>
+<main class="sm-wrap" id="sm-root">
+  <header class="sm-header sm-pattern-dark">
+    <h1 class="sm-title">غرام واحد من الجرافين سطحه يعادل نحو 10 ملاعب تنس</h1>
+  </header>
+  <div class="sm-body sm-pattern-light">
+    <section class="sm-stage light fill"><svg id="g" role="img" aria-label="رسم الجرافين"></svg></section>
+    <div class="pick">
+      <input class="sm-range" id="s" type="range" min="0" max="2" step="1" value="0" aria-label="اختر جانبًا">
+      <div class="pick-axis abs" aria-hidden="true"><span>البنية</span><span>المساحة</span><span>التراص</span></div>
+    </div>
+    <div class="sm-card" aria-live="polite"><h3 id="ct"></h3><p id="cx"></p></div>
+    <div class="sm-takeaway"><b>الخلاصة</b><span class="pt">سطح هائل وموصلية عالية تجعله قطبًا ممتازًا</span><span class="pt">لكن الصفائح تميل إلى التراص فتخسر سطحها</span></div>
+  </div>
+</main>
+<script>
+var SM = (function(){
+  var NS = 'http://www.w3.org/2000/svg';
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function el(tag, attrs, parent){
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  /* نقاط مختصرة: النص مفصول بـ | */
+  function pts(node, s){
+    node.textContent = '';
+    String(s).split('|').forEach(function(x){ var p = document.createElement('span'); p.className = 'pt'; p.textContent = x.trim(); node.appendChild(p); });
+  }
+  function tabs(container, onSelect){
+    var btns = container.querySelectorAll('.sm-btn');
+    btns.forEach(function(b, i){ b.addEventListener('click', function(){ select(i); onSelect(i); }); });
+    function select(i){ btns.forEach(function(b, j){ b.setAttribute('aria-selected', String(i === j)); }); }
+    return select;
+  }
+  /* أرقام عربية بفواصل الآلاف */
+  function fmt(n, d){ return Number(n).toLocaleString('en-US', {maximumFractionDigits: d || 0}); }
+  function postHeight(){
+    if (window.parent === window) return;
+    var h = Math.ceil(document.documentElement.getBoundingClientRect().height);
+    try { window.parent.postMessage({type:'sm-embed-height', height:h}, '*'); } catch(e){}
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(postHeight).observe(document.body);
+  window.addEventListener('load', postHeight);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(postHeight);
+  /* يجعل منطقة الرسم تملأ المساحة بلا فراغ: يختار viewBox بنسبة أبعاد الإطار ويضمن ظهور المنطقة الأساسية (w×h حول cx,cy) */
+  function fit(svg, cx, cy, w, h){
+    var box = svg.parentNode;
+    function go(){
+      var r = box.clientWidth / Math.max(1, box.clientHeight), vw, vh;
+      if (r > w / h){ vh = h; vw = h * r; } else { vw = w; vh = w / r; }
+      svg.setAttribute('viewBox', [cx - vw / 2, cy - vh / 2, vw, vh].map(function(v){ return v.toFixed(1); }).join(' '));
+      svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    }
+    if ('ResizeObserver' in window) new ResizeObserver(go).observe(box);
+    go();
+  }
+  return {el:el, pts:pts, tabs:tabs, fmt:fmt, reduce:reduce, fit:fit};
+})();
+
+</script>
+<script>
+/* تسميات الشريط تحت مواضع التوقف تمامًا (RTL: الأول يمينًا) */
+document.querySelectorAll('.pick-axis.abs').forEach(function(ax){
+  var sp = ax.children, n = sp.length;
+  for (var i = 0; i < n; i++){
+    if (i === 0) sp[i].style.right = '0';
+    else if (i === n - 1) sp[i].style.left = '0';
+    else sp[i].style.right = 'calc(8px + (100% - 16px) * ' + (i / (n - 1)) + ')';
+  }
+});
+(function(){
+var svg = document.getElementById('g'), el = SM.el;
+SM.fit(svg, 200, 110, 380, 210);
+function lattice(g, x0, y0, cols, rows, r, c, w){
+  var dx = r * Math.sqrt(3), dy = r * 1.5;
+  for (var j = 0; j < rows; j++) for (var i = 0; i < cols; i++){
+    var cx = x0 + i * dx + (j % 2) * dx / 2, cy = y0 + j * dy, d = '';
+    for (var k = 0; k < 6; k++){ var a = Math.PI / 3 * k + Math.PI / 6; d += (k ? 'L' : 'M') + (cx + r * Math.cos(a)).toFixed(1) + ' ' + (cy + r * Math.sin(a)).toFixed(1); }
+    el('path', {d:d + 'Z', fill:'none', stroke:c, 'stroke-width':w}, g);
+  }
+}
+var L = [el('g', {class:'lv'}, svg), el('g', {class:'lv'}, svg), el('g', {class:'lv'}, svg)];
+/* 0: البنية */
+lattice(L[0], 40, 35, 10, 5, 20, '#351141', 2.5);
+el('rect', {x:80, y:186, width:240, height:22, rx:6, fill:'#fff', stroke:'#DFDADE'}, L[0]);
+el('text', {x:200, y:201, 'text-anchor':'middle', fill:'#351141', 'font-size':11.5}, L[0]).textContent = 'كل رأس ذرة كربون، والرابطة نحو 0.14 نانومتر';
+/* 1: المساحة: 10 ملاعب تنس */
+for (var i = 0; i < 10; i++){
+  var x = 60 + (i % 5) * 58, y = 40 + Math.floor(i / 5) * 78;
+  el('rect', {x:x, y:y, width:50, height:68, rx:3, fill:'#81539D', 'fill-opacity':.85}, L[1]);
+  el('path', {d:'M' + x + ' ' + (y + 34) + 'h50 M' + (x + 8) + ' ' + y + 'v68 M' + (x + 42) + ' ' + y + 'v68 M' + (x + 8) + ' ' + (y + 18) + 'h34 M' + (x + 8) + ' ' + (y + 50) + 'h34 M' + (x + 25) + ' ' + (y + 18) + 'v32', stroke:'#fff', 'stroke-width':1.2, fill:'none'}, L[1]);
+}
+el('text', {x:200, y:208, 'text-anchor':'middle', fill:'#351141', 'font-size':12, 'font-weight':700}, L[1]).textContent = '2630 م² لكل غرام ≈ 10 ملاعب تنس';
+/* 2: التراص */
+for (var k = 0; k < 4; k++){ var gg = el('g', {transform:'translate(' + (95 + k * 4) + ',' + (40 + k * 22) + ') scale(.55)'}, L[2]); lattice(gg, 0, 0, 7, 3, 20, k ? '#836096' : '#351141', 3); }
+[[80, 40], [80, 70], [80, 100]].forEach(function(p){ el('circle', {cx:p[0], cy:p[1], r:7, fill:'#EBB00F'}, L[2]); });
+el('text', {x:72, y:130, 'text-anchor':'middle', fill:'#C07F00', 'font-size':11}, L[2]).textContent = 'أيونات لا تدخل';
+el('text', {x:200, y:208, 'text-anchor':'middle', fill:'#351141', 'font-size':12, 'font-weight':700}, L[2]).textContent = 'صفائح متراصة: سطح أقل متاح للأيونات';
+var S = [
+  {h:'البنية: خلايا نحل من الكربون', x:'طبقة واحدة من ذرات الكربون، بسمك ذرة|موصلة جيدة للكهرباء'},
+  {h:'المساحة: 2630 مترًا مربعًا لكل غرام', x:'هذه القيمة النظرية لصفيحة واحدة مكشوفة الوجهين|كل سطح مكشوف مكان تصطف عليه الأيونات'},
+  {h:'التحدي: التراص والتكتل', x:'الصفائح تنجذب وتعود فتتراص كالجرافيت|الحل: صفائح مسامية ثلاثية الأبعاد أو مواد فاصلة بينها'}
+];
+var s = document.getElementById('s');
+function upd(){ var k = +s.value; L.forEach(function(g, i){ g.style.opacity = i === k ? 1 : 0; }); document.getElementById('ct').textContent = S[k].h; SM.pts(document.getElementById('cx'), S[k].x); }
+s.addEventListener('input', upd); upd();
+})();
+</script>
+</body>
+</html>
